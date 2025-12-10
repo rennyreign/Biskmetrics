@@ -6,8 +6,6 @@ export interface Program {
   leads: number;
   contactToApplicationRate: number | null;
   applicationRate: number | null;
-  enrollmentRate: number | null;
   contactToEnrollmentRate: number | null;
-  inquiryToEnrollmentRate: number | null;
-  leadToEnrollmentRate: number | null;
+  enrollmentRate: number | null; // Consolidated from leadToEnrollmentRate and inquiryToEnrollmentRate
 }

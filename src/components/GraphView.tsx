@@ -8,7 +8,7 @@ interface GraphViewProps {
   showSchoolColumn: boolean;
 }
 
-type ChartType = 'leads' | 'conversion' | 'scatter';
+type ChartType = 'leads' | 'contactToEnroll' | 'contactToApp' | 'leadsVsContactEnroll' | 'leadsVsEnrollRates' | 'leadsVsApp' | 'topPerformers';
 
 const COLORS = {
   MSU: '#3b82f6',
@@ -21,34 +21,119 @@ const COLORS = {
 };
 
 export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
-  const [chartType, setChartType] = useState<ChartType>('leads');
+  const [chartType, setChartType] = useState<ChartType>('topPerformers');
 
   // Sort programs by leads for better visualization
   const sortedByLeads = [...programs].sort((a, b) => b.leads - a.leads).slice(0, 15);
 
-  // Prepare data for conversion rates chart
-  const conversionData = [...programs]
-    .filter(p => p.leadToEnrollmentRate != null)
-    .sort((a, b) => (b.leadToEnrollmentRate || 0) - (a.leadToEnrollmentRate || 0))
+  // Prepare data for Contact to Enrollment Rate chart (50+ leads)
+  const contactToEnrollData = [...programs]
+    .filter(p => p.contactToEnrollmentRate != null && p.leads >= 50)
+    .sort((a, b) => (b.contactToEnrollmentRate || 0) - (a.contactToEnrollmentRate || 0))
     .slice(0, 15)
     .map(p => ({
-      name: p.programName.length > 25 ? p.programName.substring(0, 25) + '...' : p.programName,
-      'Lead to Enroll': p.leadToEnrollmentRate,
-      'Application Rate': p.applicationRate,
-      'Enrollment Rate': p.enrollmentRate,
-      school: p.school
+      name: p.programName.length > 30 ? p.programName.substring(0, 30) + '...' : p.programName,
+      rate: p.contactToEnrollmentRate,
+      school: p.school,
+      leads: p.leads
     }));
 
-  // Prepare data for scatter plot
-  const scatterData = programs
-    .filter(p => p.leadToEnrollmentRate != null)
+  // Prepare data for Contact to Application Rate chart
+  const contactToAppData = [...programs]
+    .filter(p => p.contactToApplicationRate != null)
+    .sort((a, b) => (b.contactToApplicationRate || 0) - (a.contactToApplicationRate || 0))
+    .slice(0, 15)
+    .map(p => ({
+      name: p.programName.length > 30 ? p.programName.substring(0, 30) + '...' : p.programName,
+      rate: p.contactToApplicationRate,
+      school: p.school,
+      leads: p.leads
+    }));
+
+  // Prepare data for Leads vs Enrollment Rates (both Contact to Enroll and Enrollment Rate)
+  const leadsVsContactEnrollData = programs
+    .filter(p => p.contactToEnrollmentRate != null)
     .map(p => ({
       leads: p.leads,
-      conversionRate: p.leadToEnrollmentRate,
+      rate: p.contactToEnrollmentRate,
       programName: p.programName,
       school: p.school,
       level: p.level
     }));
+
+  const leadsVsLeadEnrollData = programs
+    .filter(p => p.enrollmentRate != null)
+    .map(p => ({
+      leads: p.leads,
+      rate: p.enrollmentRate,
+      programName: p.programName,
+      school: p.school,
+      level: p.level
+    }));
+
+  // Prepare data for Leads vs Contact to Application scatter plot
+  const leadsVsAppData = programs
+    .filter(p => p.contactToApplicationRate != null)
+    .map(p => ({
+      leads: p.leads,
+      rate: p.contactToApplicationRate,
+      programName: p.programName,
+      school: p.school,
+      level: p.level
+    }));
+
+  // Prepare data for Top Performers - profitability-focused scoring
+  // Filters: 50+ leads, requires both conversion rates
+  // Scoring: Weighted toward conversion efficiency (ROI on ad spend)
+  // - Leads provide scale but diminishing returns (log scale)
+  // - Contact to Enrollment Rate = funnel efficiency (high weight)
+  // - Enrollment Rate = final conversion (highest weight)
+  const topPerformersData = (() => {
+    // Filter: minimum 50 leads and must have both conversion metrics
+    const validPrograms = programs.filter(
+      p => p.leads >= 50 && p.contactToEnrollmentRate != null && p.enrollmentRate != null
+    );
+    
+    if (validPrograms.length === 0) return [];
+    
+    // Find max values for normalization
+    const maxLeads = Math.max(...validPrograms.map(p => p.leads));
+    const maxContactEnroll = Math.max(...validPrograms.map(p => p.contactToEnrollmentRate || 0));
+    const maxEnrollRate = Math.max(...validPrograms.map(p => p.enrollmentRate || 0));
+    
+    // Profitability Score Calculation:
+    // - Volume (20%): Log-scaled leads - rewards scale but with diminishing returns
+    // - Funnel Efficiency (35%): Contact to Enrollment Rate - how well we convert contacts
+    // - Final Conversion (45%): Enrollment Rate - ultimate ROI indicator
+    return validPrograms
+      .map(p => {
+        const contactEnroll = p.contactToEnrollmentRate || 0;
+        const enrollRate = p.enrollmentRate || 0;
+        
+        // Log-scaled volume score (diminishing returns on raw lead count)
+        const volumeScore = (Math.log10(p.leads) / Math.log10(maxLeads)) * 100;
+        
+        // Normalized conversion scores
+        const funnelScore = (contactEnroll / maxContactEnroll) * 100;
+        const conversionScore = (enrollRate / maxEnrollRate) * 100;
+        
+        // Weighted profitability score
+        const score = (volumeScore * 0.20) + (funnelScore * 0.35) + (conversionScore * 0.45);
+        
+        return {
+          name: p.programName.length > 30 ? p.programName.substring(0, 30) + '...' : p.programName,
+          fullName: p.programName,
+          school: p.school,
+          level: p.level,
+          leads: p.leads,
+          contactToEnrollmentRate: contactEnroll,
+          enrollmentRate: enrollRate,
+          score
+        };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 15);
+  })();
 
   if (programs.length === 0) {
     return (
@@ -74,7 +159,23 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
     <div>
       {/* Chart Type Selector */}
       <Box sx={{ px: 3, pt: 3, pb: 2 }}>
-        <ButtonGroup variant="outlined">
+        <ButtonGroup variant="outlined" sx={{ flexWrap: 'wrap', gap: 0.5 }}>
+          <Button
+            onClick={() => setChartType('topPerformers')}
+            variant={chartType === 'topPerformers' ? 'contained' : 'outlined'}
+            sx={{
+              textTransform: 'none',
+              bgcolor: chartType === 'topPerformers' ? '#e91e63' : 'transparent',
+              color: chartType === 'topPerformers' ? 'white' : '#64748b',
+              borderColor: '#e2e8f0',
+              '&:hover': {
+                bgcolor: chartType === 'topPerformers' ? '#c2185b' : '#f8fafc',
+                borderColor: '#e91e63',
+              }
+            }}
+          >
+            Top Performers
+          </Button>
           <Button
             onClick={() => setChartType('leads')}
             variant={chartType === 'leads' ? 'contained' : 'outlined'}
@@ -89,39 +190,87 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
               }
             }}
           >
-            Leads Volume
+            Lead Volume
           </Button>
           <Button
-            onClick={() => setChartType('conversion')}
-            variant={chartType === 'conversion' ? 'contained' : 'outlined'}
+            onClick={() => setChartType('contactToEnroll')}
+            variant={chartType === 'contactToEnroll' ? 'contained' : 'outlined'}
             sx={{
               textTransform: 'none',
-              bgcolor: chartType === 'conversion' ? '#e91e63' : 'transparent',
-              color: chartType === 'conversion' ? 'white' : '#64748b',
+              bgcolor: chartType === 'contactToEnroll' ? '#e91e63' : 'transparent',
+              color: chartType === 'contactToEnroll' ? 'white' : '#64748b',
               borderColor: '#e2e8f0',
               '&:hover': {
-                bgcolor: chartType === 'conversion' ? '#c2185b' : '#f8fafc',
+                bgcolor: chartType === 'contactToEnroll' ? '#c2185b' : '#f8fafc',
                 borderColor: '#e91e63',
               }
             }}
           >
-            Conversion Rates
+            Contact to Enroll Rate
           </Button>
           <Button
-            onClick={() => setChartType('scatter')}
-            variant={chartType === 'scatter' ? 'contained' : 'outlined'}
+            onClick={() => setChartType('contactToApp')}
+            variant={chartType === 'contactToApp' ? 'contained' : 'outlined'}
             sx={{
               textTransform: 'none',
-              bgcolor: chartType === 'scatter' ? '#e91e63' : 'transparent',
-              color: chartType === 'scatter' ? 'white' : '#64748b',
+              bgcolor: chartType === 'contactToApp' ? '#e91e63' : 'transparent',
+              color: chartType === 'contactToApp' ? 'white' : '#64748b',
               borderColor: '#e2e8f0',
               '&:hover': {
-                bgcolor: chartType === 'scatter' ? '#c2185b' : '#f8fafc',
+                bgcolor: chartType === 'contactToApp' ? '#c2185b' : '#f8fafc',
                 borderColor: '#e91e63',
               }
             }}
           >
-            Volume vs Conversion
+            Contact to App Rate
+          </Button>
+          <Button
+            onClick={() => setChartType('leadsVsContactEnroll')}
+            variant={chartType === 'leadsVsContactEnroll' ? 'contained' : 'outlined'}
+            sx={{
+              textTransform: 'none',
+              bgcolor: chartType === 'leadsVsContactEnroll' ? '#e91e63' : 'transparent',
+              color: chartType === 'leadsVsContactEnroll' ? 'white' : '#64748b',
+              borderColor: '#e2e8f0',
+              '&:hover': {
+                bgcolor: chartType === 'leadsVsContactEnroll' ? '#c2185b' : '#f8fafc',
+                borderColor: '#e91e63',
+              }
+            }}
+          >
+            Leads vs Contact to Enroll
+          </Button>
+          <Button
+            onClick={() => setChartType('leadsVsEnrollRates')}
+            variant={chartType === 'leadsVsEnrollRates' ? 'contained' : 'outlined'}
+            sx={{
+              textTransform: 'none',
+              bgcolor: chartType === 'leadsVsEnrollRates' ? '#e91e63' : 'transparent',
+              color: chartType === 'leadsVsEnrollRates' ? 'white' : '#64748b',
+              borderColor: '#e2e8f0',
+              '&:hover': {
+                bgcolor: chartType === 'leadsVsEnrollRates' ? '#c2185b' : '#f8fafc',
+                borderColor: '#e91e63',
+              }
+            }}
+          >
+            Leads vs Both Enroll Rates
+          </Button>
+          <Button
+            onClick={() => setChartType('leadsVsApp')}
+            variant={chartType === 'leadsVsApp' ? 'contained' : 'outlined'}
+            sx={{
+              textTransform: 'none',
+              bgcolor: chartType === 'leadsVsApp' ? '#e91e63' : 'transparent',
+              color: chartType === 'leadsVsApp' ? 'white' : '#64748b',
+              borderColor: '#e2e8f0',
+              '&:hover': {
+                bgcolor: chartType === 'leadsVsApp' ? '#c2185b' : '#f8fafc',
+                borderColor: '#e91e63',
+              }
+            }}
+          >
+            Leads vs Contact to App
           </Button>
         </ButtonGroup>
       </Box>
@@ -165,17 +314,17 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
           </div>
         )}
 
-        {chartType === 'conversion' && (
+        {chartType === 'contactToEnroll' && (
           <div>
-            <h3 className="text-slate-900 mb-4">Top 15 Programs by Conversion Rates (%)</h3>
+            <h3 className="text-slate-900 mb-4">Top 15 Programs by Contact to Enrollment Rate (%)</h3>
             <ResponsiveContainer width="100%" height={500}>
               <BarChart
-                data={conversionData}
+                data={contactToEnrollData}
                 layout="vertical"
                 margin={{ top: 5, right: 30, left: 200, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis type="number" stroke="#64748b" />
+                <XAxis type="number" stroke="#64748b" unit="%" />
                 <YAxis 
                   dataKey="name" 
                   type="category" 
@@ -190,36 +339,48 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
                     borderRadius: '8px',
                     boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                   }}
-                  formatter={(value: number) => [`${value.toFixed(1)}%`, '']}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      return (
+                        <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
+                          <p className="text-sm font-medium mb-1">{data.name}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school}</p>
+                          <p className="text-sm">Contact to Enroll: {data.rate?.toFixed(1)}%</p>
+                          <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
                 />
-                <Legend />
-                <Bar dataKey="Lead to Enroll" fill="#e91e63" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="Application Rate" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-                <Bar dataKey="Enrollment Rate" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="rate" radius={[0, 8, 8, 0]}>
+                  {contactToEnrollData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[entry.school as keyof typeof COLORS] || '#10b981'} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
         )}
 
-        {chartType === 'scatter' && (
+        {chartType === 'contactToApp' && (
           <div>
-            <h3 className="text-slate-900 mb-4">Lead Volume vs Lead to Enrollment Rate</h3>
+            <h3 className="text-slate-900 mb-4">Top 15 Programs by Contact to Application Rate (%)</h3>
             <ResponsiveContainer width="100%" height={500}>
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+              <BarChart
+                data={contactToAppData}
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 200, bottom: 5 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis 
-                  type="number" 
-                  dataKey="leads" 
-                  name="Leads"
-                  stroke="#64748b"
-                  label={{ value: 'Lead Volume', position: 'bottom', offset: 40, style: { fill: '#64748b' } }}
-                />
+                <XAxis type="number" stroke="#64748b" unit="%" />
                 <YAxis 
-                  type="number" 
-                  dataKey="conversionRate" 
-                  name="Conversion Rate"
+                  dataKey="name" 
+                  type="category" 
                   stroke="#64748b"
-                  label={{ value: 'Lead to Enrollment Rate (%)', angle: -90, position: 'left', offset: 40, style: { fill: '#64748b' } }}
+                  width={190}
+                  tick={{ fontSize: 12 }}
                 />
                 <Tooltip 
                   contentStyle={{ 
@@ -233,21 +394,209 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
                       const data = payload[0].payload;
                       return (
                         <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
-                          <p className="text-sm mb-1">{data.programName}</p>
-                          <p className="text-xs text-slate-600 mb-2">{data.school} · {data.level}</p>
+                          <p className="text-sm font-medium mb-1">{data.name}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school}</p>
+                          <p className="text-sm">Contact to App: {data.rate?.toFixed(1)}%</p>
                           <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
-                          <p className="text-sm">Conversion: {data.conversionRate.toFixed(1)}%</p>
                         </div>
                       );
                     }
                     return null;
                   }}
                 />
-                <Scatter name="Programs" data={scatterData}>
-                  {scatterData.map((entry, index) => (
+                <Bar dataKey="rate" radius={[0, 8, 8, 0]}>
+                  {contactToAppData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[entry.school as keyof typeof COLORS] || '#f59e0b'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+
+        {chartType === 'leadsVsContactEnroll' && (
+          <div>
+            <h3 className="text-slate-900 mb-4">Lead Volume vs Contact to Enrollment Rate</h3>
+            <ResponsiveContainer width="100%" height={500}>
+              <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis 
+                  type="number" 
+                  dataKey="leads" 
+                  name="Leads"
+                  stroke="#64748b"
+                  label={{ value: 'Lead Volume', position: 'bottom', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <YAxis 
+                  type="number" 
+                  dataKey="rate" 
+                  name="Contact to Enrollment Rate"
+                  stroke="#64748b"
+                  unit="%"
+                  label={{ value: 'Contact to Enrollment Rate (%)', angle: -90, position: 'left', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff', 
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      return (
+                        <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
+                          <p className="text-sm font-medium mb-1">{data.programName}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school} · {data.level}</p>
+                          <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
+                          <p className="text-sm">Contact to Enroll: {data.rate?.toFixed(1)}%</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Scatter name="Programs" data={leadsVsContactEnrollData}>
+                  {leadsVsContactEnrollData.map((entry, index) => (
                     <Cell 
                       key={`cell-${index}`} 
-                      fill={COLORS[entry.school as keyof typeof COLORS] || '#e91e63'}
+                      fill={COLORS[entry.school as keyof typeof COLORS] || '#10b981'}
+                      opacity={0.7}
+                    />
+                  ))}
+                </Scatter>
+              </ScatterChart>
+            </ResponsiveContainer>
+            
+            {/* Legend for schools */}
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
+              {Object.entries(COLORS).map(([school, color]) => (
+                <div key={school} className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color, opacity: 0.7 }} />
+                  <span className="text-sm text-slate-600">{school}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {chartType === 'leadsVsEnrollRates' && (
+          <div>
+            <h3 className="text-slate-900 mb-4">Lead Volume vs Both Enrollment Rates</h3>
+            <ResponsiveContainer width="100%" height={500}>
+              <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis 
+                  type="number" 
+                  dataKey="leads" 
+                  name="Leads"
+                  stroke="#64748b"
+                  label={{ value: 'Lead Volume', position: 'bottom', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <YAxis 
+                  type="number" 
+                  dataKey="rate" 
+                  name="Enrollment Rate"
+                  stroke="#64748b"
+                  unit="%"
+                  label={{ value: 'Enrollment Rate (%)', angle: -90, position: 'left', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff', 
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      const seriesName = payload[0].name;
+                      return (
+                        <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
+                          <p className="text-sm font-medium mb-1">{data.programName}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school} · {data.level}</p>
+                          <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
+                          <p className="text-sm">{seriesName}: {data.rate?.toFixed(1)}%</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Legend />
+                <Scatter name="Contact to Enroll" data={leadsVsContactEnrollData} fill="#10b981">
+                  {leadsVsContactEnrollData.map((_, index) => (
+                    <Cell 
+                      key={`contact-${index}`} 
+                      fill="#10b981"
+                      opacity={0.7}
+                    />
+                  ))}
+                </Scatter>
+                <Scatter name="Enrollment Rate" data={leadsVsLeadEnrollData} fill="#e91e63">
+                  {leadsVsLeadEnrollData.map((_, index) => (
+                    <Cell 
+                      key={`lead-${index}`} 
+                      fill="#e91e63"
+                      opacity={0.7}
+                    />
+                  ))}
+                </Scatter>
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+
+        {chartType === 'leadsVsApp' && (
+          <div>
+            <h3 className="text-slate-900 mb-4">Lead Volume vs Contact to Application Rate</h3>
+            <ResponsiveContainer width="100%" height={500}>
+              <ScatterChart margin={{ top: 20, right: 20, bottom: 60, left: 60 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis 
+                  type="number" 
+                  dataKey="leads" 
+                  name="Leads"
+                  stroke="#64748b"
+                  label={{ value: 'Lead Volume', position: 'bottom', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <YAxis 
+                  type="number" 
+                  dataKey="rate" 
+                  name="Contact to Application Rate"
+                  stroke="#64748b"
+                  unit="%"
+                  label={{ value: 'Contact to Application Rate (%)', angle: -90, position: 'left', offset: 40, style: { fill: '#64748b' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff', 
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      return (
+                        <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
+                          <p className="text-sm font-medium mb-1">{data.programName}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school} · {data.level}</p>
+                          <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
+                          <p className="text-sm">Contact to App: {data.rate?.toFixed(1)}%</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Scatter name="Programs" data={leadsVsAppData}>
+                  {leadsVsAppData.map((entry, index) => (
+                    <Cell 
+                      key={`cell-${index}`} 
+                      fill={COLORS[entry.school as keyof typeof COLORS] || '#f59e0b'}
                       opacity={0.7}
                     />
                   ))}
@@ -266,6 +615,71 @@ export function GraphView({ programs, showSchoolColumn }: GraphViewProps) {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {chartType === 'topPerformers' && (
+          <div>
+            <h3 className="text-slate-900 mb-2">Top 15 Programs by Profitability Potential</h3>
+            <p className="text-sm text-slate-500 mb-4">
+              Programs with 50+ leads scored by: Volume (20%) + Contact to Enroll Rate (35%) + Enrollment Rate (45%)
+            </p>
+            <ResponsiveContainer width="100%" height={500}>
+              <BarChart
+                data={topPerformersData}
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 200, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" stroke="#64748b" domain={[0, 100]} unit="" />
+                <YAxis 
+                  dataKey="name" 
+                  type="category" 
+                  stroke="#64748b"
+                  width={190}
+                  tick={{ fontSize: 12 }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff', 
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const data = payload[0].payload;
+                      return (
+                        <div className="bg-white border border-slate-200 rounded-lg p-3 shadow-lg">
+                          <p className="text-sm font-medium mb-1">{data.fullName}</p>
+                          <p className="text-xs text-slate-600 mb-2">{data.school} · {data.level}</p>
+                          <p className="text-sm font-semibold text-pink-600 mb-2">Score: {data.score.toFixed(1)}</p>
+                          <p className="text-sm">Leads: {data.leads.toLocaleString()}</p>
+                          <p className="text-sm">Contact to Enroll: {data.contactToEnrollmentRate?.toFixed(1)}%</p>
+                          <p className="text-sm">Enrollment Rate: {data.enrollmentRate?.toFixed(1)}%</p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Bar dataKey="score" radius={[0, 8, 8, 0]}>
+                  {topPerformersData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[entry.school as keyof typeof COLORS] || '#10b981'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            
+            {/* Legend for schools */}
+            <div className="mt-6 flex flex-wrap gap-4 justify-center">
+              {Object.entries(COLORS).map(([school, color]) => (
+                <div key={school} className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
+                  <span className="text-sm text-slate-600">{school}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
