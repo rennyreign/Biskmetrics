@@ -1,6 +1,6 @@
 import { Box, Container, Tooltip } from '@mui/material';
 import { Info } from 'lucide-react';
-import biskLogo from 'figma:asset/df8d6e47c3a848104b6fbdf6c5e800fb975d110a.png';
+import biskLogo from '../assets/BiskAmpLogo.jpg';
 
 export function Header() {
   return (

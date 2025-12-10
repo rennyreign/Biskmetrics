@@ -19,7 +19,7 @@ const SCHOOL_OPTIONS = [
 ];
 
 const LEVEL_OPTIONS = [
-  'All Levels',
+  'All Program Types',
   'Certificate',
   'Degree'
 ];
@@ -61,11 +61,11 @@ export function FilterSection({
       </FormControl>
 
       <FormControl sx={{ minWidth: 220 }}>
-        <InputLabel id="level-select-label">Level</InputLabel>
+        <InputLabel id="level-select-label">Program Type</InputLabel>
         <Select
           labelId="level-select-label"
           value={selectedLevel}
-          label="Level"
+          label="Program Type"
           onChange={(e) => onLevelChange(e.target.value)}
           sx={{
             bgcolor: 'white',

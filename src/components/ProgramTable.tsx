@@ -49,10 +49,10 @@ const DEFAULT_COLUMNS: ColumnDef[] = [
   { id: 'school', field: 'school', label: 'School', align: 'left', format: 'text' },
   { id: 'level', field: 'level', label: 'Program Type', align: 'left', format: 'chip' },
   { id: 'leads', field: 'leads', label: 'Leads', align: 'right', format: 'number' },
-  { id: 'contactToApplicationRate', field: 'contactToApplicationRate', label: 'Contact to App Rate', align: 'right', format: 'percentage' },
-  { id: 'applicationRate', field: 'applicationRate', label: 'App Rate', align: 'right', format: 'percentage' },
   { id: 'contactToEnrollmentRate', field: 'contactToEnrollmentRate', label: 'Contact Enroll Rate', align: 'right', format: 'percentage' },
   { id: 'enrollmentRate', field: 'enrollmentRate', label: 'Enrollment Rate', align: 'right', format: 'percentage' },
+  { id: 'contactToApplicationRate', field: 'contactToApplicationRate', label: 'Contact to App Rate', align: 'right', format: 'percentage' },
+  { id: 'applicationRate', field: 'applicationRate', label: 'App Rate', align: 'right', format: 'percentage' },
 ];
 
 const METRIC_FIELDS: { value: keyof Program; label: string }[] = [
