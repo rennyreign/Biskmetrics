@@ -15,17 +15,19 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  IconButton
+  IconButton,
 } from '@mui/material';
 import { X, Plus, Filter, GripVertical } from 'lucide-react';
-import type { Program } from '../types';
+import type { Program } from '../types/program';
+import { DataCompletenessBadge } from './DataCompletenessBadge';
+import { BudgetRecommendationBadge } from './BudgetRecommendationBadge';
 
 interface ProgramTableProps {
   programs: Program[];
   showSchoolColumn: boolean;
 }
 
-type SortField = keyof Program | null;
+type SortField = keyof Program | string | null;
 type SortDirection = 'asc' | 'desc';
 type Operator = '>' | '>=' | '<' | '<=' | '=' | '!=';
 
@@ -41,7 +43,7 @@ interface ColumnDef {
   field: keyof Program | 'school';
   label: string;
   align: 'left' | 'right';
-  format: 'text' | 'number' | 'percentage' | 'chip';
+  format: 'text' | 'number' | 'percentage' | 'chip' | 'currency' | 'badge';
 }
 
 const DEFAULT_COLUMNS: ColumnDef[] = [
@@ -49,18 +51,59 @@ const DEFAULT_COLUMNS: ColumnDef[] = [
   { id: 'school', field: 'school', label: 'School', align: 'left', format: 'text' },
   { id: 'level', field: 'level', label: 'Program Type', align: 'left', format: 'chip' },
   { id: 'leads', field: 'leads', label: 'Leads', align: 'right', format: 'number' },
-  { id: 'contactToEnrollmentRate', field: 'contactToEnrollmentRate', label: 'Contact Enroll Rate', align: 'right', format: 'percentage' },
-  { id: 'enrollmentRate', field: 'enrollmentRate', label: 'Enrollment Rate', align: 'right', format: 'percentage' },
-  { id: 'contactToApplicationRate', field: 'contactToApplicationRate', label: 'Contact to App Rate', align: 'right', format: 'percentage' },
-  { id: 'applicationRate', field: 'applicationRate', label: 'App Rate', align: 'right', format: 'percentage' },
+  {
+    id: 'conversions.leadToEnrollmentRate',
+    field: 'conversions',
+    label: 'Lead → Enroll %',
+    align: 'right',
+    format: 'percentage',
+  },
+  {
+    id: 'roi.costPerLead',
+    field: 'roi',
+    label: 'CPL',
+    align: 'right',
+    format: 'currency',
+  },
+  {
+    id: 'roi.costPerOpportunity',
+    field: 'roi',
+    label: 'CPO',
+    align: 'right',
+    format: 'currency',
+  },
+  {
+    id: 'roi.costPerApplication',
+    field: 'roi',
+    label: 'CPA',
+    align: 'right',
+    format: 'currency',
+  },
+  {
+    id: 'roi.costPerEnrollment',
+    field: 'roi',
+    label: 'CPE',
+    align: 'right',
+    format: 'currency',
+  },
+  {
+    id: 'dataCompleteness',
+    field: 'dataCompleteness',
+    label: 'Data Quality',
+    align: 'left',
+    format: 'badge',
+  },
+  {
+    id: 'recommendation',
+    field: 'recommendation',
+    label: 'Recommendation',
+    align: 'left',
+    format: 'badge',
+  },
 ];
 
 const METRIC_FIELDS: { value: keyof Program; label: string }[] = [
   { value: 'leads', label: 'Leads' },
-  { value: 'contactToApplicationRate', label: 'Contact to App Rate' },
-  { value: 'applicationRate', label: 'Application Rate' },
-  { value: 'contactToEnrollmentRate', label: 'Contact to Enroll Rate' },
-  { value: 'enrollmentRate', label: 'Enrollment Rate' },
 ];
 
 const OPERATORS: { value: Operator; label: string }[] = [
@@ -88,16 +131,23 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
       return metricFilters.every(filter => {
         const value = program[filter.field];
         if (value == null) return false; // Exclude nulls when filtering
-        
+
         const numValue = typeof value === 'number' ? value : 0;
         switch (filter.operator) {
-          case '>': return numValue > filter.value;
-          case '>=': return numValue >= filter.value;
-          case '<': return numValue < filter.value;
-          case '<=': return numValue <= filter.value;
-          case '=': return numValue === filter.value;
-          case '!=': return numValue !== filter.value;
-          default: return true;
+          case '>':
+            return numValue > filter.value;
+          case '>=':
+            return numValue >= filter.value;
+          case '<':
+            return numValue < filter.value;
+          case '<=':
+            return numValue <= filter.value;
+          case '=':
+            return numValue === filter.value;
+          case '!=':
+            return numValue !== filter.value;
+          default:
+            return true;
         }
       });
     });
@@ -107,10 +157,20 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
     if (!sortField) return filteredPrograms;
 
     return [...filteredPrograms].sort((a, b) => {
-      const aVal = a[sortField];
-      const bVal = b[sortField];
+      // Extract values, handling nested fields
+      let aVal: any;
+      let bVal: any;
 
-      // Handle null/undefined values
+      if (typeof sortField === 'string' && sortField.includes('.')) {
+        const [parent, child] = sortField.split('.');
+        aVal = (a[parent as keyof Program] as any)?.[child];
+        bVal = (b[parent as keyof Program] as any)?.[child];
+      } else {
+        aVal = a[sortField as keyof Program];
+        bVal = b[sortField as keyof Program];
+      }
+
+      // Handle null/undefined values - sort to bottom
       if (aVal == null && bVal == null) return 0;
       if (aVal == null) return 1;
       if (bVal == null) return -1;
@@ -125,15 +185,13 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
       id: Date.now().toString(),
       field: 'leads',
       operator: '>',
-      value: 0
+      value: 0,
     };
     setMetricFilters([...metricFilters, newFilter]);
   };
 
   const updateFilter = (id: string, updates: Partial<MetricFilter>) => {
-    setMetricFilters(metricFilters.map(f => 
-      f.id === id ? { ...f, ...updates } : f
-    ));
+    setMetricFilters(metricFilters.map(f => (f.id === id ? { ...f, ...updates } : f)));
   };
 
   const removeFilter = (id: string) => {
@@ -144,11 +202,12 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
     setMetricFilters([]);
   };
 
-  const handleSort = (field: SortField) => {
-    if (sortField === field) {
+  const handleSort = (field: SortField, columnId?: string) => {
+    const sortKey = columnId && columnId.includes('.') ? columnId : field;
+    if (sortField === sortKey) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
-      setSortField(field);
+      setSortField(sortKey);
       setSortDirection('desc');
     }
   };
@@ -161,6 +220,11 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
   const formatPercentage = (num: number | null | undefined): string => {
     if (num == null) return '—';
     return `${num.toFixed(1)}%`;
+  };
+
+  const formatCurrency = (num: number | null | undefined): string => {
+    if (num == null) return '—';
+    return `$${num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   };
 
   // Get visible columns in order
@@ -182,26 +246,29 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
     e.dataTransfer.dropEffect = 'move';
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent, targetColumnId: string) => {
-    e.preventDefault();
-    if (!draggedColumn || draggedColumn === targetColumnId) {
-      setDraggedColumn(null);
-      return;
-    }
+  const handleDrop = useCallback(
+    (e: React.DragEvent, targetColumnId: string) => {
+      e.preventDefault();
+      if (!draggedColumn || draggedColumn === targetColumnId) {
+        setDraggedColumn(null);
+        return;
+      }
 
-    setColumnOrder(prev => {
-      const newOrder = [...prev];
-      const draggedIdx = newOrder.indexOf(draggedColumn);
-      const targetIdx = newOrder.indexOf(targetColumnId);
-      
-      // Remove dragged item and insert at target position
-      newOrder.splice(draggedIdx, 1);
-      newOrder.splice(targetIdx, 0, draggedColumn);
-      
-      return newOrder;
-    });
-    setDraggedColumn(null);
-  }, [draggedColumn]);
+      setColumnOrder(prev => {
+        const newOrder = [...prev];
+        const draggedIdx = newOrder.indexOf(draggedColumn);
+        const targetIdx = newOrder.indexOf(targetColumnId);
+
+        // Remove dragged item and insert at target position
+        newOrder.splice(draggedIdx, 1);
+        newOrder.splice(targetIdx, 0, draggedColumn);
+
+        return newOrder;
+      });
+      setDraggedColumn(null);
+    },
+    [draggedColumn]
+  );
 
   const handleDragEnd = useCallback(() => {
     setDraggedColumn(null);
@@ -209,8 +276,16 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
 
   // Format cell value based on column definition
   const formatCellValue = (program: Program, column: ColumnDef) => {
-    const value = program[column.field as keyof Program];
-    
+    // Handle nested fields (roi.*, conversions.*)
+    let value: any;
+    if (column.id.includes('.')) {
+      const [parent, child] = column.id.split('.');
+      const parentObj = program[parent as keyof Program] as any;
+      value = parentObj?.[child];
+    } else {
+      value = program[column.field as keyof Program];
+    }
+
     if (column.id === 'programName') {
       return (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -223,14 +298,14 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
                 bgcolor: '#d1fae5',
                 color: '#065f46',
                 height: '20px',
-                fontSize: '11px'
+                fontSize: '11px',
               }}
             />
           )}
         </Box>
       );
     }
-    
+
     if (column.format === 'chip' && column.id === 'level') {
       return (
         <Chip
@@ -239,28 +314,45 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
           sx={{
             bgcolor: program.level === 'Certificate' ? '#dbeafe' : '#f3e8ff',
             color: program.level === 'Certificate' ? '#1e40af' : '#6b21a8',
-            fontSize: '12px'
+            fontSize: '12px',
           }}
         />
       );
     }
-    
+
     if (column.format === 'number') {
       return formatNumber(value as number | null);
     }
-    
+
     if (column.format === 'percentage') {
       return formatPercentage(value as number | null);
     }
-    
+
+    if (column.format === 'currency') {
+      return formatCurrency(value as number | null);
+    }
+
+    if (column.format === 'badge') {
+      if (column.id === 'dataCompleteness' && program.dataCompleteness) {
+        return <DataCompletenessBadge completeness={program.dataCompleteness} />;
+      }
+      if (column.id === 'recommendation' && program.recommendation) {
+        return <BudgetRecommendationBadge recommendation={program.recommendation} />;
+      }
+      return '—';
+    }
+
     return value as string;
   };
 
-  // Calculate top performers for Enrollment Rate
+  // Calculate top performers for Lead to Enrollment Rate
   const topPerformers = useMemo(() => {
     const withRate = sortedPrograms
-      .filter(p => p.enrollmentRate != null)
-      .sort((a, b) => (b.enrollmentRate || 0) - (a.enrollmentRate || 0))
+      .filter(p => p.conversions?.leadToEnrollmentRate != null)
+      .sort(
+        (a, b) =>
+          (b.conversions?.leadToEnrollmentRate || 0) - (a.conversions?.leadToEnrollmentRate || 0)
+      )
       .slice(0, 3);
     return new Set(withRate.map(p => p.id));
   }, [sortedPrograms]);
@@ -275,8 +367,8 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
             color: '#e91e63',
             textTransform: 'none',
             '&:hover': {
-              bgcolor: '#fce4ec'
-            }
+              bgcolor: '#fce4ec',
+            },
           }}
         >
           Clear filters
@@ -289,7 +381,14 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
     <Box>
       {/* Metric Filters Section */}
       <Box sx={{ px: 3, py: 2, borderBottom: '1px solid #e2e8f0' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: showFilters || metricFilters.length > 0 ? 2 : 0 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            mb: showFilters || metricFilters.length > 0 ? 2 : 0,
+          }}
+        >
           <Button
             startIcon={<Filter size={16} />}
             onClick={() => setShowFilters(!showFilters)}
@@ -303,7 +402,7 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
               '&:hover': {
                 bgcolor: showFilters ? '#c2185b' : '#f8fafc',
                 borderColor: '#e91e63',
-              }
+              },
             }}
           >
             Metric Filters {metricFilters.length > 0 && `(${metricFilters.length})`}
@@ -315,7 +414,7 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
               sx={{
                 textTransform: 'none',
                 color: '#64748b',
-                '&:hover': { color: '#e91e63' }
+                '&:hover': { color: '#e91e63' },
               }}
             >
               Clear all
@@ -329,17 +428,24 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
         {/* Filter Controls */}
         {showFilters && (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-            {metricFilters.map((filter) => (
-              <Box key={filter.id} sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
+            {metricFilters.map(filter => (
+              <Box
+                key={filter.id}
+                sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}
+              >
                 <FormControl size="small" sx={{ minWidth: 180 }}>
                   <InputLabel>Metric</InputLabel>
                   <Select
                     value={filter.field}
                     label="Metric"
-                    onChange={(e) => updateFilter(filter.id, { field: e.target.value as keyof Program })}
+                    onChange={e =>
+                      updateFilter(filter.id, { field: e.target.value as keyof Program })
+                    }
                   >
                     {METRIC_FIELDS.map(f => (
-                      <MenuItem key={f.value} value={f.value}>{f.label}</MenuItem>
+                      <MenuItem key={f.value} value={f.value}>
+                        {f.label}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -348,10 +454,14 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
                   <Select
                     value={filter.operator}
                     label="Op"
-                    onChange={(e) => updateFilter(filter.id, { operator: e.target.value as Operator })}
+                    onChange={e =>
+                      updateFilter(filter.id, { operator: e.target.value as Operator })
+                    }
                   >
                     {OPERATORS.map(op => (
-                      <MenuItem key={op.value} value={op.value}>{op.label}</MenuItem>
+                      <MenuItem key={op.value} value={op.value}>
+                        {op.label}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
@@ -360,7 +470,9 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
                   type="number"
                   label="Value"
                   value={filter.value}
-                  onChange={(e) => updateFilter(filter.id, { value: parseFloat(e.target.value) || 0 })}
+                  onChange={e =>
+                    updateFilter(filter.id, { value: parseFloat(e.target.value) || 0 })
+                  }
                   sx={{ width: 100 }}
                 />
                 <IconButton
@@ -380,7 +492,7 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
                 textTransform: 'none',
                 color: '#64748b',
                 alignSelf: 'flex-start',
-                '&:hover': { color: '#e91e63', bgcolor: '#fce4ec' }
+                '&:hover': { color: '#e91e63', bgcolor: '#fce4ec' },
               }}
             >
               Add filter
@@ -397,93 +509,102 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
             sx={{
               color: '#e91e63',
               textTransform: 'none',
-              '&:hover': { bgcolor: '#fce4ec' }
+              '&:hover': { bgcolor: '#fce4ec' },
             }}
           >
             Clear metric filters
           </Button>
         </Box>
       ) : (
-      <TableContainer>
-      <Table sx={{ minWidth: 650 }}>
-        <TableHead>
-          <TableRow sx={{ bgcolor: '#f8fafc' }}>
-            {visibleColumns.map((column) => (
-              <TableCell
-                key={column.id}
-                align={column.align}
-                draggable
-                onDragStart={(e) => handleDragStart(e, column.id)}
-                onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, column.id)}
-                onDragEnd={handleDragEnd}
-                sx={{
-                  cursor: 'grab',
-                  opacity: draggedColumn === column.id ? 0.5 : 1,
-                  bgcolor: draggedColumn === column.id ? '#fce4ec' : 'inherit',
-                  transition: 'background-color 0.2s',
-                  '&:hover': {
-                    bgcolor: '#f1f5f9',
-                  }
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <GripVertical size={14} style={{ color: '#94a3b8', flexShrink: 0 }} />
-                  <TableSortLabel
-                    active={sortField === column.field}
-                    direction={sortField === column.field ? sortDirection : 'desc'}
-                    onClick={() => handleSort(column.field as SortField)}
+        <TableContainer>
+          <Table sx={{ minWidth: 650 }}>
+            <TableHead>
+              <TableRow sx={{ bgcolor: '#f8fafc' }}>
+                {visibleColumns.map(column => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    draggable
+                    onDragStart={e => handleDragStart(e, column.id)}
+                    onDragOver={handleDragOver}
+                    onDrop={e => handleDrop(e, column.id)}
+                    onDragEnd={handleDragEnd}
                     sx={{
-                      '&.MuiTableSortLabel-root': {
-                        color: '#475569',
+                      cursor: 'grab',
+                      opacity: draggedColumn === column.id ? 0.5 : 1,
+                      bgcolor: draggedColumn === column.id ? '#fce4ec' : 'inherit',
+                      transition: 'background-color 0.2s',
+                      '&:hover': {
+                        bgcolor: '#f1f5f9',
                       },
-                      '&.MuiTableSortLabel-root:hover': {
-                        color: '#e91e63',
-                      },
-                      '&.Mui-active': {
-                        color: '#e91e63',
-                      },
-                      '& .MuiTableSortLabel-icon': {
-                        color: '#e91e63 !important',
-                      }
                     }}
                   >
-                    {column.label}
-                  </TableSortLabel>
-                </Box>
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {sortedPrograms.map((program) => (
-            <TableRow
-              key={program.id}
-              sx={{
-                '&:hover': {
-                  bgcolor: '#f8fafc',
-                },
-                borderBottom: '1px solid #f1f5f9'
-              }}
-            >
-              {visibleColumns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  sx={{ 
-                    color: column.id === 'leads' ? '#0f172a' : 
-                           column.format === 'percentage' ? '#64748b' : 
-                           column.id === 'school' ? '#475569' : 'inherit'
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <GripVertical size={14} style={{ color: '#94a3b8', flexShrink: 0 }} />
+                      <TableSortLabel
+                        active={sortField === (column.id.includes('.') ? column.id : column.field)}
+                        direction={
+                          sortField === (column.id.includes('.') ? column.id : column.field)
+                            ? sortDirection
+                            : 'desc'
+                        }
+                        onClick={() => handleSort(column.field as SortField, column.id)}
+                        sx={{
+                          '&.MuiTableSortLabel-root': {
+                            color: '#475569',
+                          },
+                          '&.MuiTableSortLabel-root:hover': {
+                            color: '#e91e63',
+                          },
+                          '&.Mui-active': {
+                            color: '#e91e63',
+                          },
+                          '& .MuiTableSortLabel-icon': {
+                            color: '#e91e63 !important',
+                          },
+                        }}
+                      >
+                        {column.label}
+                      </TableSortLabel>
+                    </Box>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedPrograms.map(program => (
+                <TableRow
+                  key={program.id}
+                  sx={{
+                    '&:hover': {
+                      bgcolor: '#f8fafc',
+                    },
+                    borderBottom: '1px solid #f1f5f9',
                   }}
                 >
-                  {formatCellValue(program, column)}
-                </TableCell>
+                  {visibleColumns.map(column => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      sx={{
+                        color:
+                          column.id === 'leads'
+                            ? '#0f172a'
+                            : column.format === 'percentage'
+                              ? '#64748b'
+                              : column.id === 'school'
+                                ? '#475569'
+                                : 'inherit',
+                      }}
+                    >
+                      {formatCellValue(program, column)}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </Box>
   );

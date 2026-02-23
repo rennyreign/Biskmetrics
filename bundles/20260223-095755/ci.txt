@@ -1,0 +1,16 @@
+npm run quality
+
+> biskmetrics@0.2.0 quality
+> npm run format:check && npm run lint && npm run typecheck && npm run test
+
+
+> biskmetrics@0.2.0 format:check
+> prettier --check "src/**/*.{ts,tsx,js,jsx,json,css,md}"
+
+Checking formatting...
+[warn] src/components/BudgetRecommendationBadge.tsx
+[warn] src/components/DataCompletenessBadge.tsx
+[warn] src/components/ProgramTable.tsx
+[warn] src/providers/FixedDataProvider.ts
+[warn] Code style issues found in 4 files. Run Prettier with --write to fix.
+make: *** [ci] Error 1

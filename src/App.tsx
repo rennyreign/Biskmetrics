@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Box, Container, Button, ButtonGroup } from '@mui/material';
 import { ProgramTable } from './components/ProgramTable';
 import { GraphView } from './components/GraphView';
@@ -6,24 +6,43 @@ import { FilterSection } from './components/FilterSection';
 import { ViewToggle } from './components/ViewToggle';
 import { Header } from './components/Header';
 import { RecommendedVerdict } from './components/RecommendedVerdict';
-import { programs } from './data/programs';
+import { dataProvider } from './providers/FixedDataProvider';
+import type { Program, SchoolId, ProgramLevel } from './types/program';
 import { LayoutDashboard, Award } from 'lucide-react';
 
 type Page = 'dashboard' | 'verdict';
 
 export default function App() {
   const [page, setPage] = useState<Page>('dashboard');
-  const [selectedSchool, setSelectedSchool] = useState<string>('All Schools');
-  const [selectedLevel, setSelectedLevel] = useState<string>('All Program Types');
+  const [selectedSchool, setSelectedSchool] = useState<SchoolId | 'All Schools'>('All Schools');
+  const [selectedLevel, setSelectedLevel] = useState<ProgramLevel | 'All Program Types'>(
+    'All Program Types'
+  );
   const [view, setView] = useState<'table' | 'graph'>('table');
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredPrograms = useMemo(() => {
-    return programs.filter(program => {
-      const schoolMatch = selectedSchool === 'All Schools' || program.school === selectedSchool;
-      const levelMatch = selectedLevel === 'All Program Types' || program.level === selectedLevel;
-      return schoolMatch && levelMatch;
-    });
+  // Load programs from data provider
+  useEffect(() => {
+    const loadPrograms = async () => {
+      setLoading(true);
+      try {
+        const data = await dataProvider.getPrograms({
+          school: selectedSchool,
+          level: selectedLevel,
+        });
+        setPrograms(data);
+      } catch (error) {
+        console.error('Failed to load programs:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPrograms();
   }, [selectedSchool, selectedLevel]);
+
+  const filteredPrograms = programs;
 
   const getFilterSummary = () => {
     const parts = [`${filteredPrograms.length} programs`];
@@ -35,7 +54,7 @@ export default function App() {
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#f8fafc' }}>
       <Header />
-      
+
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {/* Page Navigation */}
         <Box sx={{ mb: 4 }}>
@@ -54,7 +73,7 @@ export default function App() {
                 '&:hover': {
                   bgcolor: page === 'dashboard' ? '#c2185b' : '#f8fafc',
                   borderColor: '#e91e63',
-                }
+                },
               }}
             >
               Dashboard
@@ -73,7 +92,7 @@ export default function App() {
                 '&:hover': {
                   bgcolor: page === 'verdict' ? '#c2185b' : '#f8fafc',
                   borderColor: '#e91e63',
-                }
+                },
               }}
             >
               Recommended Verdict
@@ -92,7 +111,16 @@ export default function App() {
             />
 
             {/* Summary Chip and View Toggle */}
-            <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 2 }}>
+            <Box
+              sx={{
+                mb: 3,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: 2,
+              }}
+            >
               <Box
                 sx={{
                   display: 'inline-flex',
@@ -102,7 +130,7 @@ export default function App() {
                   bgcolor: 'white',
                   border: '1px solid #e2e8f0',
                   borderRadius: '24px',
-                  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)'
+                  boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)',
                 }}
               >
                 <span className="text-sm text-slate-700">Showing {getFilterSummary()}</span>
@@ -116,19 +144,19 @@ export default function App() {
                 bgcolor: 'white',
                 borderRadius: '12px',
                 boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-                overflow: 'hidden'
+                overflow: 'hidden',
               }}
             >
               <Box sx={{ px: 3, py: 2.5, borderBottom: '1px solid #e2e8f0' }}>
                 <h2 className="text-slate-900">Programs</h2>
               </Box>
               {view === 'table' ? (
-                <ProgramTable 
+                <ProgramTable
                   programs={filteredPrograms}
                   showSchoolColumn={selectedSchool === 'All Schools'}
                 />
               ) : (
-                <GraphView 
+                <GraphView
                   programs={filteredPrograms}
                   showSchoolColumn={selectedSchool === 'All Schools'}
                 />
@@ -141,7 +169,7 @@ export default function App() {
               bgcolor: 'white',
               borderRadius: '12px',
               boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-              overflow: 'hidden'
+              overflow: 'hidden',
             }}
           >
             <RecommendedVerdict />

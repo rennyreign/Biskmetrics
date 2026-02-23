@@ -10,13 +10,8 @@ export interface ROIMetrics {
 }
 
 export interface SpendData {
-  programId: string;
   totalSpend: number;
   spendByChannel?: Record<string, number>;
-  spendPeriod: {
-    startDate: Date;
-    endDate: Date;
-  };
 }
 
 export interface ConversionMetrics {

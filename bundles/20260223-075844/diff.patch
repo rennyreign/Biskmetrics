@@ -1,0 +1,2125 @@
+diff --git a/.env.example b/.env.example
+new file mode 100644
+index 0000000..db1eb53
+--- /dev/null
++++ b/.env.example
+@@ -0,0 +1,14 @@
++# Biskmetrics Environment Variables
++# Copy this file to .env and update with your actual values
++
++# HubSpot Integration (Phase 2)
++# VITE_HUBSPOT_API_KEY=your_hubspot_api_key_here
++# VITE_HUBSPOT_PORTAL_ID=your_portal_id_here
++
++# Application Settings
++VITE_APP_NAME=Biskmetrics
++VITE_APP_VERSION=0.2.0
++
++# Feature Flags
++VITE_ENABLE_HUBSPOT=false
++VITE_ENABLE_DEBUG_MODE=false
+diff --git a/.nvmrc b/.nvmrc
+new file mode 100644
+index 0000000..9e2934a
+--- /dev/null
++++ b/.nvmrc
+@@ -0,0 +1 @@
++24.11.1
+diff --git a/.prettierignore b/.prettierignore
+new file mode 100644
+index 0000000..bb7a299
+--- /dev/null
++++ b/.prettierignore
+@@ -0,0 +1,7 @@
++node_modules
++build
++dist
++coverage
++*.min.js
++package-lock.json
++.netlify
+diff --git a/.prettierrc b/.prettierrc
+new file mode 100644
+index 0000000..d507638
+--- /dev/null
++++ b/.prettierrc
+@@ -0,0 +1,8 @@
++{
++  "semi": true,
++  "singleQuote": true,
++  "tabWidth": 2,
++  "trailingComma": "es5",
++  "printWidth": 100,
++  "arrowParens": "avoid"
++}
+diff --git a/.tool-versions b/.tool-versions
+new file mode 100644
+index 0000000..9d70911
+--- /dev/null
++++ b/.tool-versions
+@@ -0,0 +1 @@
++nodejs 24.11.1
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+new file mode 100644
+index 0000000..2b62ae2
+--- /dev/null
++++ b/CHANGELOG.md
+@@ -0,0 +1,33 @@
++# Changelog
++
++All notable changes to this project will be documented in this file.
++
++The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
++and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
++
++## [Unreleased]
++
++### Added
++- Hermetic engineering compliance setup
++- Version pinning (.nvmrc, .tool-versions)
++- Quality tooling (ESLint, Prettier, Vitest)
++- Testing infrastructure with Vitest and Testing Library
++- Data provider architecture for swappable data sources
++- ROI metrics engine (CPL, CPO, CPA, CPE)
++- Scorecard tab integration
++- Program drilldown view with ROI calculator
++- Data completeness indicators
++- Budget recommendation engine
++
++### Changed
++- Migrated from prototype to production-grade architecture
++- Enhanced program table with ROI cost metrics
++
++## [0.1.0] - 2026-02-23
++
++### Added
++- Initial prototype with static data
++- Dashboard and Recommended Verdict tabs
++- Program table with filtering and sorting
++- Graph visualizations
++- Basic program performance metrics
+diff --git a/README.md b/README.md
+index 23d6131..fc29459 100644
+--- a/README.md
++++ b/README.md
+@@ -1,11 +1,202 @@
++# Biskmetrics
+ 
+-  # Program Performance Dashboard
++**Unified Program Performance Dashboard** for tracking program ROI, funnel performance, and marketing scorecard metrics following the Program Shelf System methodology.
+ 
+-  This is a code bundle for Program Performance Dashboard. The original project is available at https://www.figma.com/design/0e6KyElLDX5zbiEIV6mwu0/Program-Performance-Dashboard.
++[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
++[![React](https://img.shields.io/badge/React-18.3-61dafb)](https://react.dev/)
++[![Vite](https://img.shields.io/badge/Vite-6.3-646cff)](https://vitejs.dev/)
++[![Vitest](https://img.shields.io/badge/Vitest-2.1-6e9f18)](https://vitest.dev/)
+ 
+-  ## Running the code
++## 🚀 Quick Start
+ 
+-  Run `npm i` to install the dependencies.
++### Prerequisites
++- Node.js 24.11.1 (use nvm or asdf for version management)
++- npm (comes with Node.js)
+ 
+-  Run `npm run dev` to start the development server.
+-  
+\ No newline at end of file
++### One-Command Setup (Hermetic)
++```bash
++./scripts/setup.sh
++```
++
++### Manual Setup
++```bash
++# Install dependencies (use npm ci for reproducible builds)
++npm ci
++
++# Copy environment variables (optional for Phase 1)
++cp .env.example .env
++
++# Start development server
++npm run dev
++```
++
++## 📋 Features
++
++### Dashboard Tab
++- **Program Performance Table** with sortable/filterable columns
++- **ROI Metrics**: Cost Per Lead (CPL), Cost Per Opportunity (CPO), Cost Per Application (CPA), Cost Per Enrollment (CPE)
++- **Data Completeness Indicators** for migration gap detection
++- **Budget Recommendations** (Increase/Hold/Reduce spend)
++- **Graph Visualizations** for lead volume, conversion rates, and scatter analysis
++
++### Recommended Verdict Tab
++- Program scoring and investment recommendations
++- Comparative performance rankings
++- Top/bottom performer identification
++
++### Scorecard Tab (EOS-Style)
++- **Leading vs. Lagging Indicators** tracking
++- **Weekly Performance Metrics** with WoW deltas
++- **8-Week Trend Charts** for pattern detection
++- **Status Tracking** (On Track/Off Track/Flagged for IDS)
++- **Dual Pipeline Support** (Degree vs. Certificate programs)
++
++### Program Drilldown View
++- Detailed funnel performance analysis
++- Interactive ROI calculator with scenario modeling
++- Conversion stage drop-off insights
++- Historical trend visualizations
++
++## 🛠️ Technology Stack
++
++### Frontend
++- **React 18** - Modern UI library
++- **TypeScript** - Type-safe development
++- **Vite** - Fast build tool and dev server
++- **Material-UI + Radix UI** - Component libraries
++- **Recharts** - Data visualization
++- **Tailwind CSS** - Utility-first styling
++
++### Data Architecture
++- **Modular Provider Pattern** - Swappable data sources
++- **Phase 1**: Fixed data provider (static dataset)
++- **Phase 2**: HubSpot API integration (planned)
++
++### Quality Tools
++- **Vitest** - Unit testing framework
++- **Testing Library** - Component testing utilities
++- **Prettier** - Code formatting
++- **ESLint** - Linting and code quality
++
++## 📦 Available Commands
++
++### Development
++```bash
++npm run dev          # Start development server
++npm run build        # Production build
++npm run preview      # Preview production build
++```
++
++### Quality Gates
++```bash
++npm run test              # Run tests
++npm run test:ui           # Run tests with UI
++npm run test:coverage     # Run tests with coverage
++npm run lint              # Run ESLint
++npm run lint:fix          # Auto-fix ESLint issues
++npm run format            # Format code with Prettier
++npm run format:check      # Check code formatting
++npm run typecheck         # TypeScript type checking
++npm run quality           # Run all quality checks
++```
++
++### Scripts
++```bash
++./scripts/setup.sh        # Bootstrap development environment
++./scripts/pre-commit.sh   # Pre-commit quality checks
++./scripts/audit-deps.sh   # Security audit dependencies
++```
++
++## 📁 Project Structure
++
++```
++biskmetrics/
++├── src/
++│   ├── components/       # React components
++│   │   ├── ui/          # Reusable UI components
++│   │   ├── Scorecard/   # EOS scorecard components
++│   │   ├── ProgramDetail/ # Drilldown view
++│   │   └── DataQuality/ # Completeness indicators
++│   ├── providers/       # Data provider architecture
++│   ├── lib/             # Utility functions & engines
++│   │   ├── metricsEngine.ts
++│   │   ├── recommendationEngine.ts
++│   │   └── dataQuality.ts
++│   ├── data/            # Static data & mocks
++│   ├── types/           # TypeScript type definitions
++│   └── App.tsx          # Main application
++├── tests/
++│   ├── unit/            # Unit tests
++│   ├── integration/     # Integration tests
++│   └── setup.ts         # Test configuration
++├── scripts/             # Automation scripts
++├── docs/
++│   ├── adr/             # Architecture Decision Records
++│   └── AGENTS.md        # AI agent development guide
++└── .windsurf/
++    └── rules/           # Project rules and standards
++```
++
++## 🔒 Environment Variables
++
++Copy `.env.example` to `.env` (optional for Phase 1):
++
++```env
++# Phase 2 - HubSpot Integration
++VITE_HUBSPOT_API_KEY=your_api_key
++VITE_HUBSPOT_PORTAL_ID=your_portal_id
++VITE_ENABLE_HUBSPOT=false
++```
++
++## 🧪 Testing
++
++This project follows hermetic engineering principles with comprehensive testing:
++
++- **Minimum 80% coverage** for business logic
++- **100% coverage** for critical paths (ROI calculations, recommendations)
++- Tests required for new public functions and bugfixes
++
++Run tests:
++```bash
++npm run test              # Run all tests
++npm run test:coverage     # Generate coverage report
++npm run test:ui           # Interactive test UI
++```
++
++## 🎨 Code Style
++
++- **Path alias**: Use `@/` for imports from `src/`
++- **TypeScript**: Strict mode enabled
++- **Components**: Functional components with hooks
++- **Formatting**: Prettier (100 char line length, single quotes)
++- **Commits**: Conventional commits required
++
++## 📚 Documentation
++
++- [`docs/AGENTS.md`](./docs/AGENTS.md) - Agent/AI development guide
++- [`CHANGELOG.md`](./CHANGELOG.md) - Version history
++- [`docs/adr/`](./docs/adr/) - Architecture Decision Records
++- [`plan/program-shelf-v2.md`](./plan/program-shelf-v2.md) - Detailed requirements
++- [`.windsurf/rules/hermetic-engineering.md`](./.windsurf/rules/hermetic-engineering.md) - Engineering standards
++
++## 🔐 Security
++
++- No secrets in repository
++- Environment variables for sensitive data
++- Input validation with Zod
++- Defensive programming for calculations (null/0 handling)
++
++## 🤝 Contributing
++
++1. Follow conventional commit format
++2. Run quality checks before committing: `./scripts/pre-commit.sh`
++3. Ensure tests pass and coverage meets requirements
++4. Update documentation for significant changes
++
++## 📄 License
++
++Private project - All rights reserved
++
++## 🙏 Acknowledgments
++
++Built with modern web technologies and hermetic engineering principles for reproducibility, quality, and maintainability. Inspired by the EOS (Entrepreneurial Operating System) methodology and the Program Shelf System framework.
+\ No newline at end of file
+diff --git a/docs/AGENTS.md b/docs/AGENTS.md
+new file mode 100644
+index 0000000..36abd54
+--- /dev/null
++++ b/docs/AGENTS.md
+@@ -0,0 +1,236 @@
++# AGENTS.md
++
++## Project: Biskmetrics
++Unified Program Performance Dashboard for tracking program ROI, funnel performance, and marketing scorecard metrics.
++
++## Quick Start
++```bash
++# One-command setup (hermetic principle)
++./scripts/setup.sh
++
++# Or manually
++npm ci
++npm run dev
++```
++
++## Commands
++
++### Development
++- `npm run dev` - Start development server (Vite)
++- `npm run build` - Production build
++- `npm run preview` - Preview production build
++
++### Quality Gates
++- `npm run test` - Run tests (Vitest)
++- `npm run test:ui` - Run tests with UI
++- `npm run test:coverage` - Run tests with coverage report
++- `npm run lint` - Run ESLint
++- `npm run lint:fix` - Auto-fix ESLint issues
++- `npm run format` - Format code with Prettier
++- `npm run format:check` - Check code formatting
++- `npm run typecheck` - TypeScript type checking
++- `npm run quality` - Run all quality checks (format, lint, typecheck, test)
++
++### Scripts
++- `./scripts/setup.sh` - Bootstrap development environment
++- `./scripts/pre-commit.sh` - Pre-commit quality checks
++- `./scripts/audit-deps.sh` - Security audit dependencies
++
++## Architecture
++- **Frontend**: React 18 + TypeScript + Vite
++- **UI**: Material-UI + Radix UI components + shadcn/ui patterns
++- **Charts**: Recharts for data visualization
++- **State**: React hooks for local state
++- **Data Layer**: Modular provider architecture (FixedDataProvider → HubSpotDataProvider)
++- **Forms**: react-hook-form + Zod validation
++- **Testing**: Vitest + Testing Library
++- **Code Quality**: Prettier + ESLint + TypeScript strict mode
++
++## Project Structure (Hermetic Compliant)
++```
++biskmetrics/
++├── src/
++│   ├── components/
++│   │   ├── ui/              # Reusable UI components
++│   │   ├── ProgramTable.tsx # Main program table
++│   │   ├── GraphView.tsx    # Chart visualizations
++│   │   ├── Scorecard/       # EOS scorecard components
++│   │   ├── ProgramDetail/   # Drilldown view components
++│   │   └── DataQuality/     # Data completeness indicators
++│   ├── providers/
++│   │   ├── DataProvider.interface.ts  # Abstract interface
++│   │   ├── FixedDataProvider.ts       # Phase 1 static data
++│   │   └── HubSpotDataProvider.ts     # Phase 2 API integration
++│   ├── lib/
++│   │   ├── metricsEngine.ts           # ROI calculations
++│   │   ├── recommendationEngine.ts    # Budget recommendations
++│   │   └── dataQuality.ts             # Completeness scoring
++│   ├── data/
++│   │   ├── programs.ts      # Program data
++│   │   └── mockData.ts      # Scorecard mock data
++│   ├── types/
++│   │   ├── program.ts       # Program types
++│   │   ├── metrics.ts       # ROI metric types
++│   │   └── scorecard.ts     # Scorecard types
++│   └── App.tsx              # Main application
++├── tests/
++│   ├── unit/                # Unit tests
++│   ├── integration/         # Integration tests
++│   └── setup.ts             # Test configuration
++├── scripts/                 # Automation scripts
++├── docs/
++│   ├── adr/                 # Architecture Decision Records
++│   └── AGENTS.md            # This file
++└── .windsurf/
++    └── rules/               # Project rules and standards
++```
++
++## Code Style
++- Use `@/` path alias for imports from src/
++- TypeScript with strict settings
++- Functional components with hooks
++- Prettier formatting (100 char line length, single quotes)
++- Conventional commits required
++
++## Testing Requirements
++- Minimum 80% coverage for business logic
++- 100% coverage for critical paths (ROI calculations, recommendations)
++- Tests required for new public functions
++- Tests required for bugfixes
++
++## Data Provider Architecture
++
++The application uses a modular data provider pattern:
++
++### Phase 1: Fixed Data Provider
++```typescript
++import { FixedDataProvider } from '@/providers/FixedDataProvider';
++
++const dataProvider = new FixedDataProvider();
++const programs = await dataProvider.getPrograms();
++```
++
++### Phase 2: HubSpot Provider (Future)
++```typescript
++import { HubSpotDataProvider } from '@/providers/HubSpotDataProvider';
++
++const dataProvider = new HubSpotDataProvider({
++  apiKey: process.env.VITE_HUBSPOT_API_KEY,
++  portalId: process.env.VITE_HUBSPOT_PORTAL_ID,
++});
++const programs = await dataProvider.getPrograms();
++```
++
++## Key Features
++
++### 1. Program Performance Dashboard
++- Sortable/filterable program table
++- ROI metrics: CPL, CPO, CPA, CPE
++- Data completeness indicators
++- Budget recommendations
++
++### 2. Recommended Verdict Tab
++- Program scoring and recommendations
++- Investment action suggestions (Increase/Hold/Reduce)
++
++### 3. Scorecard Tab (EOS-Style)
++- Leading vs. Lagging indicators
++- Weekly tracking with WoW deltas
++- 8-week performance trends
++- Status tracking (On Track/Off Track/Flagged)
++
++### 4. Program Drilldown
++- Detailed funnel performance
++- ROI calculator with scenario modeling
++- Conversion stage analysis
++- Trend visualizations
++
++## Environment Variables
++See `.env.example` for required configuration:
++- `VITE_HUBSPOT_API_KEY` - HubSpot API key (Phase 2)
++- `VITE_HUBSPOT_PORTAL_ID` - HubSpot portal ID (Phase 2)
++- `VITE_ENABLE_HUBSPOT` - Feature flag for HubSpot integration
++
++## Version Pinning
++- Node.js: 24.11.1 (see `.nvmrc` and `.tool-versions`)
++- Dependencies locked via `package-lock.json`
++
++## Documentation
++- `CHANGELOG.md` - Version history and changes
++- `docs/adr/` - Architecture Decision Records
++- `README.md` - Project overview and setup
++- `plan/program-shelf-v2.md` - Detailed requirements
++
++## Hermetic Engineering Compliance
++This project follows hermetic engineering principles:
++- ✅ Reproducible builds with locked dependencies
++- ✅ Comprehensive testing framework
++- ✅ Code quality tooling (Prettier, ESLint, TypeScript)
++- ✅ Version pinning (.nvmrc, .tool-versions)
++- ✅ Environment variable templates
++- ✅ Structured project layout
++- ✅ Documentation and ADRs
++- ✅ Quality gate scripts
++- ✅ One-command bootstrap
++
++See `.windsurf/rules/hermetic-engineering.md` for full ruleset.
++
++## Development Workflow
++
++1. **Start new feature**
++   ```bash
++   git checkout -b feat/your-feature-name
++   ```
++
++2. **Make changes and test**
++   ```bash
++   npm run dev          # Development server
++   npm run test:ui      # Watch tests
++   ```
++
++3. **Before commit**
++   ```bash
++   ./scripts/pre-commit.sh  # Run all quality checks
++   ```
++
++4. **Commit with conventional format**
++   ```bash
++   git commit -m "feat: add ROI calculator to drilldown view"
++   ```
++
++## Common Tasks
++
++### Adding a New Metric
++1. Update types in `src/types/metrics.ts`
++2. Add calculation logic in `src/lib/metricsEngine.ts`
++3. Add tests in `tests/unit/metricsEngine.test.ts`
++4. Update UI components to display the metric
++
++### Adding a New Data Provider
++1. Implement `DataProvider` interface
++2. Add provider in `src/providers/`
++3. Add integration tests
++4. Update environment variables if needed
++
++### Debugging Data Quality Issues
++1. Check data completeness indicators in UI
++2. Review `src/lib/dataQuality.ts` scoring logic
++3. Inspect provider output in browser console (dev mode)
++
++## Performance Targets
++- Initial load: < 3 seconds
++- Table sorting: < 500ms
++- Drilldown open: < 1 second
++- Test suite: < 30 seconds
++
++## Security
++- No secrets in repository
++- Environment variables for sensitive data
++- Input validation with Zod
++- Defensive programming for calculations (null/0 handling)
++
++## Contributing
++1. Follow conventional commit format
++2. Run quality checks before committing
++3. Ensure tests pass and coverage meets requirements
++4. Update documentation for significant changes
+diff --git a/docs/adr/001-data-provider-architecture.md b/docs/adr/001-data-provider-architecture.md
+new file mode 100644
+index 0000000..71f5ceb
+--- /dev/null
++++ b/docs/adr/001-data-provider-architecture.md
+@@ -0,0 +1,114 @@
++# ADR 001: Data Provider Architecture
++
++## Status
++Accepted
++
++## Context
++Biskmetrics needs to support two distinct data sources across its lifecycle:
++- **Phase 1**: Static dataset (current prototype data) for immediate delivery
++- **Phase 2**: Live HubSpot API integration for real-time program performance tracking
++
++Additionally, there's an ongoing Salesforce → HubSpot migration, meaning:
++- Data structures may be incomplete or inconsistent
++- Field mappings may change during migration
++- Attribution logic may need adjustment
++
++We need an architecture that:
++1. Allows seamless switching between data sources without UI changes
++2. Supports graceful degradation when data is incomplete
++3. Makes testing easy by allowing mock data providers
++4. Isolates data fetching logic from business logic
++
++## Decision
++We will implement a **Data Provider Pattern** with the following structure:
++
++### Interface Definition
++```typescript
++interface DataProvider {
++  getPrograms(filters?: ProgramFilters): Promise<Program[]>;
++  getScorecardMetrics(week?: Date): Promise<ScorecardMetrics>;
++  getProgramDetail(programId: string): Promise<ProgramDetail>;
++  getSpendData(programId: string): Promise<SpendData>;
++}
++```
++
++### Phase 1: FixedDataProvider
++- Reads from static JSON/TypeScript files
++- No external dependencies
++- Immediate, synchronous data access
++- Serves as the baseline for testing
++
++### Phase 2: HubSpotDataProvider
++- Implements same interface
++- Handles API authentication, rate limiting, caching
++- Maps HubSpot objects to our domain model
++- Includes retry logic and error handling
++
++### Provider Selection
++```typescript
++// In App.tsx or root provider
++const dataProvider = import.meta.env.VITE_ENABLE_HUBSPOT
++  ? new HubSpotDataProvider(config)
++  : new FixedDataProvider();
++```
++
++## Consequences
++
++### Positive
++- **UI remains unchanged** when switching data sources
++- **Easy testing** with mock providers
++- **Clear separation of concerns** between data fetching and business logic
++- **Gradual migration** - can test HubSpot integration without breaking existing functionality
++- **Data quality visibility** - providers can return completeness metadata
++
++### Negative
++- **Additional abstraction layer** adds some complexity
++- **Interface must be comprehensive** enough for all use cases
++- **Type safety** requires careful mapping between HubSpot schema and our types
++
++### Neutral
++- Requires discipline to keep all data access through providers
++- May need to extend interface as new features are added
++
++## Implementation Notes
++
++### Defensive Programming
++All providers must handle:
++- Missing/null values (show "N/A" in UI)
++- Division by zero in calculations (return null)
++- Incomplete data (flag with completeness score)
++
++### Caching Strategy (Phase 2)
++- Cache HubSpot responses for 5 minutes
++- Invalidate on user-triggered refresh
++- Store in memory (no persistent cache needed initially)
++
++### Error Handling
++- Providers throw typed errors (e.g., `DataProviderError`)
++- UI catches and displays user-friendly messages
++- Errors include context for debugging
++
++## Alternatives Considered
++
++### Direct API Calls in Components
++**Rejected** because:
++- Tight coupling between UI and data source
++- Difficult to test
++- Hard to switch data sources
++- Business logic mixed with data fetching
++
++### Redux/State Management Library
++**Rejected** for Phase 1 because:
++- Overkill for static data
++- Adds unnecessary complexity
++- Can be added later if needed for Phase 2
++
++### GraphQL Layer
++**Rejected** because:
++- HubSpot doesn't provide GraphQL API
++- Would require building our own GraphQL server
++- Adds deployment complexity
++
++## References
++- [Program Shelf V2 Requirements](../../plan/program-shelf-v2.md)
++- [Hermetic Engineering Rules](../../.windsurf/rules/hermetic-engineering.md)
+diff --git a/eslint.config.js b/eslint.config.js
+new file mode 100644
+index 0000000..85f55a9
+--- /dev/null
++++ b/eslint.config.js
+@@ -0,0 +1,27 @@
++import js from '@eslint/js';
++import globals from 'globals';
++import reactHooks from 'eslint-plugin-react-hooks';
++import reactRefresh from 'eslint-plugin-react-refresh';
++import tseslint from 'typescript-eslint';
++
++export default tseslint.config(
++  { ignores: ['dist', 'build', 'node_modules', 'coverage'] },
++  {
++    extends: [js.configs.recommended, ...tseslint.configs.recommended],
++    files: ['**/*.{ts,tsx}'],
++    languageOptions: {
++      ecmaVersion: 2020,
++      globals: globals.browser,
++    },
++    plugins: {
++      'react-hooks': reactHooks,
++      'react-refresh': reactRefresh,
++    },
++    rules: {
++      ...reactHooks.configs.recommended.rules,
++      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
++      '@typescript-eslint/no-explicit-any': 'warn',
++      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
++    },
++  }
++);
+diff --git a/package.json b/package.json
+index 25c335c..1626135 100644
+--- a/package.json
++++ b/package.json
+@@ -1,64 +1,94 @@
+ {
+-      "name": "Program Performance Dashboard",
+-      "version": "0.1.0",
+-      "private": true,
+-      "dependencies": {
+-            "@mui/material": "*",
+-            "@radix-ui/react-accordion": "^1.2.3",
+-            "@radix-ui/react-alert-dialog": "^1.1.6",
+-            "@radix-ui/react-aspect-ratio": "^1.1.2",
+-            "@radix-ui/react-avatar": "^1.1.3",
+-            "@radix-ui/react-checkbox": "^1.1.4",
+-            "@radix-ui/react-collapsible": "^1.1.3",
+-            "@radix-ui/react-context-menu": "^2.2.6",
+-            "@radix-ui/react-dialog": "^1.1.6",
+-            "@radix-ui/react-dropdown-menu": "^2.1.6",
+-            "@radix-ui/react-hover-card": "^1.1.6",
+-            "@radix-ui/react-label": "^2.1.2",
+-            "@radix-ui/react-menubar": "^1.1.6",
+-            "@radix-ui/react-navigation-menu": "^1.2.5",
+-            "@radix-ui/react-popover": "^1.1.6",
+-            "@radix-ui/react-progress": "^1.1.2",
+-            "@radix-ui/react-radio-group": "^1.2.3",
+-            "@radix-ui/react-scroll-area": "^1.2.3",
+-            "@radix-ui/react-select": "^2.1.6",
+-            "@radix-ui/react-separator": "^1.1.2",
+-            "@radix-ui/react-slider": "^1.2.3",
+-            "@radix-ui/react-slot": "^1.1.2",
+-            "@radix-ui/react-switch": "^1.1.3",
+-            "@radix-ui/react-tabs": "^1.1.3",
+-            "@radix-ui/react-toggle": "^1.1.2",
+-            "@radix-ui/react-toggle-group": "^1.1.2",
+-            "@radix-ui/react-tooltip": "^1.1.8",
+-            "class-variance-authority": "^0.7.1",
+-            "clsx": "*",
+-            "cmdk": "^1.1.1",
+-            "embla-carousel-react": "^8.6.0",
+-            "input-otp": "^1.4.2",
+-            "lucide-react": "^0.487.0",
+-            "next-themes": "^0.4.6",
+-            "react": "^18.3.1",
+-            "react-day-picker": "^8.10.1",
+-            "react-dom": "^18.3.1",
+-            "react-hook-form": "^7.55.0",
+-            "react-resizable-panels": "^2.1.7",
+-            "recharts": "^2.15.2",
+-            "sonner": "^2.0.3",
+-            "tailwind-merge": "*",
+-            "vaul": "^1.1.2"
+-      },
+-      "devDependencies": {
+-            "@emotion/react": "^11.14.0",
+-            "@emotion/styled": "^11.14.1",
+-            "@types/node": "^20.10.0",
+-            "@types/react": "^19.2.7",
+-            "@types/react-dom": "^19.2.3",
+-            "@vitejs/plugin-react-swc": "^3.10.2",
+-            "typescript": "^5.9.3",
+-            "vite": "6.3.5"
+-      },
+-      "scripts": {
+-            "dev": "vite",
+-            "build": "vite build"
+-      }
++  "name": "biskmetrics",
++  "version": "0.2.0",
++  "private": true,
++  "type": "module",
++  "scripts": {
++    "dev": "vite",
++    "build": "vite build",
++    "preview": "vite preview",
++    "lint": "eslint .",
++    "lint:fix": "eslint . --fix",
++    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
++    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
++    "typecheck": "tsc --noEmit",
++    "test": "vitest run",
++    "test:ui": "vitest --ui",
++    "test:coverage": "vitest --coverage",
++    "quality": "npm run format:check && npm run lint && npm run typecheck && npm run test"
++  },
++  "dependencies": {
++    "@mui/material": "*",
++    "@radix-ui/react-accordion": "^1.2.3",
++    "@radix-ui/react-alert-dialog": "^1.1.6",
++    "@radix-ui/react-aspect-ratio": "^1.1.2",
++    "@radix-ui/react-avatar": "^1.1.3",
++    "@radix-ui/react-checkbox": "^1.1.4",
++    "@radix-ui/react-collapsible": "^1.1.3",
++    "@radix-ui/react-context-menu": "^2.2.6",
++    "@radix-ui/react-dialog": "^1.1.6",
++    "@radix-ui/react-dropdown-menu": "^2.1.6",
++    "@radix-ui/react-hover-card": "^1.1.6",
++    "@radix-ui/react-label": "^2.1.2",
++    "@radix-ui/react-menubar": "^1.1.6",
++    "@radix-ui/react-navigation-menu": "^1.2.5",
++    "@radix-ui/react-popover": "^1.1.6",
++    "@radix-ui/react-progress": "^1.1.2",
++    "@radix-ui/react-radio-group": "^1.2.3",
++    "@radix-ui/react-scroll-area": "^1.2.3",
++    "@radix-ui/react-select": "^2.1.6",
++    "@radix-ui/react-separator": "^1.1.2",
++    "@radix-ui/react-slider": "^1.2.3",
++    "@radix-ui/react-slot": "^1.1.2",
++    "@radix-ui/react-switch": "^1.1.3",
++    "@radix-ui/react-tabs": "^1.1.3",
++    "@radix-ui/react-toggle": "^1.1.2",
++    "@radix-ui/react-toggle-group": "^1.1.2",
++    "@radix-ui/react-tooltip": "^1.1.8",
++    "class-variance-authority": "^0.7.1",
++    "clsx": "*",
++    "cmdk": "^1.1.1",
++    "date-fns": "^3.6.0",
++    "embla-carousel-react": "^8.6.0",
++    "input-otp": "^1.4.2",
++    "lucide-react": "^0.487.0",
++    "next-themes": "^0.4.6",
++    "react": "^18.3.1",
++    "react-day-picker": "^8.10.1",
++    "react-dom": "^18.3.1",
++    "react-hook-form": "^7.55.0",
++    "react-resizable-panels": "^2.1.7",
++    "recharts": "^2.15.2",
++    "sonner": "^2.0.3",
++    "tailwind-merge": "*",
++    "vaul": "^1.1.2",
++    "zod": "^3.25.76"
++  },
++  "devDependencies": {
++    "@emotion/react": "^11.14.0",
++    "@emotion/styled": "^11.14.1",
++    "@eslint/js": "^9.32.0",
++    "@testing-library/jest-dom": "^6.6.3",
++    "@testing-library/react": "^16.1.0",
++    "@testing-library/user-event": "^14.5.2",
++    "@types/node": "^20.10.0",
++    "@types/react": "^19.2.7",
++    "@types/react-dom": "^19.2.3",
++    "@vitejs/plugin-react-swc": "^3.10.2",
++    "@vitest/coverage-v8": "^2.1.8",
++    "@vitest/ui": "^2.1.8",
++    "autoprefixer": "^10.4.24",
++    "eslint": "^9.32.0",
++    "eslint-plugin-react-hooks": "^5.2.0",
++    "eslint-plugin-react-refresh": "^0.4.20",
++    "globals": "^15.15.0",
++    "jsdom": "^25.0.1",
++    "postcss": "^8.5.6",
++    "prettier": "^3.4.2",
++    "tailwindcss": "^4.2.0",
++    "typescript": "^5.9.3",
++    "typescript-eslint": "^8.38.0",
++    "vite": "6.3.5",
++    "vitest": "^2.1.8"
++  }
+ }
+diff --git a/postcss.config.js b/postcss.config.js
+new file mode 100644
+index 0000000..2aa7205
+--- /dev/null
++++ b/postcss.config.js
+@@ -0,0 +1,6 @@
++export default {
++  plugins: {
++    tailwindcss: {},
++    autoprefixer: {},
++  },
++};
+diff --git a/scripts/audit-deps.sh b/scripts/audit-deps.sh
+new file mode 100755
+index 0000000..255b991
+--- /dev/null
++++ b/scripts/audit-deps.sh
+@@ -0,0 +1,11 @@
++#!/bin/bash
++set -e
++
++echo "🔒 Running dependency security audit..."
++echo ""
++
++# Run npm audit
++npm audit --audit-level=moderate
++
++echo ""
++echo "✅ Dependency audit complete!"
+diff --git a/scripts/pre-commit.sh b/scripts/pre-commit.sh
+new file mode 100755
+index 0000000..aec5adc
+--- /dev/null
++++ b/scripts/pre-commit.sh
+@@ -0,0 +1,24 @@
++#!/bin/bash
++set -e
++
++echo "🔍 Running pre-commit quality checks..."
++echo ""
++
++# Format check
++echo "📝 Checking code formatting..."
++npm run format:check
++
++# Lint
++echo "🔎 Running linter..."
++npm run lint
++
++# Type check
++echo "📘 Type checking..."
++npm run typecheck
++
++# Tests
++echo "🧪 Running tests..."
++npm run test
++
++echo ""
++echo "✅ All quality checks passed!"
+diff --git a/scripts/setup.sh b/scripts/setup.sh
+new file mode 100755
+index 0000000..1c424ca
+--- /dev/null
++++ b/scripts/setup.sh
+@@ -0,0 +1,48 @@
++#!/bin/bash
++set -e
++
++echo "🚀 Biskmetrics Setup Script"
++echo "============================"
++echo ""
++
++# Check Node version
++if command -v node &> /dev/null; then
++  NODE_VERSION=$(node -v)
++  echo "✓ Node.js detected: $NODE_VERSION"
++else
++  echo "❌ Node.js not found. Please install Node.js 24.11.1"
++  exit 1
++fi
++
++# Install dependencies
++echo ""
++echo "📦 Installing dependencies..."
++npm ci
++
++# Create .env if it doesn't exist
++if [ ! -f .env ]; then
++  echo ""
++  echo "📝 Creating .env file from .env.example..."
++  if [ -f .env.example ]; then
++    cp .env.example .env
++    echo "✓ .env created. Please update with your credentials."
++  else
++    echo "⚠️  No .env.example found. Skipping .env creation."
++  fi
++fi
++
++# Run quality checks
++echo ""
++echo "🔍 Running quality checks..."
++npm run typecheck
++npm run lint
++npm run format:check
++
++echo ""
++echo "✅ Setup complete!"
++echo ""
++echo "Next steps:"
++echo "  1. Update .env with your configuration (if applicable)"
++echo "  2. Run 'npm run dev' to start the development server"
++echo "  3. Run 'npm run test' to run tests"
++echo ""
+diff --git a/src/lib/dataQuality.ts b/src/lib/dataQuality.ts
+new file mode 100644
+index 0000000..e7bd009
+--- /dev/null
++++ b/src/lib/dataQuality.ts
+@@ -0,0 +1,128 @@
++import type { DataCompletenessScore } from '@/types/metrics';
++import type { Program } from '@/types/program';
++
++/**
++ * Data Quality Engine
++ *
++ * Calculates data completeness scores and identifies missing fields.
++ * Helps expose gaps during Salesforce → HubSpot migration.
++ */
++
++const REQUIRED_FIELDS = [
++  'funnel.inquiries',
++  'funnel.opportunities',
++  'funnel.applications',
++  'funnel.enrollments',
++];
++
++const OPTIONAL_FIELDS = [
++  'funnel.visitors',
++  'spend.totalSpend',
++  'conversions.inquiryToOpportunityRate',
++  'conversions.opportunityToApplicationRate',
++  'conversions.applicationToEnrollmentRate',
++];
++
++/**
++ * Calculate data completeness score for a program
++ */
++export function calculateCompletenessScore(program: Program): DataCompletenessScore {
++  const missingFields: string[] = [];
++  let requiredFieldsPresent = 0;
++  let optionalFieldsPresent = 0;
++
++  // Check required fields
++  REQUIRED_FIELDS.forEach(field => {
++    if (!hasValue(program, field)) {
++      missingFields.push(field);
++    } else {
++      requiredFieldsPresent++;
++    }
++  });
++
++  // Check optional fields
++  OPTIONAL_FIELDS.forEach(field => {
++    if (hasValue(program, field)) {
++      optionalFieldsPresent++;
++    }
++  });
++
++  // Calculate overall score (0-100)
++  const requiredScore = (requiredFieldsPresent / REQUIRED_FIELDS.length) * 70; // 70% weight
++  const optionalScore = (optionalFieldsPresent / OPTIONAL_FIELDS.length) * 30; // 30% weight
++  const overall = Math.round(requiredScore + optionalScore);
++
++  // Determine status
++  let status: 'complete' | 'partial' | 'unreliable';
++  if (overall >= 90) {
++    status = 'complete';
++  } else if (overall >= 50) {
++    status = 'partial';
++  } else {
++    status = 'unreliable';
++  }
++
++  return {
++    overall,
++    missingFields,
++    status,
++  };
++}
++
++/**
++ * Check if a nested field has a valid value
++ */
++function hasValue(obj: any, path: string): boolean {
++  const keys = path.split('.');
++  let current = obj;
++
++  for (const key of keys) {
++    if (current == null || current[key] == null) {
++      return false;
++    }
++    current = current[key];
++  }
++
++  // Check if the value is valid (not null, not NaN, not empty string)
++  if (typeof current === 'number') {
++    return isFinite(current);
++  }
++  if (typeof current === 'string') {
++    return current.trim().length > 0;
++  }
++  return current != null;
++}
++
++/**
++ * Get human-readable field name
++ */
++export function getFieldDisplayName(fieldPath: string): string {
++  const fieldNames: Record<string, string> = {
++    'funnel.inquiries': 'Inquiries',
++    'funnel.opportunities': 'Opportunities',
++    'funnel.applications': 'Applications',
++    'funnel.enrollments': 'Enrollments',
++    'funnel.visitors': 'Visitors',
++    'spend.totalSpend': 'Marketing Spend',
++    'conversions.inquiryToOpportunityRate': 'Inquiry to Opportunity Rate',
++    'conversions.opportunityToApplicationRate': 'Opportunity to Application Rate',
++    'conversions.applicationToEnrollmentRate': 'Application to Enrollment Rate',
++  };
++
++  return fieldNames[fieldPath] || fieldPath;
++}
++
++/**
++ * Filter programs by completeness status
++ */
++export function filterByCompleteness(
++  programs: Program[],
++  status: 'complete' | 'partial' | 'unreliable'
++): Program[] {
++  return programs.filter(program => {
++    if (!program.dataCompleteness) {
++      return false;
++    }
++    return program.dataCompleteness.status === status;
++  });
++}
+diff --git a/src/lib/metricsEngine.ts b/src/lib/metricsEngine.ts
+new file mode 100644
+index 0000000..f18b79b
+--- /dev/null
++++ b/src/lib/metricsEngine.ts
+@@ -0,0 +1,107 @@
++import type { ROIMetrics, ConversionMetrics, FunnelStageCount } from '@/types/metrics';
++
++/**
++ * Metrics Engine
++ *
++ * Centralized calculation logic for all ROI and conversion metrics.
++ * Uses defensive programming to handle null/0 values gracefully.
++ */
++
++/**
++ * Calculate ROI metrics from spend and funnel data
++ */
++export function calculateROIMetrics(totalSpend: number, funnel: FunnelStageCount): ROIMetrics {
++  return {
++    costPerLead: safeDivide(totalSpend, funnel.inquiries),
++    costPerOpportunity: safeDivide(totalSpend, funnel.opportunities),
++    costPerApplication: safeDivide(totalSpend, funnel.applications),
++    costPerEnrollment: safeDivide(totalSpend, funnel.enrollments),
++  };
++}
++
++/**
++ * Calculate conversion rates from funnel data
++ */
++export function calculateConversionMetrics(funnel: FunnelStageCount): ConversionMetrics {
++  return {
++    inquiryToOpportunityRate: safePercentage(funnel.opportunities, funnel.inquiries),
++    opportunityToApplicationRate: safePercentage(funnel.applications, funnel.opportunities),
++    applicationToEnrollmentRate: safePercentage(funnel.enrollments, funnel.applications),
++    contactToApplicationRate: safePercentage(funnel.applications, funnel.inquiries),
++    contactToEnrollmentRate: safePercentage(funnel.enrollments, funnel.inquiries),
++    leadToEnrollmentRate: safePercentage(funnel.enrollments, funnel.inquiries),
++  };
++}
++
++/**
++ * Safe division that returns null for invalid operations
++ */
++export function safeDivide(numerator: number, denominator: number): number | null {
++  if (denominator === 0 || denominator == null || numerator == null) {
++    return null;
++  }
++  if (!isFinite(numerator) || !isFinite(denominator)) {
++    return null;
++  }
++  return numerator / denominator;
++}
++
++/**
++ * Safe percentage calculation (returns value as percentage, not decimal)
++ */
++export function safePercentage(numerator: number, denominator: number): number | null {
++  const result = safeDivide(numerator, denominator);
++  return result !== null ? result * 100 : null;
++}
++
++/**
++ * Format currency value
++ */
++export function formatCurrency(value: number | null): string {
++  if (value === null || value === undefined) {
++    return '—';
++  }
++  return `$${value.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
++}
++
++/**
++ * Format percentage value
++ */
++export function formatPercentage(value: number | null, decimals: number = 1): string {
++  if (value === null || value === undefined) {
++    return '—';
++  }
++  return `${value.toFixed(decimals)}%`;
++}
++
++/**
++ * Format number with thousands separator
++ */
++export function formatNumber(value: number | null): string {
++  if (value === null || value === undefined) {
++    return '—';
++  }
++  return value.toLocaleString('en-US');
++}
++
++/**
++ * Calculate week-over-week delta
++ */
++export function calculateWoWDelta(current: number, lastWeek: number): number | null {
++  if (lastWeek === 0 || lastWeek == null || current == null) {
++    return null;
++  }
++  return ((current - lastWeek) / lastWeek) * 100;
++}
++
++/**
++ * Calculate 4-week average
++ */
++export function calculateFourWeekAvg(values: number[]): number | null {
++  const validValues = values.filter(v => v != null && isFinite(v));
++  if (validValues.length === 0) {
++    return null;
++  }
++  const sum = validValues.reduce((acc, val) => acc + val, 0);
++  return sum / validValues.length;
++}
+diff --git a/src/lib/recommendationEngine.ts b/src/lib/recommendationEngine.ts
+new file mode 100644
+index 0000000..9912523
+--- /dev/null
++++ b/src/lib/recommendationEngine.ts
+@@ -0,0 +1,171 @@
++import type { BudgetRecommendation, RecommendationAction } from '@/types/metrics';
++import type { Program } from '@/types/program';
++
++/**
++ * Budget Recommendation Engine
++ *
++ * Generates investment recommendations based on program performance.
++ * Uses simple heuristics in Phase 1, can be enhanced with ML in future.
++ */
++
++interface RecommendationCriteria {
++  minLeads: number;
++  minConversionRate: number;
++  maxCostPerEnrollment: number;
++  excellentConversionRate: number;
++  excellentCostPerEnrollment: number;
++}
++
++const DEFAULT_CRITERIA: RecommendationCriteria = {
++  minLeads: 50, // Minimum lead volume for reliable data
++  minConversionRate: 5, // Minimum lead to enrollment rate (%)
++  maxCostPerEnrollment: 5000, // Maximum acceptable CPE
++  excellentConversionRate: 15, // Excellent lead to enrollment rate (%)
++  excellentCostPerEnrollment: 2000, // Excellent CPE
++};
++
++/**
++ * Generate budget recommendation for a program
++ */
++export function generateRecommendation(
++  program: Program,
++  criteria: RecommendationCriteria = DEFAULT_CRITERIA
++): BudgetRecommendation {
++  // Check data completeness
++  if (program.dataCompleteness?.status === 'unreliable') {
++    return {
++      action: 'pause',
++      confidence: 'low',
++      reasoning:
++        'Insufficient data quality. Complete data migration before making investment decisions.',
++    };
++  }
++
++  // Check minimum lead volume
++  if (program.leads < criteria.minLeads) {
++    return {
++      action: 'hold',
++      confidence: 'low',
++      reasoning: `Insufficient lead volume (${program.leads} leads). Need at least ${criteria.minLeads} leads for reliable analysis.`,
++    };
++  }
++
++  const conversionRate = program.conversions.leadToEnrollmentRate;
++  const costPerEnrollment = program.roi?.costPerEnrollment ?? null;
++
++  // Missing critical metrics
++  if (conversionRate === null || costPerEnrollment === null) {
++    return {
++      action: 'hold',
++      confidence: 'low',
++      reasoning: 'Missing conversion rate or cost data. Cannot assess ROI.',
++    };
++  }
++
++  // At this point, TypeScript knows both are non-null
++  // Excellent performance - increase spend
++  if (
++    conversionRate >= criteria.excellentConversionRate &&
++    costPerEnrollment <= criteria.excellentCostPerEnrollment
++  ) {
++    return {
++      action: 'increase',
++      confidence: 'high',
++      reasoning: `Strong performance: ${conversionRate.toFixed(1)}% conversion rate and $${costPerEnrollment.toLocaleString()} cost per enrollment. Scale investment.`,
++      suggestedSpendChange: 25,
++    };
++  }
++
++  // Good performance - hold or slight increase
++  if (
++    conversionRate >= criteria.minConversionRate &&
++    costPerEnrollment <= criteria.maxCostPerEnrollment
++  ) {
++    return {
++      action: 'hold',
++      confidence: 'high',
++      reasoning: `Solid performance: ${conversionRate.toFixed(1)}% conversion rate and $${costPerEnrollment.toLocaleString()} cost per enrollment. Maintain current investment.`,
++    };
++  }
++
++  // High cost but good conversion - optimize spend
++  if (
++    conversionRate >= criteria.minConversionRate &&
++    costPerEnrollment > criteria.maxCostPerEnrollment
++  ) {
++    return {
++      action: 'hold',
++      confidence: 'medium',
++      reasoning: `Good conversion (${conversionRate.toFixed(1)}%) but high cost per enrollment ($${costPerEnrollment.toLocaleString()}). Optimize spend efficiency before scaling.`,
++    };
++  }
++
++  // Low conversion but acceptable cost - investigate
++  if (
++    conversionRate < criteria.minConversionRate &&
++    costPerEnrollment <= criteria.maxCostPerEnrollment
++  ) {
++    return {
++      action: 'reduce',
++      confidence: 'medium',
++      reasoning: `Low conversion rate (${conversionRate.toFixed(1)}%). Investigate funnel drop-off points before increasing investment.`,
++      suggestedSpendChange: -15,
++    };
++  }
++
++  // Poor performance - reduce or pause
++  if (
++    conversionRate < criteria.minConversionRate &&
++    costPerEnrollment > criteria.maxCostPerEnrollment
++  ) {
++    return {
++      action: 'reduce',
++      confidence: 'high',
++      reasoning: `Underperforming: ${conversionRate.toFixed(1)}% conversion rate and $${costPerEnrollment.toLocaleString()} cost per enrollment. Reduce spend until performance improves.`,
++      suggestedSpendChange: -30,
++    };
++  }
++
++  // Default fallback
++  return {
++    action: 'hold',
++    confidence: 'low',
++    reasoning: 'Unable to determine clear recommendation. Monitor performance.',
++  };
++}
++
++/**
++ * Get recommendation badge color
++ */
++export function getRecommendationColor(action: RecommendationAction): string {
++  switch (action) {
++    case 'increase':
++      return '#10b981'; // green
++    case 'hold':
++      return '#3b82f6'; // blue
++    case 'reduce':
++      return '#f59e0b'; // amber
++    case 'pause':
++      return '#ef4444'; // red
++    default:
++      return '#6b7280'; // gray
++  }
++}
++
++/**
++ * Get recommendation display text
++ */
++export function getRecommendationText(action: RecommendationAction): string {
++  switch (action) {
++    case 'increase':
++      return 'Increase Spend';
++    case 'hold':
++      return 'Hold Spend';
++    case 'reduce':
++      return 'Reduce Spend';
++    case 'pause':
++      return 'Pause / Investigate';
++    default:
++      return 'Unknown';
++  }
++}
+diff --git a/src/providers/DataProvider.interface.ts b/src/providers/DataProvider.interface.ts
+new file mode 100644
+index 0000000..c443f91
+--- /dev/null
++++ b/src/providers/DataProvider.interface.ts
+@@ -0,0 +1,56 @@
++import type { Program, ProgramDetail, ProgramFilters } from '@/types/program';
++import type { ScorecardWeek, ScorecardSummary, FunnelSnapshot } from '@/types/scorecard';
++import type { SpendData } from '@/types/metrics';
++
++/**
++ * Data Provider Interface
++ *
++ * Abstraction layer for data sources. Allows swapping between:
++ * - Phase 1: FixedDataProvider (static data)
++ * - Phase 2: HubSpotDataProvider (live API)
++ */
++export interface DataProvider {
++  /**
++   * Get all programs with optional filtering
++   */
++  getPrograms(filters?: ProgramFilters): Promise<Program[]>;
++
++  /**
++   * Get detailed information for a specific program
++   */
++  getProgramDetail(programId: string): Promise<ProgramDetail>;
++
++  /**
++   * Get spend data for a program
++   */
++  getSpendData(programId: string): Promise<SpendData | null>;
++
++  /**
++   * Get scorecard metrics for a specific week
++   */
++  getScorecardMetrics(weekOf?: Date): Promise<ScorecardWeek>;
++
++  /**
++   * Get scorecard summary for a specific week
++   */
++  getScorecardSummary(weekOf?: Date): Promise<ScorecardSummary>;
++
++  /**
++   * Get funnel snapshot for a specific week
++   */
++  getFunnelSnapshot(weekOf?: Date): Promise<FunnelSnapshot>;
++}
++
++/**
++ * Data Provider Error
++ */
++export class DataProviderError extends Error {
++  constructor(
++    message: string,
++    public code: string,
++    public context?: Record<string, unknown>
++  ) {
++    super(message);
++    this.name = 'DataProviderError';
++  }
++}
+diff --git a/src/types/metrics.ts b/src/types/metrics.ts
+new file mode 100644
+index 0000000..b5f6089
+--- /dev/null
++++ b/src/types/metrics.ts
+@@ -0,0 +1,52 @@
++/**
++ * ROI and Cost Metrics Types
++ */
++
++export interface ROIMetrics {
++  costPerLead: number | null;
++  costPerOpportunity: number | null;
++  costPerApplication: number | null;
++  costPerEnrollment: number | null;
++}
++
++export interface SpendData {
++  programId: string;
++  totalSpend: number;
++  spendByChannel?: Record<string, number>;
++  spendPeriod: {
++    startDate: Date;
++    endDate: Date;
++  };
++}
++
++export interface ConversionMetrics {
++  inquiryToOpportunityRate: number | null;
++  opportunityToApplicationRate: number | null;
++  applicationToEnrollmentRate: number | null;
++  contactToApplicationRate: number | null;
++  contactToEnrollmentRate: number | null;
++  leadToEnrollmentRate: number | null;
++}
++
++export interface FunnelStageCount {
++  visitors?: number;
++  inquiries: number;
++  opportunities: number;
++  applications: number;
++  enrollments: number;
++}
++
++export type RecommendationAction = 'increase' | 'hold' | 'reduce' | 'pause';
++
++export interface BudgetRecommendation {
++  action: RecommendationAction;
++  confidence: 'high' | 'medium' | 'low';
++  reasoning: string;
++  suggestedSpendChange?: number; // Percentage change
++}
++
++export interface DataCompletenessScore {
++  overall: number; // 0-100
++  missingFields: string[];
++  status: 'complete' | 'partial' | 'unreliable';
++}
+diff --git a/src/types/program.ts b/src/types/program.ts
+new file mode 100644
+index 0000000..c39ce8f
+--- /dev/null
++++ b/src/types/program.ts
+@@ -0,0 +1,62 @@
++import type {
++  ROIMetrics,
++  ConversionMetrics,
++  FunnelStageCount,
++  BudgetRecommendation,
++  DataCompletenessScore,
++  SpendData,
++} from './metrics';
++
++export type ProgramLevel = 'Certificate' | 'Degree';
++
++export type SchoolId = 'MSU' | 'SMU' | 'USF' | 'Emory ECE' | 'Emory GBS' | 'ECSU' | 'KEEP';
++
++export interface Program {
++  id: string;
++  school: SchoolId;
++  level: ProgramLevel;
++  programName: string;
++  leads: number;
++
++  // Funnel counts
++  funnel: FunnelStageCount;
++
++  // Conversion rates
++  conversions: ConversionMetrics;
++
++  // ROI metrics (calculated)
++  roi?: ROIMetrics;
++
++  // Spend data
++  spend?: SpendData;
++
++  // Recommendation
++  recommendation?: BudgetRecommendation;
++
++  // Data quality
++  dataCompleteness?: DataCompletenessScore;
++}
++
++export interface ProgramDetail extends Program {
++  // Historical trend data
++  trends?: {
++    leads: Array<{ date: Date; value: number }>;
++    conversions: Array<{ date: Date; metric: string; value: number }>;
++    costs: Array<{ date: Date; metric: string; value: number }>;
++  };
++
++  // Drop-off analysis
++  dropOffInsights?: {
++    stage: string;
++    dropOffRate: number;
++    suggestion: string;
++  }[];
++}
++
++export interface ProgramFilters {
++  school?: SchoolId | 'All Schools';
++  level?: ProgramLevel | 'All Program Types';
++  minLeads?: number;
++  maxCostPerLead?: number;
++  recommendationAction?: string;
++}
+diff --git a/src/types/scorecard.ts b/src/types/scorecard.ts
+new file mode 100644
+index 0000000..3c3d9bd
+--- /dev/null
++++ b/src/types/scorecard.ts
+@@ -0,0 +1,66 @@
++/**
++ * EOS Scorecard Types
++ */
++
++export type MetricCategory = 'leading' | 'lagging';
++export type MetricStatus = 'on-track' | 'off-track' | 'flagged';
++export type PipelineType = 'degree' | 'certificate';
++
++export interface ScorecardMetric {
++  id: string;
++  name: string;
++  category: MetricCategory;
++  owner: string;
++  currentValue: number;
++  lastWeekValue: number;
++  fourWeekAvg: number;
++  target: number;
++  status: MetricStatus;
++  streak: number; // Consecutive weeks on/off track (positive = on track, negative = off track)
++  unit: 'currency' | 'percentage' | 'count';
++  pipeline?: PipelineType;
++
++  // IDS (Issues Discussion Solving) tracking
++  idsDiscussion?: {
++    hypothesis: string;
++    actionPlan: string;
++    flaggedDate: Date;
++  };
++}
++
++export interface ScorecardWeek {
++  weekOf: Date;
++  metrics: ScorecardMetric[];
++}
++
++export interface ScorecardSummary {
++  weekOf: Date;
++  metricsOnTrack: number;
++  metricsOffTrack: number;
++  metricsFlagged: number;
++  leadingIndicatorsOnTrack: number;
++  leadingIndicatorsTotal: number;
++  laggingIndicatorsOnTrack: number;
++  laggingIndicatorsTotal: number;
++}
++
++export interface TrendDataPoint {
++  week: string; // e.g., "Wk 1", "Wk 2"
++  date: Date;
++  value: number;
++}
++
++export interface ScorecardTrends {
++  metricId: string;
++  metricName: string;
++  data: TrendDataPoint[];
++}
++
++export interface FunnelSnapshot {
++  weekOf: Date;
++  visitors: number;
++  inquiries: number;
++  opportunities: number;
++  applications: number;
++  enrollments?: number;
++}
+diff --git a/tailwind.config.js b/tailwind.config.js
+new file mode 100644
+index 0000000..d21f1cd
+--- /dev/null
++++ b/tailwind.config.js
+@@ -0,0 +1,8 @@
++/** @type {import('tailwindcss').Config} */
++export default {
++  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
++  theme: {
++    extend: {},
++  },
++  plugins: [],
++};
+diff --git a/tests/setup.ts b/tests/setup.ts
+new file mode 100644
+index 0000000..117b3a6
+--- /dev/null
++++ b/tests/setup.ts
+@@ -0,0 +1,9 @@
++import { expect, afterEach } from 'vitest';
++import { cleanup } from '@testing-library/react';
++import * as matchers from '@testing-library/jest-dom/matchers';
++
++expect.extend(matchers);
++
++afterEach(() => {
++  cleanup();
++});
+diff --git a/tests/unit/metricsEngine.test.ts b/tests/unit/metricsEngine.test.ts
+new file mode 100644
+index 0000000..23bcf2d
+--- /dev/null
++++ b/tests/unit/metricsEngine.test.ts
+@@ -0,0 +1,178 @@
++import { describe, it, expect } from 'vitest';
++import {
++  calculateROIMetrics,
++  calculateConversionMetrics,
++  safeDivide,
++  safePercentage,
++  formatCurrency,
++  formatPercentage,
++  calculateWoWDelta,
++  calculateFourWeekAvg,
++} from '@/lib/metricsEngine';
++
++describe('metricsEngine', () => {
++  describe('safeDivide', () => {
++    it('should divide numbers correctly', () => {
++      expect(safeDivide(100, 10)).toBe(10);
++      expect(safeDivide(50, 2)).toBe(25);
++    });
++
++    it('should return null for division by zero', () => {
++      expect(safeDivide(100, 0)).toBeNull();
++    });
++
++    it('should return null for null inputs', () => {
++      expect(safeDivide(null as any, 10)).toBeNull();
++      expect(safeDivide(10, null as any)).toBeNull();
++    });
++
++    it('should return null for infinite values', () => {
++      expect(safeDivide(Infinity, 10)).toBeNull();
++      expect(safeDivide(10, Infinity)).toBeNull();
++    });
++  });
++
++  describe('safePercentage', () => {
++    it('should calculate percentage correctly', () => {
++      expect(safePercentage(50, 100)).toBe(50);
++      expect(safePercentage(1, 4)).toBe(25);
++    });
++
++    it('should return null for division by zero', () => {
++      expect(safePercentage(50, 0)).toBeNull();
++    });
++  });
++
++  describe('calculateROIMetrics', () => {
++    it('should calculate all ROI metrics correctly', () => {
++      const funnel = {
++        inquiries: 1000,
++        opportunities: 500,
++        applications: 250,
++        enrollments: 100,
++      };
++      const totalSpend = 10000;
++
++      const roi = calculateROIMetrics(totalSpend, funnel);
++
++      expect(roi.costPerLead).toBe(10);
++      expect(roi.costPerOpportunity).toBe(20);
++      expect(roi.costPerApplication).toBe(40);
++      expect(roi.costPerEnrollment).toBe(100);
++    });
++
++    it('should handle zero funnel values gracefully', () => {
++      const funnel = {
++        inquiries: 0,
++        opportunities: 0,
++        applications: 0,
++        enrollments: 0,
++      };
++      const totalSpend = 10000;
++
++      const roi = calculateROIMetrics(totalSpend, funnel);
++
++      expect(roi.costPerLead).toBeNull();
++      expect(roi.costPerOpportunity).toBeNull();
++      expect(roi.costPerApplication).toBeNull();
++      expect(roi.costPerEnrollment).toBeNull();
++    });
++  });
++
++  describe('calculateConversionMetrics', () => {
++    it('should calculate all conversion rates correctly', () => {
++      const funnel = {
++        inquiries: 1000,
++        opportunities: 500,
++        applications: 250,
++        enrollments: 100,
++      };
++
++      const conversions = calculateConversionMetrics(funnel);
++
++      expect(conversions.inquiryToOpportunityRate).toBe(50);
++      expect(conversions.opportunityToApplicationRate).toBe(50);
++      expect(conversions.applicationToEnrollmentRate).toBe(40);
++      expect(conversions.contactToApplicationRate).toBe(25);
++      expect(conversions.contactToEnrollmentRate).toBe(10);
++      expect(conversions.leadToEnrollmentRate).toBe(10);
++    });
++
++    it('should handle zero values gracefully', () => {
++      const funnel = {
++        inquiries: 0,
++        opportunities: 0,
++        applications: 0,
++        enrollments: 0,
++      };
++
++      const conversions = calculateConversionMetrics(funnel);
++
++      expect(conversions.inquiryToOpportunityRate).toBeNull();
++      expect(conversions.opportunityToApplicationRate).toBeNull();
++      expect(conversions.applicationToEnrollmentRate).toBeNull();
++    });
++  });
++
++  describe('formatCurrency', () => {
++    it('should format currency values correctly', () => {
++      expect(formatCurrency(1000)).toBe('$1,000');
++      expect(formatCurrency(1234567)).toBe('$1,234,567');
++      expect(formatCurrency(100)).toBe('$100');
++    });
++
++    it('should return dash for null values', () => {
++      expect(formatCurrency(null)).toBe('—');
++      expect(formatCurrency(undefined as any)).toBe('—');
++    });
++  });
++
++  describe('formatPercentage', () => {
++    it('should format percentage values correctly', () => {
++      expect(formatPercentage(50.5)).toBe('50.5%');
++      expect(formatPercentage(10.123, 2)).toBe('10.12%');
++      expect(formatPercentage(100)).toBe('100.0%');
++    });
++
++    it('should return dash for null values', () => {
++      expect(formatPercentage(null)).toBe('—');
++      expect(formatPercentage(undefined as any)).toBe('—');
++    });
++  });
++
++  describe('calculateWoWDelta', () => {
++    it('should calculate week-over-week delta correctly', () => {
++      expect(calculateWoWDelta(110, 100)).toBe(10);
++      expect(calculateWoWDelta(90, 100)).toBe(-10);
++      expect(calculateWoWDelta(100, 100)).toBe(0);
++    });
++
++    it('should return null for zero last week value', () => {
++      expect(calculateWoWDelta(100, 0)).toBeNull();
++    });
++
++    it('should return null for null inputs', () => {
++      expect(calculateWoWDelta(null as any, 100)).toBeNull();
++      expect(calculateWoWDelta(100, null as any)).toBeNull();
++    });
++  });
++
++  describe('calculateFourWeekAvg', () => {
++    it('should calculate average correctly', () => {
++      expect(calculateFourWeekAvg([100, 200, 300, 400])).toBe(250);
++      expect(calculateFourWeekAvg([10, 20, 30])).toBe(20);
++    });
++
++    it('should handle empty array', () => {
++      expect(calculateFourWeekAvg([])).toBeNull();
++    });
++
++    it('should filter out null values', () => {
++      expect(calculateFourWeekAvg([100, null as any, 200, 300])).toBe(200);
++    });
++
++    it('should filter out infinite values', () => {
++      expect(calculateFourWeekAvg([100, Infinity, 200, 300])).toBe(200);
++    });
++  });
++});
+diff --git a/tests/unit/recommendationEngine.test.ts b/tests/unit/recommendationEngine.test.ts
+new file mode 100644
+index 0000000..d96c1d4
+--- /dev/null
++++ b/tests/unit/recommendationEngine.test.ts
+@@ -0,0 +1,183 @@
++import { describe, it, expect } from 'vitest';
++import {
++  generateRecommendation,
++  getRecommendationColor,
++  getRecommendationText,
++} from '@/lib/recommendationEngine';
++import type { Program } from '@/types/program';
++
++describe('recommendationEngine', () => {
++  const createMockProgram = (overrides: Partial<Program> = {}): Program => ({
++    id: 'test-1',
++    school: 'MSU',
++    level: 'Certificate',
++    programName: 'Test Program',
++    leads: 100,
++    funnel: {
++      inquiries: 100,
++      opportunities: 50,
++      applications: 25,
++      enrollments: 10,
++    },
++    conversions: {
++      inquiryToOpportunityRate: 50,
++      opportunityToApplicationRate: 50,
++      applicationToEnrollmentRate: 40,
++      contactToApplicationRate: 25,
++      contactToEnrollmentRate: 10,
++      leadToEnrollmentRate: 10,
++    },
++    roi: {
++      costPerLead: 100,
++      costPerOpportunity: 200,
++      costPerApplication: 400,
++      costPerEnrollment: 1000,
++    },
++    dataCompleteness: {
++      overall: 95,
++      missingFields: [],
++      status: 'complete',
++    },
++    ...overrides,
++  });
++
++  describe('generateRecommendation', () => {
++    it('should recommend increase for excellent performance', () => {
++      const program = createMockProgram({
++        conversions: {
++          inquiryToOpportunityRate: 50,
++          opportunityToApplicationRate: 50,
++          applicationToEnrollmentRate: 40,
++          contactToApplicationRate: 30,
++          contactToEnrollmentRate: 20,
++          leadToEnrollmentRate: 20, // Excellent: >= 15%
++        },
++        roi: {
++          costPerLead: 50,
++          costPerOpportunity: 100,
++          costPerApplication: 200,
++          costPerEnrollment: 1500, // Excellent: <= 2000
++        },
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('increase');
++      expect(recommendation.confidence).toBe('high');
++      expect(recommendation.suggestedSpendChange).toBe(25);
++    });
++
++    it('should recommend hold for solid performance', () => {
++      const program = createMockProgram({
++        conversions: {
++          inquiryToOpportunityRate: 50,
++          opportunityToApplicationRate: 50,
++          applicationToEnrollmentRate: 40,
++          contactToApplicationRate: 25,
++          contactToEnrollmentRate: 10,
++          leadToEnrollmentRate: 10, // Good: >= 5%
++        },
++        roi: {
++          costPerLead: 100,
++          costPerOpportunity: 200,
++          costPerApplication: 400,
++          costPerEnrollment: 3000, // Acceptable: <= 5000
++        },
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('hold');
++      expect(recommendation.confidence).toBe('high');
++    });
++
++    it('should recommend reduce for low conversion', () => {
++      const program = createMockProgram({
++        conversions: {
++          inquiryToOpportunityRate: 20,
++          opportunityToApplicationRate: 20,
++          applicationToEnrollmentRate: 20,
++          contactToApplicationRate: 10,
++          contactToEnrollmentRate: 3,
++          leadToEnrollmentRate: 3, // Low: < 5%
++        },
++        roi: {
++          costPerLead: 100,
++          costPerOpportunity: 500,
++          costPerApplication: 2500,
++          costPerEnrollment: 6000, // High: > 5000
++        },
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('reduce');
++      expect(recommendation.confidence).toBe('high');
++      expect(recommendation.suggestedSpendChange).toBe(-30);
++    });
++
++    it('should recommend pause for unreliable data', () => {
++      const program = createMockProgram({
++        dataCompleteness: {
++          overall: 30,
++          missingFields: ['funnel.enrollments', 'spend.totalSpend'],
++          status: 'unreliable',
++        },
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('pause');
++      expect(recommendation.confidence).toBe('low');
++    });
++
++    it('should recommend hold for insufficient lead volume', () => {
++      const program = createMockProgram({
++        leads: 30, // Below minimum of 50
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('hold');
++      expect(recommendation.confidence).toBe('low');
++      expect(recommendation.reasoning).toContain('Insufficient lead volume');
++    });
++
++    it('should recommend hold for missing metrics', () => {
++      const program = createMockProgram({
++        conversions: {
++          inquiryToOpportunityRate: 50,
++          opportunityToApplicationRate: 50,
++          applicationToEnrollmentRate: 40,
++          contactToApplicationRate: 25,
++          contactToEnrollmentRate: 10,
++          leadToEnrollmentRate: null, // Missing
++        },
++      });
++
++      const recommendation = generateRecommendation(program);
++
++      expect(recommendation.action).toBe('hold');
++      expect(recommendation.confidence).toBe('low');
++      expect(recommendation.reasoning).toContain('Missing conversion rate');
++    });
++  });
++
++  describe('getRecommendationColor', () => {
++    it('should return correct colors for each action', () => {
++      expect(getRecommendationColor('increase')).toBe('#10b981');
++      expect(getRecommendationColor('hold')).toBe('#3b82f6');
++      expect(getRecommendationColor('reduce')).toBe('#f59e0b');
++      expect(getRecommendationColor('pause')).toBe('#ef4444');
++    });
++  });
++
++  describe('getRecommendationText', () => {
++    it('should return correct text for each action', () => {
++      expect(getRecommendationText('increase')).toBe('Increase Spend');
++      expect(getRecommendationText('hold')).toBe('Hold Spend');
++      expect(getRecommendationText('reduce')).toBe('Reduce Spend');
++      expect(getRecommendationText('pause')).toBe('Pause / Investigate');
++    });
++  });
++});
+diff --git a/tsconfig.json b/tsconfig.json
+index 78c4bcd..a44f51c 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -16,7 +16,11 @@
+     "noUnusedParameters": false,
+     "noFallthroughCasesInSwitch": true,
+     "esModuleInterop": true,
+-    "allowSyntheticDefaultImports": true
++    "allowSyntheticDefaultImports": true,
++    "baseUrl": ".",
++    "paths": {
++      "@/*": ["./src/*"]
++    }
+   },
+   "include": ["src"],
+   "references": [{ "path": "./tsconfig.node.json" }]
+diff --git a/vitest.config.ts b/vitest.config.ts
+new file mode 100644
+index 0000000..5abe380
+--- /dev/null
++++ b/vitest.config.ts
+@@ -0,0 +1,32 @@
++import { defineConfig } from 'vitest/config';
++import react from '@vitejs/plugin-react-swc';
++import path from 'path';
++
++export default defineConfig({
++  plugins: [react()],
++  test: {
++    globals: true,
++    environment: 'jsdom',
++    setupFiles: './tests/setup.ts',
++    css: false,
++    include: ['tests/**/*.test.{ts,tsx}'],
++    exclude: ['node_modules/', 'eos-pulse/'],
++    coverage: {
++      provider: 'v8',
++      reporter: ['text', 'json', 'html'],
++      exclude: [
++        'node_modules/',
++        'tests/',
++        'eos-pulse/',
++        '**/*.config.{js,ts}',
++        '**/types/**',
++        '**/*.d.ts',
++      ],
++    },
++  },
++  resolve: {
++    alias: {
++      '@': path.resolve(__dirname, './src'),
++    },
++  },
++});

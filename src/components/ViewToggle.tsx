@@ -31,12 +31,12 @@ export function ViewToggle({ view, onViewChange }: ViewToggleProps) {
             borderColor: '#e91e63',
             '&:hover': {
               bgcolor: '#c2185b',
-            }
+            },
           },
           '&:hover': {
             bgcolor: '#f1f5f9',
-          }
-        }
+          },
+        },
       }}
     >
       <ToggleButton value="table">

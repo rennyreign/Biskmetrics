@@ -16,14 +16,9 @@ export interface DataProvider {
   getPrograms(filters?: ProgramFilters): Promise<Program[]>;
 
   /**
-   * Get detailed information for a specific program
+   * Get a single program by ID
    */
-  getProgramDetail(programId: string): Promise<ProgramDetail>;
-
-  /**
-   * Get spend data for a program
-   */
-  getSpendData(programId: string): Promise<SpendData | null>;
+  getProgramById(id: string): Promise<Program | null>;
 
   /**
    * Get scorecard metrics for a specific week
@@ -31,14 +26,19 @@ export interface DataProvider {
   getScorecardMetrics(weekOf?: Date): Promise<ScorecardWeek>;
 
   /**
-   * Get scorecard summary for a specific week
+   * Get available schools for filtering
    */
-  getScorecardSummary(weekOf?: Date): Promise<ScorecardSummary>;
+  getSchools(): Promise<string[]>;
 
   /**
-   * Get funnel snapshot for a specific week
+   * Get available program levels for filtering
    */
-  getFunnelSnapshot(weekOf?: Date): Promise<FunnelSnapshot>;
+  getLevels(): Promise<string[]>;
+
+  /**
+   * Refresh data from source
+   */
+  refresh(): Promise<void>;
 }
 
 /**

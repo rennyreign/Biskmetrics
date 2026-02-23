@@ -1,0 +1,156 @@
+npm run quality
+
+> biskmetrics@0.2.0 quality
+> npm run format:check && npm run lint && npm run typecheck && npm run test
+
+
+> biskmetrics@0.2.0 format:check
+> prettier --check "src/**/*.{ts,tsx,js,jsx,json,css,md}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> biskmetrics@0.2.0 lint
+> eslint .
+
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/RecommendedVerdict.tsx
+  1:37  warning  'Tooltip' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/badge.tsx
+  39:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/button.tsx
+  56:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/form.tsx
+  144:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/navigation-menu.tsx
+  160:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/sidebar.tsx
+  687:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/toggle.tsx
+  45:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/lib/dataQuality.ts
+  75:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/tests/unit/metricsEngine.test.ts
+   25:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   26:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  139:44  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 15 problems (0 errors, 15 warnings)
+
+
+> biskmetrics@0.2.0 typecheck
+> tsc --noEmit
+
+src/components/Header.tsx(3,22): error TS2307: Cannot find module '../assets/BiskAmpLogo.jpg' or its corresponding type declarations.
+src/components/ui/accordion.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-accordion@1.2.3' or its corresponding type declarations.
+src/components/ui/accordion.tsx(5,33): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/alert-dialog.tsx(4,39): error TS2307: Cannot find module '@radix-ui/react-alert-dialog@1.1.6' or its corresponding type declarations.
+src/components/ui/alert.tsx(2,40): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/aspect-ratio.tsx(3,39): error TS2307: Cannot find module '@radix-ui/react-aspect-ratio@1.1.2' or its corresponding type declarations.
+src/components/ui/avatar.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-avatar@1.1.3' or its corresponding type declarations.
+src/components/ui/badge.tsx(2,22): error TS2307: Cannot find module '@radix-ui/react-slot@1.1.2' or its corresponding type declarations.
+src/components/ui/badge.tsx(3,40): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/breadcrumb.tsx(2,22): error TS2307: Cannot find module '@radix-ui/react-slot@1.1.2' or its corresponding type declarations.
+src/components/ui/breadcrumb.tsx(3,46): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/button.tsx(2,22): error TS2307: Cannot find module '@radix-ui/react-slot@1.1.2' or its corresponding type declarations.
+src/components/ui/button.tsx(3,40): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/calendar.tsx(4,43): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/calendar.tsx(5,27): error TS2307: Cannot find module 'react-day-picker@8.10.1' or its corresponding type declarations.
+src/components/ui/calendar.tsx(60,22): error TS7031: Binding element 'className' implicitly has an 'any' type.
+src/components/ui/calendar.tsx(63,23): error TS7031: Binding element 'className' implicitly has an 'any' type.
+src/components/ui/carousel.tsx(4,61): error TS2307: Cannot find module 'embla-carousel-react@8.6.0' or its corresponding type declarations.
+src/components/ui/carousel.tsx(5,39): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/chart.tsx(4,36): error TS2307: Cannot find module 'recharts@2.15.2' or its corresponding type declarations.
+src/components/ui/chart.tsx(164,23): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/components/ui/chart.tsx(164,29): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/ui/chart.tsx(260,20): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/components/ui/checkbox.tsx(4,36): error TS2307: Cannot find module '@radix-ui/react-checkbox@1.1.4' or its corresponding type declarations.
+src/components/ui/checkbox.tsx(5,27): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/collapsible.tsx(3,39): error TS2307: Cannot find module '@radix-ui/react-collapsible@1.1.3' or its corresponding type declarations.
+src/components/ui/command.tsx(4,45): error TS2307: Cannot find module 'cmdk@1.1.1' or its corresponding type declarations.
+src/components/ui/command.tsx(5,28): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/context-menu.tsx(4,39): error TS2307: Cannot find module '@radix-ui/react-context-menu@2.2.6' or its corresponding type declarations.
+src/components/ui/context-menu.tsx(5,57): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/dialog.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-dialog@1.1.6' or its corresponding type declarations.
+src/components/ui/dialog.tsx(5,23): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/drawer.tsx(4,43): error TS2307: Cannot find module 'vaul@1.1.2' or its corresponding type declarations.
+src/components/ui/dropdown-menu.tsx(4,40): error TS2307: Cannot find module '@radix-ui/react-dropdown-menu@2.1.6' or its corresponding type declarations.
+src/components/ui/dropdown-menu.tsx(5,57): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/form.tsx(4,33): error TS2307: Cannot find module '@radix-ui/react-label@2.1.2' or its corresponding type declarations.
+src/components/ui/form.tsx(5,22): error TS2307: Cannot find module '@radix-ui/react-slot@1.1.2' or its corresponding type declarations.
+src/components/ui/form.tsx(14,8): error TS2307: Cannot find module 'react-hook-form@7.55.0' or its corresponding type declarations.
+src/components/ui/hover-card.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-hover-card@1.1.6' or its corresponding type declarations.
+src/components/ui/input-otp.tsx(4,43): error TS2307: Cannot find module 'input-otp@1.4.2' or its corresponding type declarations.
+src/components/ui/input-otp.tsx(5,27): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/input-otp.tsx(44,61): error TS2339: Property 'slots' does not exist on type '{}'.
+src/components/ui/label.tsx(4,33): error TS2307: Cannot find module '@radix-ui/react-label@2.1.2' or its corresponding type declarations.
+src/components/ui/menubar.tsx(4,35): error TS2307: Cannot find module '@radix-ui/react-menubar@1.1.6' or its corresponding type declarations.
+src/components/ui/menubar.tsx(5,57): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/navigation-menu.tsx(2,42): error TS2307: Cannot find module '@radix-ui/react-navigation-menu@1.2.5' or its corresponding type declarations.
+src/components/ui/navigation-menu.tsx(3,21): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/navigation-menu.tsx(4,33): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/pagination.tsx(2,71): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/pagination.tsx(60,7): error TS2783: 'size' is specified more than once, so this usage will be overwritten.
+src/components/ui/pagination.tsx(74,7): error TS2783: 'size' is specified more than once, so this usage will be overwritten.
+src/components/ui/popover.tsx(4,35): error TS2307: Cannot find module '@radix-ui/react-popover@1.1.6' or its corresponding type declarations.
+src/components/ui/progress.tsx(4,36): error TS2307: Cannot find module '@radix-ui/react-progress@1.1.2' or its corresponding type declarations.
+src/components/ui/radio-group.tsx(4,38): error TS2307: Cannot find module '@radix-ui/react-radio-group@1.2.3' or its corresponding type declarations.
+src/components/ui/radio-group.tsx(5,28): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/resizable.tsx(4,34): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/resizable.tsx(5,37): error TS2307: Cannot find module 'react-resizable-panels@2.1.7' or its corresponding type declarations.
+src/components/ui/scroll-area.tsx(4,38): error TS2307: Cannot find module '@radix-ui/react-scroll-area@1.2.3' or its corresponding type declarations.
+src/components/ui/select.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-select@2.1.6' or its corresponding type declarations.
+src/components/ui/select.tsx(5,59): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/separator.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-separator@1.1.2' or its corresponding type declarations.
+src/components/ui/sheet.tsx(4,33): error TS2307: Cannot find module '@radix-ui/react-dialog@1.1.6' or its corresponding type declarations.
+src/components/ui/sheet.tsx(5,23): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/sidebar.tsx(4,22): error TS2307: Cannot find module '@radix-ui/react-slot@1.1.2' or its corresponding type declarations.
+src/components/ui/sidebar.tsx(5,35): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/sidebar.tsx(6,31): error TS2307: Cannot find module 'lucide-react@0.487.0' or its corresponding type declarations.
+src/components/ui/sidebar.tsx(252,16): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/components/ui/slider.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-slider@1.2.3' or its corresponding type declarations.
+src/components/ui/sonner.tsx(3,26): error TS2307: Cannot find module 'next-themes@0.4.6' or its corresponding type declarations.
+src/components/ui/sonner.tsx(4,49): error TS2307: Cannot find module 'sonner@2.0.3' or its corresponding type declarations.
+src/components/ui/switch.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-switch@1.1.3' or its corresponding type declarations.
+src/components/ui/tabs.tsx(4,32): error TS2307: Cannot find module '@radix-ui/react-tabs@1.1.3' or its corresponding type declarations.
+src/components/ui/toggle-group.tsx(4,39): error TS2307: Cannot find module '@radix-ui/react-toggle-group@1.1.2' or its corresponding type declarations.
+src/components/ui/toggle-group.tsx(5,35): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/toggle.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-toggle@1.1.2' or its corresponding type declarations.
+src/components/ui/toggle.tsx(5,40): error TS2307: Cannot find module 'class-variance-authority@0.7.1' or its corresponding type declarations.
+src/components/ui/tooltip.tsx(4,35): error TS2307: Cannot find module '@radix-ui/react-tooltip@1.1.8' or its corresponding type declarations.
+src/data/mockData.ts(15,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(28,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(41,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(54,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(68,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(81,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(94,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(107,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(121,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(134,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(147,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(160,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(174,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(187,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(201,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(214,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(227,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(241,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(254,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(267,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(281,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(294,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+src/data/mockData.ts(307,5): error TS2353: Object literal may only specify known properties, and 'inquiryToEnrollmentRate' does not exist in type 'Program'.
+make: *** [ci] Error 2

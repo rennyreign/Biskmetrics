@@ -1,0 +1,70 @@
+npm run quality
+
+> biskmetrics@0.2.0 quality
+> npm run format:check && npm run lint && npm run typecheck && npm run test
+
+
+> biskmetrics@0.2.0 format:check
+> prettier --check "src/**/*.{ts,tsx,js,jsx,json,css,md}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> biskmetrics@0.2.0 lint
+> eslint .
+
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/RecommendedVerdict.tsx
+  1:37  warning  'Tooltip' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/badge.tsx
+  39:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/button.tsx
+  56:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/form.tsx
+  144:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/navigation-menu.tsx
+  160:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/sidebar.tsx
+  687:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/toggle.tsx
+  45:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/lib/dataQuality.ts
+  75:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/tests/unit/metricsEngine.test.ts
+   25:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   26:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  139:44  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 15 problems (0 errors, 15 warnings)
+
+
+> biskmetrics@0.2.0 typecheck
+> tsc --noEmit
+
+
+> biskmetrics@0.2.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics
+
+ ✓ tests/unit/metricsEngine.test.ts (21 tests) 33ms
+ ✓ tests/unit/recommendationEngine.test.ts (8 tests) 35ms
+
+ Test Files  2 passed (2)
+      Tests  29 passed (29)
+   Start at  12:07:23
+   Duration  910ms (transform 79ms, setup 313ms, collect 47ms, tests 68ms, environment 886ms, prepare 82ms)
+

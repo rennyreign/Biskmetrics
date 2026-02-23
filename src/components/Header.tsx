@@ -9,16 +9,12 @@ export function Header() {
         bgcolor: '#2c3e50',
         color: 'white',
         py: 3,
-        borderBottom: '3px solid #e91e63'
+        borderBottom: '3px solid #e91e63',
       }}
     >
       <Container maxWidth="xl">
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, mb: 2 }}>
-          <img 
-            src={biskLogo} 
-            alt="BISK" 
-            style={{ height: '40px', objectFit: 'contain' }}
-          />
+          <img src={biskLogo} alt="BISK" style={{ height: '40px', objectFit: 'contain' }} />
           <Box sx={{ height: '40px', width: '1px', bgcolor: 'rgba(255,255,255,0.2)' }} />
           <h1 style={{ margin: 0, color: 'white' }}>Program Performance Dashboard</h1>
         </Box>

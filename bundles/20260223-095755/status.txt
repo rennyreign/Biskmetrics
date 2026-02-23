@@ -1,0 +1,115 @@
+# git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   package-lock.json
+	modified:   package.json
+	new file:   plan/PROGRESS.md
+	modified:   postcss.config.js
+	new file:   scripts/migrate-programs.cjs
+	modified:   src/App.tsx
+	new file:   src/components/BudgetRecommendationBadge.tsx
+	new file:   src/components/DataCompletenessBadge.tsx
+	modified:   src/components/ProgramTable.tsx
+	modified:   src/data/programs.ts
+	modified:   src/providers/DataProvider.interface.ts
+	new file:   src/providers/FixedDataProvider.ts
+	new file:   tests/unit/FixedDataProvider.test.ts
+	modified:   tsconfig.json
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   src/Attributions.md
+	modified:   src/components/FilterSection.tsx
+	modified:   src/components/GraphView.tsx
+	modified:   src/components/Header.tsx
+	modified:   src/components/RecommendedVerdict.tsx
+	modified:   src/components/ViewToggle.tsx
+	modified:   src/components/figma/ImageWithFallback.tsx
+	modified:   src/components/ui/accordion.tsx
+	modified:   src/components/ui/alert-dialog.tsx
+	modified:   src/components/ui/alert.tsx
+	modified:   src/components/ui/aspect-ratio.tsx
+	modified:   src/components/ui/avatar.tsx
+	modified:   src/components/ui/badge.tsx
+	modified:   src/components/ui/breadcrumb.tsx
+	modified:   src/components/ui/button.tsx
+	modified:   src/components/ui/calendar.tsx
+	modified:   src/components/ui/card.tsx
+	modified:   src/components/ui/carousel.tsx
+	modified:   src/components/ui/chart.tsx
+	modified:   src/components/ui/checkbox.tsx
+	modified:   src/components/ui/collapsible.tsx
+	modified:   src/components/ui/command.tsx
+	modified:   src/components/ui/context-menu.tsx
+	modified:   src/components/ui/dialog.tsx
+	modified:   src/components/ui/drawer.tsx
+	modified:   src/components/ui/dropdown-menu.tsx
+	modified:   src/components/ui/form.tsx
+	modified:   src/components/ui/hover-card.tsx
+	modified:   src/components/ui/input-otp.tsx
+	modified:   src/components/ui/input.tsx
+	modified:   src/components/ui/label.tsx
+	modified:   src/components/ui/menubar.tsx
+	modified:   src/components/ui/navigation-menu.tsx
+	modified:   src/components/ui/pagination.tsx
+	modified:   src/components/ui/popover.tsx
+	modified:   src/components/ui/progress.tsx
+	modified:   src/components/ui/radio-group.tsx
+	modified:   src/components/ui/resizable.tsx
+	modified:   src/components/ui/scroll-area.tsx
+	modified:   src/components/ui/select.tsx
+	modified:   src/components/ui/separator.tsx
+	modified:   src/components/ui/sheet.tsx
+	modified:   src/components/ui/sidebar.tsx
+	modified:   src/components/ui/skeleton.tsx
+	modified:   src/components/ui/slider.tsx
+	modified:   src/components/ui/sonner.tsx
+	modified:   src/components/ui/switch.tsx
+	modified:   src/components/ui/table.tsx
+	modified:   src/components/ui/tabs.tsx
+	modified:   src/components/ui/textarea.tsx
+	modified:   src/components/ui/toggle-group.tsx
+	modified:   src/components/ui/toggle.tsx
+	modified:   src/components/ui/tooltip.tsx
+	modified:   src/components/ui/use-mobile.ts
+	modified:   src/components/ui/utils.ts
+	modified:   src/guidelines/Guidelines.md
+	modified:   src/index.css
+	modified:   src/main.tsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.windsurf/
+	6878ba99-5106-48c6-8b86-cb207aa2eea7_ExportBlock-2b7c9bf8-e07b-4dab-b59b-5fde026f8dc4.zip
+	EXECUTIVE_SUMMARY.md
+	Makefile
+	PRODUCTION_FEATURES.md
+	bundles/
+	coverage/
+	docs/code-reviews/
+	plan/Program Shelf Database/
+	plan/UpdatedBriefFeb20.md
+	plan/program-shelf-v2.md
+	program-shelf-system.md
+
+
+# staged files
+package-lock.json
+package.json
+plan/PROGRESS.md
+postcss.config.js
+scripts/migrate-programs.cjs
+src/App.tsx
+src/components/BudgetRecommendationBadge.tsx
+src/components/DataCompletenessBadge.tsx
+src/components/ProgramTable.tsx
+src/data/programs.ts
+src/providers/DataProvider.interface.ts
+src/providers/FixedDataProvider.ts
+tests/unit/FixedDataProvider.test.ts
+tsconfig.json

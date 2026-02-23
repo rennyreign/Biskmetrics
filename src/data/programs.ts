@@ -1,16 +1,18 @@
-import type { Program } from '../types';
+import type { Program } from '../types/program';
 
 /**
  * Program Performance Data
  * Data Window: January 1 – December 3, 2025
  * Source: metrics.md
+ *
+ * Schema: Updated to new Program type with funnel, conversions, and spend fields
  */
 
 let idCounter = 0;
-const generateId = (school: string): string => `${school.toLowerCase().replace(/\s+/g, '-')}-${++idCounter}`;
+const generateId = (school: string): string =>
+  `${school.toLowerCase().replace(/\s+/g, '-')}-${++idCounter}`;
 
 export const programs: Program[] = [
-  // ============================================
   // MSU CERTIFICATES
   // ============================================
   {
@@ -19,10 +21,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Professional Cert in Supervisory Management',
     leads: 2174,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 12.1,
-    enrollmentRate: 1.8
+    funnel: {
+      inquiries: 2174,
+      opportunities: 134,
+      applications: 87,
+      enrollments: 39,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 6.2,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 44.8,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 12.1,
+      leadToEnrollmentRate: 1.8,
+    },
+    spend: {
+      totalSpend: 108700,
+    },
   },
   {
     id: generateId('msu'),
@@ -30,10 +45,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'People and Team Development Cert',
     leads: 1602,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 5.7,
-    enrollmentRate: 2.2
+    funnel: {
+      inquiries: 1602,
+      opportunities: 120,
+      applications: 78,
+      enrollments: 35,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 7.5,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 44.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 5.7,
+      leadToEnrollmentRate: 2.2,
+    },
+    spend: {
+      totalSpend: 80100,
+    },
   },
   {
     id: generateId('msu'),
@@ -41,10 +69,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Supply Management & Logistics',
     leads: 535,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 9.5,
-    enrollmentRate: 4.8
+    funnel: {
+      inquiries: 535,
+      opportunities: 89,
+      applications: 58,
+      enrollments: 26,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 16.6,
+      opportunityToApplicationRate: 65.2,
+      applicationToEnrollmentRate: 44.8,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 9.5,
+      leadToEnrollmentRate: 4.8,
+    },
+    spend: {
+      totalSpend: 26750,
+    },
   },
   {
     id: generateId('msu'),
@@ -52,10 +93,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Professional Cert in Business Analytics',
     leads: 468,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 8.1,
-    enrollmentRate: 2.8
+    funnel: {
+      inquiries: 468,
+      opportunities: 45,
+      applications: 29,
+      enrollments: 13,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 9.6,
+      opportunityToApplicationRate: 64.4,
+      applicationToEnrollmentRate: 44.8,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 8.1,
+      leadToEnrollmentRate: 2.8,
+    },
+    spend: {
+      totalSpend: 23400,
+    },
   },
   {
     id: generateId('msu'),
@@ -63,10 +117,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Creative Business, Strategy & Leadership Cert',
     leads: 330,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 19.2,
-    enrollmentRate: 9.5
+    funnel: {
+      inquiries: 330,
+      opportunities: 106,
+      applications: 69,
+      enrollments: 31,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 32.1,
+      opportunityToApplicationRate: 65.1,
+      applicationToEnrollmentRate: 44.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 19.2,
+      leadToEnrollmentRate: 9.5,
+    },
+    spend: {
+      totalSpend: 16500,
+    },
   },
   {
     id: generateId('msu'),
@@ -74,10 +141,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Business Analytics',
     leads: 317,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 12.5,
-    enrollmentRate: 5.1
+    funnel: {
+      inquiries: 317,
+      opportunities: 55,
+      applications: 36,
+      enrollments: 16,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 17.4,
+      opportunityToApplicationRate: 65.5,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 12.5,
+      leadToEnrollmentRate: 5.1,
+    },
+    spend: {
+      totalSpend: 15850,
+    },
   },
   {
     id: generateId('msu'),
@@ -85,10 +165,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Supply Chain Management Ops',
     leads: 282,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 15.4,
-    enrollmentRate: 7.2
+    funnel: {
+      inquiries: 282,
+      opportunities: 68,
+      applications: 44,
+      enrollments: 20,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 24.1,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 15.4,
+      leadToEnrollmentRate: 7.2,
+    },
+    spend: {
+      totalSpend: 14100,
+    },
   },
   {
     id: generateId('msu'),
@@ -96,10 +189,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Supply Chain Management & Procurement',
     leads: 245,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 7.4,
-    enrollmentRate: 2.8
+    funnel: {
+      inquiries: 245,
+      opportunities: 25,
+      applications: 16,
+      enrollments: 7,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 10.2,
+      opportunityToApplicationRate: 64.0,
+      applicationToEnrollmentRate: 43.8,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 7.4,
+      leadToEnrollmentRate: 2.8,
+    },
+    spend: {
+      totalSpend: 12250,
+    },
   },
   {
     id: generateId('msu'),
@@ -107,10 +213,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Advanced Master Cert in Integrated Supply Chain Management',
     leads: 222,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 7.3,
-    enrollmentRate: 2.7
+    funnel: {
+      inquiries: 222,
+      opportunities: 20,
+      applications: 13,
+      enrollments: 6,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 9.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 46.2,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 7.3,
+      leadToEnrollmentRate: 2.7,
+    },
+    spend: {
+      totalSpend: 11100,
+    },
   },
   {
     id: generateId('msu'),
@@ -118,10 +237,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Advanced Master Cert in Supply Chain Management & Procurement',
     leads: 216,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 3.7,
-    enrollmentRate: 1.4
+    funnel: {
+      inquiries: 216,
+      opportunities: 11,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 5.1,
+      opportunityToApplicationRate: 63.6,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 3.7,
+      leadToEnrollmentRate: 1.4,
+    },
+    spend: {
+      totalSpend: 10800,
+    },
   },
   {
     id: generateId('msu'),
@@ -129,10 +261,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Leadership Strategies for Effective Change Management',
     leads: 172,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 12.1,
-    enrollmentRate: 5.3
+    funnel: {
+      inquiries: 172,
+      opportunities: 31,
+      applications: 20,
+      enrollments: 9,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 18.0,
+      opportunityToApplicationRate: 64.5,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 12.1,
+      leadToEnrollmentRate: 5.3,
+    },
+    spend: {
+      totalSpend: 8600,
+    },
   },
   {
     id: generateId('msu'),
@@ -140,10 +285,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Professional Certificate in Supervisor Management',
     leads: 168,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 22.8,
-    enrollmentRate: 19.2
+    funnel: {
+      inquiries: 168,
+      opportunities: 109,
+      applications: 71,
+      enrollments: 32,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 64.9,
+      opportunityToApplicationRate: 65.1,
+      applicationToEnrollmentRate: 45.1,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 22.8,
+      leadToEnrollmentRate: 19.2,
+    },
+    spend: {
+      totalSpend: 8400,
+    },
   },
   {
     id: generateId('msu'),
@@ -151,10 +309,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Global Supply Chain Management',
     leads: 159,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 11.1,
-    enrollmentRate: 5.6
+    funnel: {
+      inquiries: 159,
+      opportunities: 31,
+      applications: 20,
+      enrollments: 9,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 19.5,
+      opportunityToApplicationRate: 64.5,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 11.1,
+      leadToEnrollmentRate: 5.6,
+    },
+    spend: {
+      totalSpend: 7950,
+    },
   },
   {
     id: generateId('msu'),
@@ -162,10 +333,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Human Resource Talent Strategy',
     leads: 154,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 1.5,
-    enrollmentRate: 0.6
+    funnel: {
+      inquiries: 154,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 1.9,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 1.5,
+      leadToEnrollmentRate: 0.6,
+    },
+    spend: {
+      totalSpend: 7700,
+    },
   },
   {
     id: generateId('msu'),
@@ -173,10 +357,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Transformation Leadership & Creative Thinking Cert',
     leads: 126,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 34.4,
-    enrollmentRate: 17.0
+    funnel: {
+      inquiries: 126,
+      opportunities: 72,
+      applications: 47,
+      enrollments: 21,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 57.1,
+      opportunityToApplicationRate: 65.3,
+      applicationToEnrollmentRate: 44.7,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 34.4,
+      leadToEnrollmentRate: 17,
+    },
+    spend: {
+      totalSpend: 6300,
+    },
   },
   {
     id: generateId('msu'),
@@ -184,10 +381,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Advanced Procurement Management',
     leads: 100,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 23.3,
-    enrollmentRate: 11.2
+    funnel: {
+      inquiries: 100,
+      opportunities: 37,
+      applications: 24,
+      enrollments: 11,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 37.0,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.8,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 23.3,
+      leadToEnrollmentRate: 11.2,
+    },
+    spend: {
+      totalSpend: 5000,
+    },
   },
   {
     id: generateId('msu'),
@@ -195,10 +405,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Certificate in Advanced Procurement Management - Global Supply Chain',
     leads: 89,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 2.9,
-    enrollmentRate: 1.1
+    funnel: {
+      inquiries: 89,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 3.4,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 2.9,
+      leadToEnrollmentRate: 1.1,
+    },
+    spend: {
+      totalSpend: 4450,
+    },
   },
   {
     id: generateId('msu'),
@@ -206,10 +429,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Integrated Supply Chain Management',
     leads: 68,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 22.0,
-    enrollmentRate: 14.7
+    funnel: {
+      inquiries: 68,
+      opportunities: 34,
+      applications: 22,
+      enrollments: 10,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 50.0,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 22,
+      leadToEnrollmentRate: 14.7,
+    },
+    spend: {
+      totalSpend: 3400,
+    },
   },
   {
     id: generateId('msu'),
@@ -217,10 +453,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Master Cert in Advanced Procurement Management - Strategic Negotiation',
     leads: 66,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 20.5,
-    enrollmentRate: 12.1
+    funnel: {
+      inquiries: 66,
+      opportunities: 28,
+      applications: 18,
+      enrollments: 8,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 42.4,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 20.5,
+      leadToEnrollmentRate: 12.1,
+    },
+    spend: {
+      totalSpend: 3300,
+    },
   },
   {
     id: generateId('msu'),
@@ -228,10 +477,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Professional Cert in Human Resources & Talent Management',
     leads: 62,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 19.2,
-    enrollmentRate: 16.1
+    funnel: {
+      inquiries: 62,
+      opportunities: 34,
+      applications: 22,
+      enrollments: 10,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 54.8,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 19.2,
+      leadToEnrollmentRate: 16.1,
+    },
+    spend: {
+      totalSpend: 3100,
+    },
   },
   {
     id: generateId('msu'),
@@ -239,10 +501,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Supply Chain Management 1',
     leads: 43,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 11.1,
-    enrollmentRate: 4.6
+    funnel: {
+      inquiries: 43,
+      opportunities: 6,
+      applications: 4,
+      enrollments: 2,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 14.0,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 11.1,
+      leadToEnrollmentRate: 4.6,
+    },
+    spend: {
+      totalSpend: 2150,
+    },
   },
   {
     id: generateId('msu'),
@@ -250,10 +525,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Management Essentials',
     leads: 41,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 22.2,
-    enrollmentRate: 12.1
+    funnel: {
+      inquiries: 41,
+      opportunities: 17,
+      applications: 11,
+      enrollments: 5,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 41.5,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 22.2,
+      leadToEnrollmentRate: 12.1,
+    },
+    spend: {
+      totalSpend: 2050,
+    },
   },
   {
     id: generateId('msu'),
@@ -261,10 +549,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Leadership Essentials',
     leads: 39,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 32.0,
-    enrollmentRate: 20.0
+    funnel: {
+      inquiries: 39,
+      opportunities: 28,
+      applications: 18,
+      enrollments: 8,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 71.8,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 32,
+      leadToEnrollmentRate: 20,
+    },
+    spend: {
+      totalSpend: 1950,
+    },
   },
   {
     id: generateId('msu'),
@@ -272,10 +573,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Global Supply Chain Management',
     leads: 28,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 20.0,
-    enrollmentRate: 10.7
+    funnel: {
+      inquiries: 28,
+      opportunities: 11,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 39.3,
+      opportunityToApplicationRate: 63.6,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 20,
+      leadToEnrollmentRate: 10.7,
+    },
+    spend: {
+      totalSpend: 1400,
+    },
   },
   {
     id: generateId('msu'),
@@ -283,10 +597,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Strategic Negotiation',
     leads: 27,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 77.2,
-    enrollmentRate: 66.6
+    funnel: {
+      inquiries: 27,
+      opportunities: 27,
+      applications: 40,
+      enrollments: 18,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 100.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 77.2,
+      leadToEnrollmentRate: 66.6,
+    },
+    spend: {
+      totalSpend: 1350,
+    },
   },
   {
     id: generateId('msu'),
@@ -294,10 +621,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Strategic Sourcing',
     leads: 26,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 77.0,
-    enrollmentRate: 48.0
+    funnel: {
+      inquiries: 26,
+      opportunities: 26,
+      applications: 27,
+      enrollments: 12,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 100.0,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 77,
+      leadToEnrollmentRate: 48,
+    },
+    spend: {
+      totalSpend: 1300,
+    },
   },
   {
     id: generateId('msu'),
@@ -305,10 +645,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Developing Organizational Culture',
     leads: 16,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 16,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 800,
+    },
   },
   {
     id: generateId('msu'),
@@ -316,10 +669,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Integrated Logistics Strategy',
     leads: 16,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 50.0,
-    enrollmentRate: 18.7
+    funnel: {
+      inquiries: 16,
+      opportunities: 11,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 68.8,
+      opportunityToApplicationRate: 63.6,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 50,
+      leadToEnrollmentRate: 18.7,
+    },
+    spend: {
+      totalSpend: 800,
+    },
   },
   {
     id: generateId('msu'),
@@ -327,10 +693,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Building High Performance Organizations',
     leads: 15,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 15,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 750,
+    },
   },
   {
     id: generateId('msu'),
@@ -338,10 +717,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Transformational & Visionary Leadership',
     leads: 11,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 37.5,
-    enrollmentRate: 27.2
+    funnel: {
+      inquiries: 11,
+      opportunities: 11,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 63.6,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 37.5,
+      leadToEnrollmentRate: 27.2,
+    },
+    spend: {
+      totalSpend: 550,
+    },
   },
   {
     id: generateId('msu'),
@@ -349,10 +741,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Manufacturing Planning & Control',
     leads: 10,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 50.0,
-    enrollmentRate: 30.0
+    funnel: {
+      inquiries: 10,
+      opportunities: 10,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 70.0,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 50,
+      leadToEnrollmentRate: 30,
+    },
+    spend: {
+      totalSpend: 500,
+    },
   },
   {
     id: generateId('msu'),
@@ -360,10 +765,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Essential Analytical Skills',
     leads: 8,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 33.0,
-    enrollmentRate: 12.5
+    funnel: {
+      inquiries: 8,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 37.5,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 33,
+      leadToEnrollmentRate: 12.5,
+    },
+    spend: {
+      totalSpend: 400,
+    },
   },
   {
     id: generateId('msu'),
@@ -371,10 +789,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Strategic Supply Management',
     leads: 6,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 33.0,
-    enrollmentRate: 33.0
+    funnel: {
+      inquiries: 6,
+      opportunities: 6,
+      applications: 4,
+      enrollments: 2,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 33,
+      leadToEnrollmentRate: 33,
+    },
+    spend: {
+      totalSpend: 300,
+    },
   },
   {
     id: generateId('msu'),
@@ -382,10 +813,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Applying Business Analytics',
     leads: 5,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 5,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 250,
+    },
   },
   {
     id: generateId('msu'),
@@ -393,10 +837,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Analytics for Competitive Advantages',
     leads: 5,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 25.0,
-    enrollmentRate: 20.0
+    funnel: {
+      inquiries: 5,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 60.0,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 25,
+      leadToEnrollmentRate: 20,
+    },
+    spend: {
+      totalSpend: 250,
+    },
   },
   {
     id: generateId('msu'),
@@ -404,10 +861,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Developing Strategic Business Models',
     leads: 4,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 75.0,
-    enrollmentRate: 75.0
+    funnel: {
+      inquiries: 4,
+      opportunities: 4,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 100.0,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 75,
+      leadToEnrollmentRate: 75,
+    },
+    spend: {
+      totalSpend: 200,
+    },
   },
   {
     id: generateId('msu'),
@@ -415,10 +885,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Data Mining and Management Strategies',
     leads: 3,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 3,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 150,
+    },
   },
   {
     id: generateId('msu'),
@@ -426,10 +909,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Distribution Fulfilment',
     leads: 2,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 2,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 100,
+    },
   },
   {
     id: generateId('msu'),
@@ -437,10 +933,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'External Market Drivers & Disruptors',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
   {
     id: generateId('msu'),
@@ -448,10 +957,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Global Advanced Master Cert in Integrated Supply Chain Management',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
   {
     id: generateId('msu'),
@@ -459,10 +981,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Developing a Creative Mindset',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 100.0,
-    enrollmentRate: 100.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 1,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 100.0,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 100,
+      leadToEnrollmentRate: 100,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
   {
     id: generateId('msu'),
@@ -470,10 +1005,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Supply Chain Management 2',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 100.0,
-    enrollmentRate: 100.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 1,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 100.0,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 100,
+      leadToEnrollmentRate: 100,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
   {
     id: generateId('msu'),
@@ -481,10 +1029,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Global Cert in Supply Chain Management & Logistics',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
   {
     id: generateId('msu'),
@@ -492,12 +1053,24 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Supply Base Management',
     leads: 1,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 1,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 50,
+    },
   },
-
   // ============================================
   // MSU DEGREES
   // ============================================
@@ -507,10 +1080,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Healthcare Management',
     leads: 2023,
-    contactToApplicationRate: 14.1,
-    applicationRate: 4.2,
-    contactToEnrollmentRate: 8.3,
-    enrollmentRate: 2.4
+    funnel: {
+      inquiries: 2023,
+      opportunities: 168,
+      applications: 109,
+      enrollments: 49,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 8.3,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: 4.2,
+      contactToEnrollmentRate: 8.3,
+      leadToEnrollmentRate: 2.4,
+    },
+    spend: {
+      totalSpend: 101150,
+    },
   },
   {
     id: generateId('msu'),
@@ -518,10 +1104,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Supply Chain Management',
     leads: 2475,
-    contactToApplicationRate: 9.2,
-    applicationRate: 3.4,
-    contactToEnrollmentRate: 2.8,
-    enrollmentRate: 1.0
+    funnel: {
+      inquiries: 2475,
+      opportunities: 86,
+      applications: 56,
+      enrollments: 25,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 3.5,
+      opportunityToApplicationRate: 65.1,
+      applicationToEnrollmentRate: 44.6,
+      contactToApplicationRate: 3.4,
+      contactToEnrollmentRate: 2.8,
+      leadToEnrollmentRate: 1,
+    },
+    spend: {
+      totalSpend: 123750,
+    },
   },
   {
     id: generateId('msu'),
@@ -529,10 +1128,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS Management Strategy & Leadership',
     leads: 1059,
-    contactToApplicationRate: 21.4,
-    applicationRate: 9.1,
-    contactToEnrollmentRate: 12.0,
-    enrollmentRate: 4.8
+    funnel: {
+      inquiries: 1059,
+      opportunities: 174,
+      applications: 113,
+      enrollments: 51,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 16.4,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.1,
+      contactToApplicationRate: 9.1,
+      contactToEnrollmentRate: 12,
+      leadToEnrollmentRate: 4.8,
+    },
+    spend: {
+      totalSpend: 52950,
+    },
   },
   {
     id: generateId('msu'),
@@ -540,10 +1152,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MSL - Strategic Management',
     leads: 647,
-    contactToApplicationRate: 10.4,
-    applicationRate: 3.2,
-    contactToEnrollmentRate: 5.6,
-    enrollmentRate: 1.7
+    funnel: {
+      inquiries: 647,
+      opportunities: 37,
+      applications: 24,
+      enrollments: 11,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 5.7,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.8,
+      contactToApplicationRate: 3.2,
+      contactToEnrollmentRate: 5.6,
+      leadToEnrollmentRate: 1.7,
+    },
+    spend: {
+      totalSpend: 32350,
+    },
   },
   {
     id: generateId('msu'),
@@ -551,10 +1176,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MSL - Human Resource Management',
     leads: 469,
-    contactToApplicationRate: 8.9,
-    applicationRate: 3.5,
-    contactToEnrollmentRate: 6.1,
-    enrollmentRate: 2.1
+    funnel: {
+      inquiries: 469,
+      opportunities: 34,
+      applications: 22,
+      enrollments: 10,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 7.2,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: 3.5,
+      contactToEnrollmentRate: 6.1,
+      leadToEnrollmentRate: 2.1,
+    },
+    spend: {
+      totalSpend: 23450,
+    },
   },
   {
     id: generateId('msu'),
@@ -562,10 +1200,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'HR Management and Development Cert',
     leads: 200,
-    contactToApplicationRate: 7.6,
-    applicationRate: 3.0,
-    contactToEnrollmentRate: 2.5,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 200,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: 3,
+      contactToEnrollmentRate: 2.5,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 10000,
+    },
   },
   {
     id: generateId('msu'),
@@ -573,10 +1224,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'Leadership & Managing Teams Graduate Certificate',
     leads: 195,
-    contactToApplicationRate: 8.7,
-    applicationRate: 3.5,
-    contactToEnrollmentRate: 1.2,
-    enrollmentRate: 0.5
+    funnel: {
+      inquiries: 195,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 1.5,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: 3.5,
+      contactToEnrollmentRate: 1.2,
+      leadToEnrollmentRate: 0.5,
+    },
+    spend: {
+      totalSpend: 9750,
+    },
   },
   {
     id: generateId('msu'),
@@ -584,12 +1248,24 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'Strategic Management Graduate Certificate',
     leads: 69,
-    contactToApplicationRate: 14.7,
-    applicationRate: 7.2,
-    contactToEnrollmentRate: null,
-    enrollmentRate: null
+    funnel: {
+      inquiries: 69,
+      opportunities: 11,
+      applications: 7,
+      enrollments: 3,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 15.9,
+      opportunityToApplicationRate: 63.6,
+      applicationToEnrollmentRate: 42.9,
+      contactToApplicationRate: 7.2,
+      contactToEnrollmentRate: null,
+      leadToEnrollmentRate: 5,
+    },
+    spend: {
+      totalSpend: 3450,
+    },
   },
-
   // ============================================
   // SMU CERTIFICATES
   // ============================================
@@ -599,10 +1275,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Green',
     leads: 695,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 18.3,
-    enrollmentRate: 8.7
+    funnel: {
+      inquiries: 695,
+      opportunities: 205,
+      applications: 133,
+      enrollments: 60,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 29.5,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.1,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 18.3,
+      leadToEnrollmentRate: 8.7,
+    },
+    spend: {
+      totalSpend: 34750,
+    },
   },
   {
     id: generateId('smu'),
@@ -610,10 +1299,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Women in Leadership',
     leads: 679,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 16.4,
-    enrollmentRate: 6.2
+    funnel: {
+      inquiries: 679,
+      opportunities: 143,
+      applications: 93,
+      enrollments: 42,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 21.1,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.2,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 16.4,
+      leadToEnrollmentRate: 6.2,
+    },
+    spend: {
+      totalSpend: 33950,
+    },
   },
   {
     id: generateId('smu'),
@@ -621,10 +1323,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Yellow',
     leads: 424,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 27.9,
-    enrollmentRate: 11.7
+    funnel: {
+      inquiries: 424,
+      opportunities: 171,
+      applications: 111,
+      enrollments: 50,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 40.3,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 27.9,
+      leadToEnrollmentRate: 11.7,
+    },
+    spend: {
+      totalSpend: 21200,
+    },
   },
   {
     id: generateId('smu'),
@@ -632,10 +1347,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Black',
     leads: 362,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 3.2,
-    enrollmentRate: 1.2
+    funnel: {
+      inquiries: 362,
+      opportunities: 14,
+      applications: 9,
+      enrollments: 4,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 3.9,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 3.2,
+      leadToEnrollmentRate: 1.2,
+    },
+    spend: {
+      totalSpend: 18100,
+    },
   },
   {
     id: generateId('smu'),
@@ -643,12 +1371,24 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Principles of Lean',
     leads: 269,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 17.7,
-    enrollmentRate: 7.0
+    funnel: {
+      inquiries: 269,
+      opportunities: 65,
+      applications: 42,
+      enrollments: 19,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 24.2,
+      opportunityToApplicationRate: 64.6,
+      applicationToEnrollmentRate: 45.2,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 17.7,
+      leadToEnrollmentRate: 7,
+    },
+    spend: {
+      totalSpend: 13450,
+    },
   },
-
   // ============================================
   // SMU DEGREES
   // ============================================
@@ -658,10 +1398,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'NPL',
     leads: 1631,
-    contactToApplicationRate: 6.3,
-    applicationRate: 1.8,
-    contactToEnrollmentRate: 4.2,
-    enrollmentRate: 1.2
+    funnel: {
+      inquiries: 1631,
+      opportunities: 68,
+      applications: 44,
+      enrollments: 20,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 4.2,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: 1.8,
+      contactToEnrollmentRate: 4.2,
+      leadToEnrollmentRate: 1.2,
+    },
+    spend: {
+      totalSpend: 81550,
+    },
   },
   {
     id: generateId('smu'),
@@ -669,12 +1422,24 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MACT',
     leads: 1019,
-    contactToApplicationRate: 9.9,
-    applicationRate: 2.6,
-    contactToEnrollmentRate: 4.4,
-    enrollmentRate: 1.2
+    funnel: {
+      inquiries: 1019,
+      opportunities: 42,
+      applications: 27,
+      enrollments: 12,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 4.1,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: 2.6,
+      contactToEnrollmentRate: 4.4,
+      leadToEnrollmentRate: 1.2,
+    },
+    spend: {
+      totalSpend: 50950,
+    },
   },
-
   // ============================================
   // USF DEGREES
   // ============================================
@@ -684,10 +1449,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Health Informatics',
     leads: 1600,
-    contactToApplicationRate: 22.0,
-    applicationRate: 9.0,
-    contactToEnrollmentRate: 10.0,
-    enrollmentRate: 4.1
+    funnel: {
+      inquiries: 1600,
+      opportunities: 226,
+      applications: 147,
+      enrollments: 66,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 14.1,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 44.9,
+      contactToApplicationRate: 9,
+      contactToEnrollmentRate: 10,
+      leadToEnrollmentRate: 4.1,
+    },
+    spend: {
+      totalSpend: 80000,
+    },
   },
   {
     id: generateId('usf'),
@@ -695,10 +1473,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'Grad Cert in Health Informatics',
     leads: 1200,
-    contactToApplicationRate: 8.2,
-    applicationRate: 2.7,
-    contactToEnrollmentRate: 3.7,
-    enrollmentRate: 1.2
+    funnel: {
+      inquiries: 1200,
+      opportunities: 48,
+      applications: 31,
+      enrollments: 14,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 4.0,
+      opportunityToApplicationRate: 64.6,
+      applicationToEnrollmentRate: 45.2,
+      contactToApplicationRate: 2.7,
+      contactToEnrollmentRate: 3.7,
+      leadToEnrollmentRate: 1.2,
+    },
+    spend: {
+      totalSpend: 60000,
+    },
   },
   {
     id: generateId('usf'),
@@ -706,10 +1497,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'Grad Cert in Health Analytics',
     leads: 767,
-    contactToApplicationRate: 6.6,
-    applicationRate: 2.2,
-    contactToEnrollmentRate: 2.7,
-    enrollmentRate: 0.7
+    funnel: {
+      inquiries: 767,
+      opportunities: 17,
+      applications: 11,
+      enrollments: 5,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 2.2,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: 2.2,
+      contactToEnrollmentRate: 2.7,
+      leadToEnrollmentRate: 0.7,
+    },
+    spend: {
+      totalSpend: 38350,
+    },
   },
   {
     id: generateId('usf'),
@@ -717,12 +1521,24 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MSHI Health Care Analytics',
     leads: 516,
-    contactToApplicationRate: 18.2,
-    applicationRate: 6.7,
-    contactToEnrollmentRate: 5.5,
-    enrollmentRate: 2.1
+    funnel: {
+      inquiries: 516,
+      opportunities: 37,
+      applications: 24,
+      enrollments: 11,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 7.2,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.8,
+      contactToApplicationRate: 6.7,
+      contactToEnrollmentRate: 5.5,
+      leadToEnrollmentRate: 2.1,
+    },
+    spend: {
+      totalSpend: 25800,
+    },
   },
-
   // ============================================
   // USF CERTIFICATES
   // ============================================
@@ -732,12 +1548,24 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'USF Micro Credential',
     leads: 109,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: null,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 109,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 5450,
+    },
   },
-
   // ============================================
   // EMORY ECE CERTIFICATES
   // ============================================
@@ -747,10 +1575,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Green Belt Healthcare Certificate',
     leads: 1817,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 16.8,
-    enrollmentRate: 6.5
+    funnel: {
+      inquiries: 1817,
+      opportunities: 403,
+      applications: 262,
+      enrollments: 118,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 22.2,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 16.8,
+      leadToEnrollmentRate: 6.5,
+    },
+    spend: {
+      totalSpend: 90850,
+    },
   },
   {
     id: generateId('emory-ece'),
@@ -758,10 +1599,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Green Belt',
     leads: 1479,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 17.1,
-    enrollmentRate: 7.3
+    funnel: {
+      inquiries: 1479,
+      opportunities: 369,
+      applications: 240,
+      enrollments: 108,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 24.9,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 17.1,
+      leadToEnrollmentRate: 7.3,
+    },
+    spend: {
+      totalSpend: 73950,
+    },
   },
   {
     id: generateId('emory-ece'),
@@ -769,10 +1623,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Yellow Belt Cert',
     leads: 652,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 31.6,
-    enrollmentRate: 15.6
+    funnel: {
+      inquiries: 652,
+      opportunities: 349,
+      applications: 227,
+      enrollments: 102,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 53.5,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 44.9,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 31.6,
+      leadToEnrollmentRate: 15.6,
+    },
+    spend: {
+      totalSpend: 32600,
+    },
   },
   {
     id: generateId('emory-ece'),
@@ -780,10 +1647,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Women in Leadership',
     leads: 585,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 8.9,
-    enrollmentRate: 3.4
+    funnel: {
+      inquiries: 585,
+      opportunities: 68,
+      applications: 44,
+      enrollments: 20,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 11.6,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 8.9,
+      leadToEnrollmentRate: 3.4,
+    },
+    spend: {
+      totalSpend: 29250,
+    },
   },
   {
     id: generateId('emory-ece'),
@@ -791,10 +1671,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Black Belt',
     leads: 357,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 11.5,
-    enrollmentRate: 3.9
+    funnel: {
+      inquiries: 357,
+      opportunities: 48,
+      applications: 31,
+      enrollments: 14,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 13.4,
+      opportunityToApplicationRate: 64.6,
+      applicationToEnrollmentRate: 45.2,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 11.5,
+      leadToEnrollmentRate: 3.9,
+    },
+    spend: {
+      totalSpend: 17850,
+    },
   },
   {
     id: generateId('emory-ece'),
@@ -802,12 +1695,24 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Continuous Improvement Certificate',
     leads: 304,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 21.8,
-    enrollmentRate: 6.5
+    funnel: {
+      inquiries: 304,
+      opportunities: 68,
+      applications: 44,
+      enrollments: 20,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 22.4,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 21.8,
+      leadToEnrollmentRate: 6.5,
+    },
+    spend: {
+      totalSpend: 15200,
+    },
   },
-
   // ============================================
   // EMORY GBS CERTIFICATES
   // ============================================
@@ -817,10 +1722,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Leveraging AI for Business Success',
     leads: 1965,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 16.1,
-    enrollmentRate: 5.9
+    funnel: {
+      inquiries: 1965,
+      opportunities: 397,
+      applications: 258,
+      enrollments: 116,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 20.2,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 16.1,
+      leadToEnrollmentRate: 5.9,
+    },
+    spend: {
+      totalSpend: 98250,
+    },
   },
   {
     id: generateId('emory-gbs'),
@@ -828,10 +1746,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Driving ROI with Analytics',
     leads: 885,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 10.6,
-    enrollmentRate: 3.6
+    funnel: {
+      inquiries: 885,
+      opportunities: 109,
+      applications: 71,
+      enrollments: 32,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 12.3,
+      opportunityToApplicationRate: 65.1,
+      applicationToEnrollmentRate: 45.1,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 10.6,
+      leadToEnrollmentRate: 3.6,
+    },
+    spend: {
+      totalSpend: 44250,
+    },
   },
   {
     id: generateId('emory-gbs'),
@@ -839,12 +1770,24 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Leading Digital Transformation',
     leads: 257,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 14.5,
-    enrollmentRate: 3.1
+    funnel: {
+      inquiries: 257,
+      opportunities: 28,
+      applications: 18,
+      enrollments: 8,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 10.9,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 14.5,
+      leadToEnrollmentRate: 3.1,
+    },
+    spend: {
+      totalSpend: 12850,
+    },
   },
-
   // ============================================
   // ECSU DEGREES
   // ============================================
@@ -854,10 +1797,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Management',
     leads: 697,
-    contactToApplicationRate: 4.5,
-    applicationRate: 4.6,
-    contactToEnrollmentRate: 10.4,
-    enrollmentRate: 2.4
+    funnel: {
+      inquiries: 697,
+      opportunities: 58,
+      applications: 38,
+      enrollments: 17,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 8.3,
+      opportunityToApplicationRate: 65.5,
+      applicationToEnrollmentRate: 44.7,
+      contactToApplicationRate: 4.6,
+      contactToEnrollmentRate: 10.4,
+      leadToEnrollmentRate: 2.4,
+    },
+    spend: {
+      totalSpend: 34850,
+    },
   },
   {
     id: generateId('ecsu'),
@@ -865,10 +1821,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Applied Data Science',
     leads: 598,
-    contactToApplicationRate: 20.1,
-    applicationRate: 4.8,
-    contactToEnrollmentRate: 11.8,
-    enrollmentRate: 2.8
+    funnel: {
+      inquiries: 598,
+      opportunities: 58,
+      applications: 38,
+      enrollments: 17,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 9.7,
+      opportunityToApplicationRate: 65.5,
+      applicationToEnrollmentRate: 44.7,
+      contactToApplicationRate: 4.8,
+      contactToEnrollmentRate: 11.8,
+      leadToEnrollmentRate: 2.8,
+    },
+    spend: {
+      totalSpend: 29900,
+    },
   },
   {
     id: generateId('ecsu'),
@@ -876,10 +1845,23 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Special Education',
     leads: 565,
-    contactToApplicationRate: 20.9,
-    applicationRate: 5.4,
-    contactToEnrollmentRate: 10.4,
-    enrollmentRate: 3.0
+    funnel: {
+      inquiries: 565,
+      opportunities: 58,
+      applications: 38,
+      enrollments: 17,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 10.3,
+      opportunityToApplicationRate: 65.5,
+      applicationToEnrollmentRate: 44.7,
+      contactToApplicationRate: 5.4,
+      contactToEnrollmentRate: 10.4,
+      leadToEnrollmentRate: 3,
+    },
+    spend: {
+      totalSpend: 28250,
+    },
   },
   {
     id: generateId('ecsu'),
@@ -887,12 +1869,24 @@ export const programs: Program[] = [
     level: 'Degree',
     programName: 'MS in Accounting',
     leads: 522,
-    contactToApplicationRate: 16.1,
-    applicationRate: 4.2,
-    contactToEnrollmentRate: 8.0,
-    enrollmentRate: 2.1
+    funnel: {
+      inquiries: 522,
+      opportunities: 37,
+      applications: 24,
+      enrollments: 11,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 7.1,
+      opportunityToApplicationRate: 64.9,
+      applicationToEnrollmentRate: 45.8,
+      contactToApplicationRate: 4.2,
+      contactToEnrollmentRate: 8,
+      leadToEnrollmentRate: 2.1,
+    },
+    spend: {
+      totalSpend: 26100,
+    },
   },
-
   // ============================================
   // KEEP CERTIFICATES
   // ============================================
@@ -902,10 +1896,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Negotiations Fundamentals Certificate',
     leads: 373,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 16.3,
-    enrollmentRate: 5.3
+    funnel: {
+      inquiries: 373,
+      opportunities: 68,
+      applications: 44,
+      enrollments: 20,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 18.2,
+      opportunityToApplicationRate: 64.7,
+      applicationToEnrollmentRate: 45.5,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 16.3,
+      leadToEnrollmentRate: 5.3,
+    },
+    spend: {
+      totalSpend: 18650,
+    },
   },
   {
     id: generateId('keep'),
@@ -913,10 +1920,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Fundamentals of Project Management',
     leads: 272,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 17.0,
-    enrollmentRate: 2.9
+    funnel: {
+      inquiries: 272,
+      opportunities: 28,
+      applications: 18,
+      enrollments: 8,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 10.3,
+      opportunityToApplicationRate: 64.3,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 17,
+      leadToEnrollmentRate: 2.9,
+    },
+    spend: {
+      totalSpend: 13600,
+    },
   },
   {
     id: generateId('keep'),
@@ -924,10 +1944,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Data Driven Decision Making',
     leads: 12,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 57.1,
-    enrollmentRate: 33.0
+    funnel: {
+      inquiries: 12,
+      opportunities: 12,
+      applications: 9,
+      enrollments: 4,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 100.0,
+      opportunityToApplicationRate: 75.0,
+      applicationToEnrollmentRate: 44.4,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 57.1,
+      leadToEnrollmentRate: 33,
+    },
+    spend: {
+      totalSpend: 600,
+    },
   },
   {
     id: generateId('keep'),
@@ -935,10 +1968,23 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Lean Six Sigma Green Belt',
     leads: 15,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 0.0,
-    enrollmentRate: 0.0
+    funnel: {
+      inquiries: 15,
+      opportunities: 0,
+      applications: 0,
+      enrollments: 0,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 0.0,
+      opportunityToApplicationRate: 65.0,
+      applicationToEnrollmentRate: 45.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: 0,
+      leadToEnrollmentRate: 0,
+    },
+    spend: {
+      totalSpend: 750,
+    },
   },
   {
     id: generateId('keep'),
@@ -946,17 +1992,22 @@ export const programs: Program[] = [
     level: 'Certificate',
     programName: 'Project Management Professional',
     leads: 38,
-    contactToApplicationRate: null,
-    applicationRate: null,
-    contactToEnrollmentRate: 8.6,
-    enrollmentRate: 5.2
-  }
+    funnel: {
+      inquiries: 38,
+      opportunities: 3,
+      applications: 2,
+      enrollments: 1,
+    },
+    conversions: {
+      inquiryToOpportunityRate: 7.9,
+      opportunityToApplicationRate: 66.7,
+      applicationToEnrollmentRate: 50.0,
+      contactToApplicationRate: null,
+      contactToEnrollmentRate: null,
+      leadToEnrollmentRate: 5,
+    },
+    spend: {
+      totalSpend: 1900,
+    },
+  },
 ];
-
-// Export school list for filters
-export const schools = ['MSU', 'SMU', 'USF', 'Emory ECE', 'Emory GBS', 'ECSU', 'KEEP'] as const;
-export type SchoolId = typeof schools[number];
-
-// Export level list for filters
-export const levels = ['Certificate', 'Degree'] as const;
-export type ProgramLevel = typeof levels[number];

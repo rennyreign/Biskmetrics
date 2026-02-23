@@ -1,0 +1,142 @@
+# git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   .env.example
+	new file:   .nvmrc
+	new file:   .prettierignore
+	new file:   .prettierrc
+	new file:   .tool-versions
+	new file:   CHANGELOG.md
+	modified:   README.md
+	new file:   docs/AGENTS.md
+	new file:   docs/adr/001-data-provider-architecture.md
+	new file:   eslint.config.js
+	modified:   package.json
+	new file:   postcss.config.js
+	new file:   scripts/audit-deps.sh
+	new file:   scripts/pre-commit.sh
+	new file:   scripts/setup.sh
+	new file:   src/lib/dataQuality.ts
+	new file:   src/lib/metricsEngine.ts
+	new file:   src/lib/recommendationEngine.ts
+	new file:   src/providers/DataProvider.interface.ts
+	new file:   src/types/metrics.ts
+	new file:   src/types/program.ts
+	new file:   src/types/scorecard.ts
+	new file:   tailwind.config.js
+	new file:   tests/setup.ts
+	new file:   tests/unit/metricsEngine.test.ts
+	new file:   tests/unit/recommendationEngine.test.ts
+	new file:   vitest.config.ts
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   package-lock.json
+	modified:   src/App.tsx
+	modified:   src/Attributions.md
+	modified:   src/components/FilterSection.tsx
+	modified:   src/components/GraphView.tsx
+	modified:   src/components/Header.tsx
+	modified:   src/components/ProgramTable.tsx
+	modified:   src/components/RecommendedVerdict.tsx
+	modified:   src/components/ViewToggle.tsx
+	modified:   src/components/figma/ImageWithFallback.tsx
+	modified:   src/components/ui/accordion.tsx
+	modified:   src/components/ui/alert-dialog.tsx
+	modified:   src/components/ui/alert.tsx
+	modified:   src/components/ui/aspect-ratio.tsx
+	modified:   src/components/ui/avatar.tsx
+	modified:   src/components/ui/badge.tsx
+	modified:   src/components/ui/breadcrumb.tsx
+	modified:   src/components/ui/button.tsx
+	modified:   src/components/ui/calendar.tsx
+	modified:   src/components/ui/card.tsx
+	modified:   src/components/ui/carousel.tsx
+	modified:   src/components/ui/chart.tsx
+	modified:   src/components/ui/checkbox.tsx
+	modified:   src/components/ui/collapsible.tsx
+	modified:   src/components/ui/command.tsx
+	modified:   src/components/ui/context-menu.tsx
+	modified:   src/components/ui/dialog.tsx
+	modified:   src/components/ui/drawer.tsx
+	modified:   src/components/ui/dropdown-menu.tsx
+	modified:   src/components/ui/form.tsx
+	modified:   src/components/ui/hover-card.tsx
+	modified:   src/components/ui/input-otp.tsx
+	modified:   src/components/ui/input.tsx
+	modified:   src/components/ui/label.tsx
+	modified:   src/components/ui/menubar.tsx
+	modified:   src/components/ui/navigation-menu.tsx
+	modified:   src/components/ui/pagination.tsx
+	modified:   src/components/ui/popover.tsx
+	modified:   src/components/ui/progress.tsx
+	modified:   src/components/ui/radio-group.tsx
+	modified:   src/components/ui/resizable.tsx
+	modified:   src/components/ui/scroll-area.tsx
+	modified:   src/components/ui/select.tsx
+	modified:   src/components/ui/separator.tsx
+	modified:   src/components/ui/sheet.tsx
+	modified:   src/components/ui/sidebar.tsx
+	modified:   src/components/ui/skeleton.tsx
+	modified:   src/components/ui/slider.tsx
+	modified:   src/components/ui/sonner.tsx
+	modified:   src/components/ui/switch.tsx
+	modified:   src/components/ui/table.tsx
+	modified:   src/components/ui/tabs.tsx
+	modified:   src/components/ui/textarea.tsx
+	modified:   src/components/ui/toggle-group.tsx
+	modified:   src/components/ui/toggle.tsx
+	modified:   src/components/ui/tooltip.tsx
+	modified:   src/components/ui/use-mobile.ts
+	modified:   src/components/ui/utils.ts
+	modified:   src/data/mockData.ts
+	modified:   src/data/programs.ts
+	modified:   src/guidelines/Guidelines.md
+	modified:   src/index.css
+	modified:   src/main.tsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.windsurf/
+	6878ba99-5106-48c6-8b86-cb207aa2eea7_ExportBlock-2b7c9bf8-e07b-4dab-b59b-5fde026f8dc4.zip
+	EXECUTIVE_SUMMARY.md
+	Makefile
+	PRODUCTION_FEATURES.md
+	bundles/
+	coverage/
+	plan/
+	program-shelf-system.md
+
+
+# staged files
+.env.example
+.nvmrc
+.prettierignore
+.prettierrc
+.tool-versions
+CHANGELOG.md
+README.md
+docs/AGENTS.md
+docs/adr/001-data-provider-architecture.md
+eslint.config.js
+package.json
+postcss.config.js
+scripts/audit-deps.sh
+scripts/pre-commit.sh
+scripts/setup.sh
+src/lib/dataQuality.ts
+src/lib/metricsEngine.ts
+src/lib/recommendationEngine.ts
+src/providers/DataProvider.interface.ts
+src/types/metrics.ts
+src/types/program.ts
+src/types/scorecard.ts
+tailwind.config.js
+tests/setup.ts
+tests/unit/metricsEngine.test.ts
+tests/unit/recommendationEngine.test.ts
+vitest.config.ts

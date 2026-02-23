@@ -1,10 +1,12 @@
 import { Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
+import type { SchoolId, ProgramLevel } from '../types/program';
+
 interface FilterSectionProps {
-  selectedSchool: string;
-  selectedLevel: string;
-  onSchoolChange: (value: string) => void;
-  onLevelChange: (value: string) => void;
+  selectedSchool: SchoolId | 'All Schools';
+  selectedLevel: ProgramLevel | 'All Program Types';
+  onSchoolChange: (value: SchoolId | 'All Schools') => void;
+  onLevelChange: (value: ProgramLevel | 'All Program Types') => void;
 }
 
 const SCHOOL_OPTIONS = [
@@ -15,20 +17,16 @@ const SCHOOL_OPTIONS = [
   'Emory ECE',
   'Emory GBS',
   'ECSU',
-  'KEEP'
+  'KEEP',
 ];
 
-const LEVEL_OPTIONS = [
-  'All Program Types',
-  'Certificate',
-  'Degree'
-];
+const LEVEL_OPTIONS = ['All Program Types', 'Certificate', 'Degree'];
 
 export function FilterSection({
   selectedSchool,
   selectedLevel,
   onSchoolChange,
-  onLevelChange
+  onLevelChange,
 }: FilterSectionProps) {
   return (
     <Box sx={{ mb: 3, display: 'flex', gap: 3, flexWrap: 'wrap' }}>
@@ -38,7 +36,7 @@ export function FilterSection({
           labelId="school-select-label"
           value={selectedSchool}
           label="School"
-          onChange={(e) => onSchoolChange(e.target.value)}
+          onChange={e => onSchoolChange(e.target.value as SchoolId | 'All Schools')}
           sx={{
             bgcolor: 'white',
             '& .MuiOutlinedInput-notchedOutline': {
@@ -49,10 +47,10 @@ export function FilterSection({
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
               borderColor: '#e91e63',
-            }
+            },
           }}
         >
-          {SCHOOL_OPTIONS.map((option) => (
+          {SCHOOL_OPTIONS.map(option => (
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>
@@ -66,7 +64,7 @@ export function FilterSection({
           labelId="level-select-label"
           value={selectedLevel}
           label="Program Type"
-          onChange={(e) => onLevelChange(e.target.value)}
+          onChange={e => onLevelChange(e.target.value as ProgramLevel | 'All Program Types')}
           sx={{
             bgcolor: 'white',
             '& .MuiOutlinedInput-notchedOutline': {
@@ -77,10 +75,10 @@ export function FilterSection({
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
               borderColor: '#e91e63',
-            }
+            },
           }}
         >
-          {LEVEL_OPTIONS.map((option) => (
+          {LEVEL_OPTIONS.map(option => (
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>
