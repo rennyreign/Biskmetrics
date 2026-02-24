@@ -1,16 +1,16 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Box, Container, Button, ButtonGroup } from '@mui/material';
 import { ProgramTable } from './components/ProgramTable';
-import { GraphView } from './components/GraphView';
 import { FilterSection } from './components/FilterSection';
-import { ViewToggle } from './components/ViewToggle';
 import { Header } from './components/Header';
-import { RecommendedVerdict } from './components/RecommendedVerdict';
+import { ProgramDetailDrawer } from './components/ProgramDetail/ProgramDetailDrawer';
+import { ScorecardPage } from './pages/ScorecardPage';
+import { InvestmentInsights } from './components/InvestmentInsights';
 import { dataProvider } from './providers/FixedDataProvider';
 import type { Program, SchoolId, ProgramLevel } from './types/program';
-import { LayoutDashboard, Award } from 'lucide-react';
+import { LayoutDashboard, BarChart3 } from 'lucide-react';
 
-type Page = 'dashboard' | 'verdict';
+type Page = 'dashboard' | 'scorecard';
 
 export default function App() {
   const [page, setPage] = useState<Page>('dashboard');
@@ -18,9 +18,20 @@ export default function App() {
   const [selectedLevel, setSelectedLevel] = useState<ProgramLevel | 'All Program Types'>(
     'All Program Types'
   );
-  const [view, setView] = useState<'table' | 'graph'>('table');
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProgram, setSelectedProgram] = useState<Program | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleProgramClick = (program: Program) => {
+    setSelectedProgram(program);
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+    setSelectedProgram(null);
+  };
 
   // Load programs from data provider
   useEffect(() => {
@@ -79,29 +90,32 @@ export default function App() {
               Dashboard
             </Button>
             <Button
-              onClick={() => setPage('verdict')}
-              variant={page === 'verdict' ? 'contained' : 'outlined'}
-              startIcon={<Award size={18} />}
+              onClick={() => setPage('scorecard')}
+              variant={page === 'scorecard' ? 'contained' : 'outlined'}
+              startIcon={<BarChart3 size={18} />}
               sx={{
                 textTransform: 'none',
                 px: 3,
                 py: 1.5,
-                bgcolor: page === 'verdict' ? '#e91e63' : 'white',
-                color: page === 'verdict' ? 'white' : '#64748b',
+                bgcolor: page === 'scorecard' ? '#e91e63' : 'white',
+                color: page === 'scorecard' ? 'white' : '#64748b',
                 borderColor: '#e2e8f0',
                 '&:hover': {
-                  bgcolor: page === 'verdict' ? '#c2185b' : '#f8fafc',
+                  bgcolor: page === 'scorecard' ? '#c2185b' : '#f8fafc',
                   borderColor: '#e91e63',
                 },
               }}
             >
-              Recommended Verdict
+              Scorecard
             </Button>
           </ButtonGroup>
         </Box>
 
         {page === 'dashboard' ? (
           <>
+            {/* Investment Insights Panel */}
+            <InvestmentInsights programs={programs} />
+
             {/* Filters */}
             <FilterSection
               selectedSchool={selectedSchool}
@@ -110,17 +124,8 @@ export default function App() {
               onLevelChange={setSelectedLevel}
             />
 
-            {/* Summary Chip and View Toggle */}
-            <Box
-              sx={{
-                mb: 3,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: 2,
-              }}
-            >
+            {/* Summary Chip */}
+            <Box sx={{ mb: 3 }}>
               <Box
                 sx={{
                   display: 'inline-flex',
@@ -135,7 +140,6 @@ export default function App() {
               >
                 <span className="text-sm text-slate-700">Showing {getFilterSummary()}</span>
               </Box>
-              <ViewToggle view={view} onViewChange={setView} />
             </Box>
 
             {/* Main Content Card */}
@@ -150,32 +154,24 @@ export default function App() {
               <Box sx={{ px: 3, py: 2.5, borderBottom: '1px solid #e2e8f0' }}>
                 <h2 className="text-slate-900">Programs</h2>
               </Box>
-              {view === 'table' ? (
-                <ProgramTable
-                  programs={filteredPrograms}
-                  showSchoolColumn={selectedSchool === 'All Schools'}
-                />
-              ) : (
-                <GraphView
-                  programs={filteredPrograms}
-                  showSchoolColumn={selectedSchool === 'All Schools'}
-                />
-              )}
+              <ProgramTable
+                programs={filteredPrograms}
+                showSchoolColumn={selectedSchool === 'All Schools'}
+                onRowClick={handleProgramClick}
+              />
             </Box>
           </>
         ) : (
-          <Box
-            sx={{
-              bgcolor: 'white',
-              borderRadius: '12px',
-              boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-              overflow: 'hidden',
-            }}
-          >
-            <RecommendedVerdict />
-          </Box>
+          <ScorecardPage />
         )}
       </Container>
+
+      {/* Program Detail Drawer */}
+      <ProgramDetailDrawer
+        program={selectedProgram}
+        open={drawerOpen}
+        onClose={handleDrawerClose}
+      />
     </Box>
   );
 }

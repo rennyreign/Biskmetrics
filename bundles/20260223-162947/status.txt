@@ -1,0 +1,424 @@
+# git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   .windsurf/rules/hermetic-engineering.md
+	new file:   .windsurf/workflows/approve.md
+	new file:   .windsurf/workflows/bugfix.md
+	new file:   .windsurf/workflows/code_review.md
+	new file:   .windsurf/workflows/code_review_old.md
+	new file:   .windsurf/workflows/end_session.md
+	new file:   .windsurf/workflows/feature_build.md
+	new file:   .windsurf/workflows/plan.md
+	new file:   .windsurf/workflows/refactor.md
+	new file:   .windsurf/workflows/release.md
+	new file:   .windsurf/workflows/security_review.md
+	new file:   6878ba99-5106-48c6-8b86-cb207aa2eea7_ExportBlock-2b7c9bf8-e07b-4dab-b59b-5fde026f8dc4.zip
+	new file:   EXECUTIVE_SUMMARY.md
+	new file:   Makefile
+	new file:   PRODUCTION_FEATURES.md
+	new file:   bundles/20260223-075411/ci.txt
+	new file:   bundles/20260223-075411/diff.patch
+	new file:   bundles/20260223-075411/intent.md
+	new file:   bundles/20260223-075411/status.txt
+	new file:   bundles/20260223-075844/ci.txt
+	new file:   bundles/20260223-075844/diff.patch
+	new file:   bundles/20260223-075844/intent.md
+	new file:   bundles/20260223-075844/status.txt
+	new file:   bundles/20260223-080719/ci.txt
+	new file:   bundles/20260223-080719/diff.patch
+	new file:   bundles/20260223-080719/intent.md
+	new file:   bundles/20260223-080719/status.txt
+	new file:   bundles/20260223-095755/ci.txt
+	new file:   bundles/20260223-095755/diff.patch
+	new file:   bundles/20260223-095755/intent.md
+	new file:   bundles/20260223-095755/status.txt
+	new file:   bundles/20260223-121849/ci.txt
+	new file:   bundles/20260223-121849/diff.patch
+	new file:   bundles/20260223-121849/intent.md
+	new file:   bundles/20260223-122717/ci.txt
+	new file:   bundles/20260223-122717/diff.patch
+	new file:   bundles/20260223-122717/intent.md
+	new file:   bundles/20260223-122717/status.txt
+	new file:   coverage/base.css
+	new file:   coverage/block-navigation.js
+	new file:   coverage/build/assets/index-vzMmP3_O.js.html
+	new file:   coverage/build/assets/index.html
+	new file:   coverage/coverage-final.json
+	new file:   coverage/favicon.png
+	new file:   coverage/index.html
+	new file:   coverage/prettify.css
+	new file:   coverage/prettify.js
+	new file:   coverage/sort-arrow-sprite.png
+	new file:   coverage/sorter.js
+	new file:   coverage/src/App.tsx.html
+	new file:   coverage/src/components/FilterSection.tsx.html
+	new file:   coverage/src/components/GraphView.tsx.html
+	new file:   coverage/src/components/Header.tsx.html
+	new file:   coverage/src/components/ProgramTable.tsx.html
+	new file:   coverage/src/components/RecommendedVerdict.tsx.html
+	new file:   coverage/src/components/ViewToggle.tsx.html
+	new file:   coverage/src/components/figma/ImageWithFallback.tsx.html
+	new file:   coverage/src/components/figma/index.html
+	new file:   coverage/src/components/index.html
+	new file:   coverage/src/components/ui/accordion.tsx.html
+	new file:   coverage/src/components/ui/alert-dialog.tsx.html
+	new file:   coverage/src/components/ui/alert.tsx.html
+	new file:   coverage/src/components/ui/aspect-ratio.tsx.html
+	new file:   coverage/src/components/ui/avatar.tsx.html
+	new file:   coverage/src/components/ui/badge.tsx.html
+	new file:   coverage/src/components/ui/breadcrumb.tsx.html
+	new file:   coverage/src/components/ui/button.tsx.html
+	new file:   coverage/src/components/ui/calendar.tsx.html
+	new file:   coverage/src/components/ui/card.tsx.html
+	new file:   coverage/src/components/ui/carousel.tsx.html
+	new file:   coverage/src/components/ui/chart.tsx.html
+	new file:   coverage/src/components/ui/checkbox.tsx.html
+	new file:   coverage/src/components/ui/collapsible.tsx.html
+	new file:   coverage/src/components/ui/command.tsx.html
+	new file:   coverage/src/components/ui/context-menu.tsx.html
+	new file:   coverage/src/components/ui/dialog.tsx.html
+	new file:   coverage/src/components/ui/drawer.tsx.html
+	new file:   coverage/src/components/ui/dropdown-menu.tsx.html
+	new file:   coverage/src/components/ui/form.tsx.html
+	new file:   coverage/src/components/ui/hover-card.tsx.html
+	new file:   coverage/src/components/ui/index.html
+	new file:   coverage/src/components/ui/input-otp.tsx.html
+	new file:   coverage/src/components/ui/input.tsx.html
+	new file:   coverage/src/components/ui/label.tsx.html
+	new file:   coverage/src/components/ui/menubar.tsx.html
+	new file:   coverage/src/components/ui/navigation-menu.tsx.html
+	new file:   coverage/src/components/ui/pagination.tsx.html
+	new file:   coverage/src/components/ui/popover.tsx.html
+	new file:   coverage/src/components/ui/progress.tsx.html
+	new file:   coverage/src/components/ui/radio-group.tsx.html
+	new file:   coverage/src/components/ui/resizable.tsx.html
+	new file:   coverage/src/components/ui/scroll-area.tsx.html
+	new file:   coverage/src/components/ui/select.tsx.html
+	new file:   coverage/src/components/ui/separator.tsx.html
+	new file:   coverage/src/components/ui/sheet.tsx.html
+	new file:   coverage/src/components/ui/sidebar.tsx.html
+	new file:   coverage/src/components/ui/skeleton.tsx.html
+	new file:   coverage/src/components/ui/slider.tsx.html
+	new file:   coverage/src/components/ui/sonner.tsx.html
+	new file:   coverage/src/components/ui/switch.tsx.html
+	new file:   coverage/src/components/ui/table.tsx.html
+	new file:   coverage/src/components/ui/tabs.tsx.html
+	new file:   coverage/src/components/ui/textarea.tsx.html
+	new file:   coverage/src/components/ui/toggle-group.tsx.html
+	new file:   coverage/src/components/ui/toggle.tsx.html
+	new file:   coverage/src/components/ui/tooltip.tsx.html
+	new file:   coverage/src/components/ui/use-mobile.ts.html
+	new file:   coverage/src/components/ui/utils.ts.html
+	new file:   coverage/src/data/index.html
+	new file:   coverage/src/data/mockData.ts.html
+	new file:   coverage/src/data/programs.ts.html
+	new file:   coverage/src/index.html
+	new file:   coverage/src/lib/dataQuality.ts.html
+	new file:   coverage/src/lib/index.html
+	new file:   coverage/src/lib/metricsEngine.ts.html
+	new file:   coverage/src/lib/recommendationEngine.ts.html
+	new file:   coverage/src/main.tsx.html
+	new file:   coverage/src/providers/DataProvider.interface.ts.html
+	new file:   coverage/src/providers/index.html
+	new file:   docs/code-reviews/session-2026-02-23_075439.md
+	new file:   docs/code-reviews/session-2026-02-23_075849.md
+	new file:   docs/code-reviews/session-2026-02-23_080724.md
+	new file:   docs/code-reviews/session-2026-02-23_095827.md
+	new file:   docs/code-reviews/session-2026-02-23_122545.md
+	new file:   docs/code-reviews/session-2026-02-23_122725.md
+	modified:   package-lock.json
+	modified:   package.json
+	new file:   plan/PROGRESS.md
+	new file:   plan/Program Shelf Database/Bisk-Scorecard--EOS-Execution-Dashboard-5.png
+	new file:   plan/Program Shelf Database/cbd9248e-3c2d-4f85-98e0-758d3098c68d.png
+	new file:   plan/Program Shelf Database/d652070b-40c2-42a3-b733-540a8b022094.png
+	new file:   plan/UpdatedBriefFeb20.md
+	new file:   plan/program-shelf-v2.md
+	modified:   postcss.config.js
+	new file:   program-shelf-system.md
+	new file:   scripts/migrate-programs.cjs
+	modified:   src/App.tsx
+	modified:   src/Attributions.md
+	new file:   src/components/BudgetRecommendationBadge.tsx
+	new file:   src/components/DataCompletenessBadge.tsx
+	modified:   src/components/FilterSection.tsx
+	modified:   src/components/GraphView.tsx
+	modified:   src/components/Header.tsx
+	modified:   src/components/ProgramTable.tsx
+	modified:   src/components/RecommendedVerdict.tsx
+	modified:   src/components/ViewToggle.tsx
+	modified:   src/components/figma/ImageWithFallback.tsx
+	modified:   src/components/ui/accordion.tsx
+	modified:   src/components/ui/alert-dialog.tsx
+	modified:   src/components/ui/alert.tsx
+	modified:   src/components/ui/aspect-ratio.tsx
+	modified:   src/components/ui/avatar.tsx
+	modified:   src/components/ui/badge.tsx
+	modified:   src/components/ui/breadcrumb.tsx
+	modified:   src/components/ui/button.tsx
+	modified:   src/components/ui/calendar.tsx
+	modified:   src/components/ui/card.tsx
+	modified:   src/components/ui/carousel.tsx
+	modified:   src/components/ui/chart.tsx
+	modified:   src/components/ui/checkbox.tsx
+	modified:   src/components/ui/collapsible.tsx
+	modified:   src/components/ui/command.tsx
+	modified:   src/components/ui/context-menu.tsx
+	modified:   src/components/ui/dialog.tsx
+	modified:   src/components/ui/drawer.tsx
+	modified:   src/components/ui/dropdown-menu.tsx
+	modified:   src/components/ui/form.tsx
+	modified:   src/components/ui/hover-card.tsx
+	modified:   src/components/ui/input-otp.tsx
+	modified:   src/components/ui/input.tsx
+	modified:   src/components/ui/label.tsx
+	modified:   src/components/ui/menubar.tsx
+	modified:   src/components/ui/navigation-menu.tsx
+	modified:   src/components/ui/pagination.tsx
+	modified:   src/components/ui/popover.tsx
+	modified:   src/components/ui/progress.tsx
+	modified:   src/components/ui/radio-group.tsx
+	modified:   src/components/ui/resizable.tsx
+	modified:   src/components/ui/scroll-area.tsx
+	modified:   src/components/ui/select.tsx
+	modified:   src/components/ui/separator.tsx
+	modified:   src/components/ui/sheet.tsx
+	modified:   src/components/ui/sidebar.tsx
+	modified:   src/components/ui/skeleton.tsx
+	modified:   src/components/ui/slider.tsx
+	modified:   src/components/ui/sonner.tsx
+	modified:   src/components/ui/switch.tsx
+	modified:   src/components/ui/table.tsx
+	modified:   src/components/ui/tabs.tsx
+	modified:   src/components/ui/textarea.tsx
+	modified:   src/components/ui/toggle-group.tsx
+	modified:   src/components/ui/toggle.tsx
+	modified:   src/components/ui/tooltip.tsx
+	modified:   src/components/ui/use-mobile.ts
+	modified:   src/components/ui/utils.ts
+	modified:   src/data/programs.ts
+	modified:   src/guidelines/Guidelines.md
+	modified:   src/index.css
+	modified:   src/main.tsx
+	modified:   src/providers/DataProvider.interface.ts
+	new file:   src/providers/FixedDataProvider.ts
+	modified:   src/types/metrics.ts
+	new file:   src/vite-env.d.ts
+	new file:   tests/unit/FixedDataProvider.test.ts
+	modified:   tsconfig.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	bundles/20260223-162947/
+
+
+# staged files
+.windsurf/rules/hermetic-engineering.md
+.windsurf/workflows/approve.md
+.windsurf/workflows/bugfix.md
+.windsurf/workflows/code_review.md
+.windsurf/workflows/code_review_old.md
+.windsurf/workflows/end_session.md
+.windsurf/workflows/feature_build.md
+.windsurf/workflows/plan.md
+.windsurf/workflows/refactor.md
+.windsurf/workflows/release.md
+.windsurf/workflows/security_review.md
+6878ba99-5106-48c6-8b86-cb207aa2eea7_ExportBlock-2b7c9bf8-e07b-4dab-b59b-5fde026f8dc4.zip
+EXECUTIVE_SUMMARY.md
+Makefile
+PRODUCTION_FEATURES.md
+bundles/20260223-075411/ci.txt
+bundles/20260223-075411/diff.patch
+bundles/20260223-075411/intent.md
+bundles/20260223-075411/status.txt
+bundles/20260223-075844/ci.txt
+bundles/20260223-075844/diff.patch
+bundles/20260223-075844/intent.md
+bundles/20260223-075844/status.txt
+bundles/20260223-080719/ci.txt
+bundles/20260223-080719/diff.patch
+bundles/20260223-080719/intent.md
+bundles/20260223-080719/status.txt
+bundles/20260223-095755/ci.txt
+bundles/20260223-095755/diff.patch
+bundles/20260223-095755/intent.md
+bundles/20260223-095755/status.txt
+bundles/20260223-121849/ci.txt
+bundles/20260223-121849/diff.patch
+bundles/20260223-121849/intent.md
+bundles/20260223-122717/ci.txt
+bundles/20260223-122717/diff.patch
+bundles/20260223-122717/intent.md
+bundles/20260223-122717/status.txt
+coverage/base.css
+coverage/block-navigation.js
+coverage/build/assets/index-vzMmP3_O.js.html
+coverage/build/assets/index.html
+coverage/coverage-final.json
+coverage/favicon.png
+coverage/index.html
+coverage/prettify.css
+coverage/prettify.js
+coverage/sort-arrow-sprite.png
+coverage/sorter.js
+coverage/src/App.tsx.html
+coverage/src/components/FilterSection.tsx.html
+coverage/src/components/GraphView.tsx.html
+coverage/src/components/Header.tsx.html
+coverage/src/components/ProgramTable.tsx.html
+coverage/src/components/RecommendedVerdict.tsx.html
+coverage/src/components/ViewToggle.tsx.html
+coverage/src/components/figma/ImageWithFallback.tsx.html
+coverage/src/components/figma/index.html
+coverage/src/components/index.html
+coverage/src/components/ui/accordion.tsx.html
+coverage/src/components/ui/alert-dialog.tsx.html
+coverage/src/components/ui/alert.tsx.html
+coverage/src/components/ui/aspect-ratio.tsx.html
+coverage/src/components/ui/avatar.tsx.html
+coverage/src/components/ui/badge.tsx.html
+coverage/src/components/ui/breadcrumb.tsx.html
+coverage/src/components/ui/button.tsx.html
+coverage/src/components/ui/calendar.tsx.html
+coverage/src/components/ui/card.tsx.html
+coverage/src/components/ui/carousel.tsx.html
+coverage/src/components/ui/chart.tsx.html
+coverage/src/components/ui/checkbox.tsx.html
+coverage/src/components/ui/collapsible.tsx.html
+coverage/src/components/ui/command.tsx.html
+coverage/src/components/ui/context-menu.tsx.html
+coverage/src/components/ui/dialog.tsx.html
+coverage/src/components/ui/drawer.tsx.html
+coverage/src/components/ui/dropdown-menu.tsx.html
+coverage/src/components/ui/form.tsx.html
+coverage/src/components/ui/hover-card.tsx.html
+coverage/src/components/ui/index.html
+coverage/src/components/ui/input-otp.tsx.html
+coverage/src/components/ui/input.tsx.html
+coverage/src/components/ui/label.tsx.html
+coverage/src/components/ui/menubar.tsx.html
+coverage/src/components/ui/navigation-menu.tsx.html
+coverage/src/components/ui/pagination.tsx.html
+coverage/src/components/ui/popover.tsx.html
+coverage/src/components/ui/progress.tsx.html
+coverage/src/components/ui/radio-group.tsx.html
+coverage/src/components/ui/resizable.tsx.html
+coverage/src/components/ui/scroll-area.tsx.html
+coverage/src/components/ui/select.tsx.html
+coverage/src/components/ui/separator.tsx.html
+coverage/src/components/ui/sheet.tsx.html
+coverage/src/components/ui/sidebar.tsx.html
+coverage/src/components/ui/skeleton.tsx.html
+coverage/src/components/ui/slider.tsx.html
+coverage/src/components/ui/sonner.tsx.html
+coverage/src/components/ui/switch.tsx.html
+coverage/src/components/ui/table.tsx.html
+coverage/src/components/ui/tabs.tsx.html
+coverage/src/components/ui/textarea.tsx.html
+coverage/src/components/ui/toggle-group.tsx.html
+coverage/src/components/ui/toggle.tsx.html
+coverage/src/components/ui/tooltip.tsx.html
+coverage/src/components/ui/use-mobile.ts.html
+coverage/src/components/ui/utils.ts.html
+coverage/src/data/index.html
+coverage/src/data/mockData.ts.html
+coverage/src/data/programs.ts.html
+coverage/src/index.html
+coverage/src/lib/dataQuality.ts.html
+coverage/src/lib/index.html
+coverage/src/lib/metricsEngine.ts.html
+coverage/src/lib/recommendationEngine.ts.html
+coverage/src/main.tsx.html
+coverage/src/providers/DataProvider.interface.ts.html
+coverage/src/providers/index.html
+docs/code-reviews/session-2026-02-23_075439.md
+docs/code-reviews/session-2026-02-23_075849.md
+docs/code-reviews/session-2026-02-23_080724.md
+docs/code-reviews/session-2026-02-23_095827.md
+docs/code-reviews/session-2026-02-23_122545.md
+docs/code-reviews/session-2026-02-23_122725.md
+package-lock.json
+package.json
+plan/PROGRESS.md
+plan/Program Shelf Database/Bisk-Scorecard--EOS-Execution-Dashboard-5.png
+plan/Program Shelf Database/cbd9248e-3c2d-4f85-98e0-758d3098c68d.png
+plan/Program Shelf Database/d652070b-40c2-42a3-b733-540a8b022094.png
+plan/UpdatedBriefFeb20.md
+plan/program-shelf-v2.md
+postcss.config.js
+program-shelf-system.md
+scripts/migrate-programs.cjs
+src/App.tsx
+src/Attributions.md
+src/components/BudgetRecommendationBadge.tsx
+src/components/DataCompletenessBadge.tsx
+src/components/FilterSection.tsx
+src/components/GraphView.tsx
+src/components/Header.tsx
+src/components/ProgramTable.tsx
+src/components/RecommendedVerdict.tsx
+src/components/ViewToggle.tsx
+src/components/figma/ImageWithFallback.tsx
+src/components/ui/accordion.tsx
+src/components/ui/alert-dialog.tsx
+src/components/ui/alert.tsx
+src/components/ui/aspect-ratio.tsx
+src/components/ui/avatar.tsx
+src/components/ui/badge.tsx
+src/components/ui/breadcrumb.tsx
+src/components/ui/button.tsx
+src/components/ui/calendar.tsx
+src/components/ui/card.tsx
+src/components/ui/carousel.tsx
+src/components/ui/chart.tsx
+src/components/ui/checkbox.tsx
+src/components/ui/collapsible.tsx
+src/components/ui/command.tsx
+src/components/ui/context-menu.tsx
+src/components/ui/dialog.tsx
+src/components/ui/drawer.tsx
+src/components/ui/dropdown-menu.tsx
+src/components/ui/form.tsx
+src/components/ui/hover-card.tsx
+src/components/ui/input-otp.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/menubar.tsx
+src/components/ui/navigation-menu.tsx
+src/components/ui/pagination.tsx
+src/components/ui/popover.tsx
+src/components/ui/progress.tsx
+src/components/ui/radio-group.tsx
+src/components/ui/resizable.tsx
+src/components/ui/scroll-area.tsx
+src/components/ui/select.tsx
+src/components/ui/separator.tsx
+src/components/ui/sheet.tsx
+src/components/ui/sidebar.tsx
+src/components/ui/skeleton.tsx
+src/components/ui/slider.tsx
+src/components/ui/sonner.tsx
+src/components/ui/switch.tsx
+src/components/ui/table.tsx
+src/components/ui/tabs.tsx
+src/components/ui/textarea.tsx
+src/components/ui/toggle-group.tsx
+src/components/ui/toggle.tsx
+src/components/ui/tooltip.tsx
+src/components/ui/use-mobile.ts
+src/components/ui/utils.ts
+src/data/programs.ts
+src/guidelines/Guidelines.md
+src/index.css
+src/main.tsx
+src/providers/DataProvider.interface.ts
+src/providers/FixedDataProvider.ts
+src/types/metrics.ts
+src/vite-env.d.ts
+tests/unit/FixedDataProvider.test.ts
+tsconfig.json

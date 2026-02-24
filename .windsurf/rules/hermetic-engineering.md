@@ -168,9 +168,12 @@ pull_requests:
 
 ### Waived Rules
 1. **`zero_lint_warnings: true`** - Temporarily allowing 27 ESLint warnings
-   - **Justification:** Warnings are in legacy code (`ui/**/*`, test files) not in production paths
-   - **Mitigation:** All new Phase 2+3 code has zero warnings
-   - **Removal Plan:** Phase 4 cleanup of legacy components
+   - **Justification:** 
+     - 4 warnings in Phase 2+3 code (unused imports/variables - non-blocking)
+     - 16 warnings in legacy UI components (shadcn/ui with version-pinned imports)
+     - 7 warnings in test files (`any` types for mock data)
+   - **Mitigation:** All warnings documented and tracked; zero errors in all code
+   - **Removal Plan:** Phase 4 cleanup of unused imports and legacy components
 
 2. **`require_full_typecheck_coverage`** - Temporarily excluding legacy files from TypeScript
    - **Files:** `src/data/mockData.ts`, `src/components/ui/**/*`
@@ -179,7 +182,7 @@ pull_requests:
    - **Removal Plan:** Migrate or delete in Phase 4
 
 ### Non-Waived (Still Enforced)
-- Zero TypeScript errors in **active** code (all Phase 2+3 files)
+- Zero TypeScript errors in **active** code (all Phase 2+3 files; excludes `src/data/mockData.ts` and `src/components/ui/**/*` per `tsconfig.json`)
 - All tests passing (42/42)
 - Prettier formatting (100% compliance)
 - Reproducible builds (lockfiles committed)

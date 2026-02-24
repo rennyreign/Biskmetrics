@@ -1,0 +1,89 @@
+npm run quality
+
+> biskmetrics@0.2.0 quality
+> npm run format:check && npm run lint && npm run typecheck && npm run test
+
+
+> biskmetrics@0.2.0 format:check
+> prettier --check "src/**/*.{ts,tsx,js,jsx,json,css,md}"
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> biskmetrics@0.2.0 lint
+> eslint .
+
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/App.tsx
+   1:20  warning  'useMemo' is defined but never used           @typescript-eslint/no-unused-vars
+  23:10  warning  'loading' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ProgramTable.tsx
+  161:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  162:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  166:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  167:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  280:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  283:61  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/RecommendedVerdict.tsx
+  1:37  warning  'Tooltip' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/badge.tsx
+  39:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/button.tsx
+  56:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/form.tsx
+  144:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/navigation-menu.tsx
+  160:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/sidebar.tsx
+  687:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/components/ui/toggle.tsx
+  45:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/lib/dataQuality.ts
+  75:24  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/src/providers/DataProvider.interface.ts
+  1:24  warning  'ProgramDetail' is defined but never used     @typescript-eslint/no-unused-vars
+  2:30  warning  'ScorecardSummary' is defined but never used  @typescript-eslint/no-unused-vars
+  2:48  warning  'FunnelSnapshot' is defined but never used    @typescript-eslint/no-unused-vars
+  3:15  warning  'SpendData' is defined but never used         @typescript-eslint/no-unused-vars
+
+/Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics/tests/unit/metricsEngine.test.ts
+   25:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   26:37  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  126:42  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  139:44  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  155:40  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:49  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 27 problems (0 errors, 27 warnings)
+
+
+> biskmetrics@0.2.0 typecheck
+> tsc --noEmit
+
+
+> biskmetrics@0.2.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /Users/renaldoedmondson/Library/CloudStorage/Dropbox/Projects/bisk/applications/Biskmetrics
+
+ ✓ tests/unit/metricsEngine.test.ts (21 tests) 35ms
+ ✓ tests/unit/recommendationEngine.test.ts (8 tests) 37ms
+ ✓ tests/unit/FixedDataProvider.test.ts (13 tests) 12ms
+
+ Test Files  3 passed (3)
+      Tests  42 passed (42)
+   Start at  20:29:55
+   Duration  2.35s (transform 189ms, setup 696ms, collect 185ms, tests 84ms, environment 1.96s, prepare 273ms)
+

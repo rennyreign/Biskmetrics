@@ -19,12 +19,12 @@ import {
 } from '@mui/material';
 import { X, Plus, Filter, GripVertical } from 'lucide-react';
 import type { Program } from '../types/program';
-import { DataCompletenessBadge } from './DataCompletenessBadge';
 import { BudgetRecommendationBadge } from './BudgetRecommendationBadge';
 
 interface ProgramTableProps {
   programs: Program[];
   showSchoolColumn: boolean;
+  onRowClick?: (program: Program) => void;
 }
 
 type SortField = keyof Program | string | null;
@@ -87,16 +87,9 @@ const DEFAULT_COLUMNS: ColumnDef[] = [
     format: 'currency',
   },
   {
-    id: 'dataCompleteness',
-    field: 'dataCompleteness',
-    label: 'Data Quality',
-    align: 'left',
-    format: 'badge',
-  },
-  {
     id: 'recommendation',
     field: 'recommendation',
-    label: 'Recommendation',
+    label: 'Investment',
     align: 'left',
     format: 'badge',
   },
@@ -115,7 +108,7 @@ const OPERATORS: { value: Operator; label: string }[] = [
   { value: '!=', label: '!=' },
 ];
 
-export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) {
+export function ProgramTable({ programs, showSchoolColumn, onRowClick }: ProgramTableProps) {
   const [sortField, setSortField] = useState<SortField>('leads');
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [metricFilters, setMetricFilters] = useState<MetricFilter[]>([]);
@@ -333,9 +326,6 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
     }
 
     if (column.format === 'badge') {
-      if (column.id === 'dataCompleteness' && program.dataCompleteness) {
-        return <DataCompletenessBadge completeness={program.dataCompleteness} />;
-      }
       if (column.id === 'recommendation' && program.recommendation) {
         return <BudgetRecommendationBadge recommendation={program.recommendation} />;
       }
@@ -575,9 +565,11 @@ export function ProgramTable({ programs, showSchoolColumn }: ProgramTableProps) 
               {sortedPrograms.map(program => (
                 <TableRow
                   key={program.id}
+                  onClick={() => onRowClick?.(program)}
                   sx={{
                     '&:hover': {
                       bgcolor: '#f8fafc',
+                      cursor: onRowClick ? 'pointer' : 'default',
                     },
                     borderBottom: '1px solid #f1f5f9',
                   }}

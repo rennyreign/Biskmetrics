@@ -36,16 +36,16 @@
 ### ESLint Warnings
 **Status:** 27 warnings (0 errors)  
 **Categories:**
-- Unused imports (4 warnings)
+- Unused imports in Phase 2+3 code (4 warnings - `App.tsx`, `RecommendedVerdict.tsx`)
 - `any` types in test files (7 warnings)
 - Fast refresh warnings in UI components (6 warnings)
 - Legacy component warnings (10 warnings)
 
-**Impact:** Non-blocking, mostly in test files and legacy components  
-**Mitigation:** All warnings documented and tracked  
-**Resolution:** Progressive cleanup in Phase 4  
+**Impact:** Non-blocking; unused imports are safe, test `any` types are isolated  
+**Mitigation:** All warnings documented and tracked; zero errors enforced  
+**Resolution:** Progressive cleanup in Phase 4 (target Q2 2026, not date-bound commitment)  
 **Owner:** Engineering team  
-**Target:** Q2 2026
+**Target:** Q2 2026 (best effort)
 
 ## User-Facing Limitations
 

@@ -1,8 +1,8 @@
 # Biskmetrics Development Progress
 
-**Last Updated:** February 23, 2026  
-**Current Phase:** Phase 3 - UI Updates  
-**Overall Progress:** ~50% Complete
+**Last Updated:** February 24, 2026  
+**Current Phase:** Phase 4.2 - EOS Scorecard Complete  
+**Overall Progress:** ~75% Complete
 
 ---
 
@@ -101,40 +101,119 @@
 
 ---
 
-## 📋 PHASE 4: New Features - PENDING
+## ✅ PHASE 4.1 & 4.2: Program Drilldown & EOS Scorecard - COMPLETE
 
-**Status:** Not started  
-**Target:** Add Scorecard tab and program drilldown
+**Status:** Complete, not yet committed  
+**Target:** Add program drilldown and rebuild EOS Scorecard
+
+### Phase 4.1: Program Detail Drilldown - COMPLETE
+
+- [x] **Create ProgramDetailDrawer component**
+  - Drawer with 4 tabs: Funnel Analysis, ROI Calculator, Trends, Insights
+  - Integrated with ProgramTable row clicks
+  - Proper null handling for optional fields
+  
+- [x] **Build Funnel Analysis tab**
+  - Visual funnel with conversion rates
+  - Drop-off analysis
+  - Stage-by-stage breakdown
+  
+- [x] **Build ROI Calculator tab**
+  - Current ROI metrics display
+  - Interactive scenario modeling with sliders
+  - Real-time recalculation
+  
+- [x] **Build Insights tab**
+  - Auto-generated budget recommendations
+  - Data quality warnings
+  - Key insights and red flags
+
+### Phase 4.2: EOS Scorecard Rebuild - COMPLETE
+
+- [x] **Rebuild Scorecard as standalone page**
+  - Full-page layout (not tab)
+  - Week navigation with date picker
+  - Pipeline tabs (Degree/Certificate)
+  - Prominent EOS Day selector
+  
+- [x] **Build Executive Snapshot**
+  - Weekly Status Summary (On Track/Off Track/Flagged cards)
+  - Quarter Pacing Summary with risk badges
+  
+- [x] **Build Metric Tables**
+  - All 10 columns: Metric, Owner, Current, Last Week, WoW Δ, 4-Wk Avg, Target, Status, Streak, IDS
+  - Color-coded WoW delta (inverted for cost metrics)
+  - Clickable rows to open edit dialog
+  
+- [x] **Build Trend Charts**
+  - 8-Week Performance Trends (dual-axis line chart)
+  - Marketing Funnel (horizontal bar chart)
+  
+- [x] **Build EditMetricDialog**
+  - Editable: Target, Owner
+  - IDS fields: Hypothesis, Action Plan (when flagged)
+  - Read-only: Current value, 4-week average
+
+**Deliverables:**
+- ✅ Program drilldown provides deep insights
+- ✅ ROI calculator enables what-if analysis
+- ✅ EOS Scorecard fully functional with mock data
+- ✅ Ready for Phase 4.4 HubSpot integration
+
+---
+
+## 📋 PHASE 4.3: Legacy Cleanup - PENDING
+
+**Status:** Optional, low priority  
+**Target:** Clean up old Scorecard components
 
 ### Tasks
 
-- [ ] **Add Scorecard tab to navigation**
-  - Add tab button to page navigation
-  - Create routing/conditional rendering
-  - Update page state management
+- [ ] **Remove old ScorecardView component**
+  - Delete `src/components/Scorecard/ScorecardView.tsx`
+  - Remove any unused imports
   
-- [ ] **Build Scorecard components**
-  - ScorecardMetricCard component
-  - Weekly trend visualization
-  - Status indicators (On Track/Off Track/Flagged)
-  - WoW delta display
-  
-- [ ] **Create program drilldown view**
-  - Detailed program page/modal
-  - Funnel visualization
-  - Conversion stage breakdown
-  - Trend charts
-  
-- [ ] **Add ROI calculator to drilldown**
-  - Interactive spend input
-  - Real-time ROI recalculation
-  - Scenario modeling
-  - Budget recommendation updates
+- [ ] **Consolidate type definitions**
+  - Merge `src/types/scorecard.ts` with `src/types/eos-scorecard.ts`
+  - Single source of truth for scorecard types
 
 **Deliverables:**
-- Scorecard tab functional with EOS-style metrics
-- Program drilldown provides deep insights
-- ROI calculator enables what-if analysis
+- Cleaner codebase
+- No unused components
+
+---
+
+## 📋 PHASE 4.4: HubSpot Integration - PENDING
+
+**Status:** Not started  
+**Target:** Connect EOS Scorecard to live HubSpot data
+
+### Tasks
+
+- [ ] **HubSpot API Setup**
+  - Set up API authentication
+  - Create HubSpot client/service layer
+  - Map HubSpot properties to scorecard metrics
+  
+- [ ] **Update useScorecardData hook**
+  - Replace mock data with HubSpot API calls
+  - Implement week-based data fetching
+  - Calculate WoW delta, streaks from historical data
+  
+- [ ] **Persistence Layer**
+  - Store metric targets and owners
+  - Store IDS hypothesis and action plans
+  - Implement save functionality for EditMetricDialog
+  
+- [ ] **Testing with Real Data**
+  - Verify calculations with live HubSpot data
+  - Test week navigation with historical data
+  - Validate metric accuracy
+
+**Deliverables:**
+- EOS Scorecard connected to live CRM data
+- Automated weekly metric updates
+- Full CRUD for metric metadata
 
 ---
 
@@ -191,10 +270,13 @@
 
 ## 🎯 Next Actions
 
-1. **Immediate:** Add ROI columns to ProgramTable (Phase 3)
-2. **Next:** Add data completeness and recommendation badges
-3. **Then:** Build Scorecard tab (Phase 4)
-4. **Finally:** Integration tests and code review (Phase 5)
+1. **Immediate:** Phase 4.4 - HubSpot Integration
+   - Set up HubSpot API client
+   - Map HubSpot data to scorecard metrics
+   - Replace mock data with live API calls
+2. **Optional:** Phase 4.3 - Legacy Cleanup (remove old ScorecardView)
+3. **Then:** Integration tests and code review (Phase 5)
+4. **Finally:** Commit Phase 4 work
 
 ---
 

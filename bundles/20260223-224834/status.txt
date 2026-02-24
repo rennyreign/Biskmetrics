@@ -1,0 +1,20 @@
+# git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   .windsurf/rules/hermetic-engineering.md
+	new file:   docs/KNOWN_LIMITATIONS.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	bundles/20260223-162947/
+	bundles/20260223-224834/
+	docs/code-reviews/session-2026-02-23_162957.md
+
+
+# staged files
+.windsurf/rules/hermetic-engineering.md
+docs/KNOWN_LIMITATIONS.md

@@ -1,0 +1,98 @@
+# git status
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   .windsurf/rules/hermetic-engineering.md
+	new file:   bundles/20260223-162947/ci.txt
+	new file:   bundles/20260223-162947/diff.patch
+	new file:   bundles/20260223-162947/intent.md
+	new file:   bundles/20260223-162947/status.txt
+	new file:   bundles/20260223-224834/ci.txt
+	new file:   bundles/20260223-224834/diff.patch
+	new file:   bundles/20260223-224834/intent.md
+	new file:   bundles/20260223-224834/status.txt
+	modified:   docs/KNOWN_LIMITATIONS.md
+	new file:   docs/code-reviews/session-2026-02-23_162957.md
+	new file:   docs/code-reviews/session-2026-02-23_224840.md
+	modified:   plan/PROGRESS.md
+	new file:   plan/end-of-session.md
+	new file:   plan/eos-scorecard-rebuild/1. full dashboard view.png
+	new file:   plan/eos-scorecard-rebuild/2. certificate pipeline tab.png
+	new file:   plan/eos-scorecard-rebuild/3. weekly scorecard entry dialog.png
+	new file:   plan/eos-scorecard-rebuild/4a. edit metric dialog - IDS.png
+	new file:   plan/eos-scorecard-rebuild/4b. edit metric dialog non-IDS.png
+	new file:   plan/eos-scorecard-rebuild/5. Add metric dialog.png
+	new file:   plan/eos-scorecard-rebuild/6. eos day picker.png
+	new file:   plan/eos-scorecard-rebuild/7. Login: Auth page.png
+	new file:   plan/eos-scorecard-rebuild/REBUILD_BRIEF.md
+	modified:   src/App.tsx
+	deleted:    src/components/GraphView.tsx
+	new file:   src/components/InvestmentInsights.tsx
+	new file:   src/components/ProgramDetail/FunnelView.tsx
+	new file:   src/components/ProgramDetail/InsightsView.tsx
+	new file:   src/components/ProgramDetail/ProgramDetailDrawer.tsx
+	new file:   src/components/ProgramDetail/ROICalculator.tsx
+	new file:   src/components/ProgramDetail/TrendsView.tsx
+	modified:   src/components/ProgramTable.tsx
+	new file:   src/components/Scorecard/AddMetricDialog.tsx
+	new file:   src/components/Scorecard/EditMetricDialog.tsx
+	new file:   src/components/Scorecard/ExecutiveSnapshot.tsx
+	new file:   src/components/Scorecard/MetricTable.tsx
+	new file:   src/components/Scorecard/ScorecardView.tsx
+	new file:   src/components/Scorecard/TrendCharts.tsx
+	deleted:    src/components/ViewToggle.tsx
+	new file:   src/hooks/useScorecardData.ts
+	new file:   src/pages/ScorecardPage.tsx
+	new file:   src/types/eos-scorecard.ts
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	bundles/20260224-210408/
+
+
+# staged files
+.windsurf/rules/hermetic-engineering.md
+bundles/20260223-162947/ci.txt
+bundles/20260223-162947/diff.patch
+bundles/20260223-162947/intent.md
+bundles/20260223-162947/status.txt
+bundles/20260223-224834/ci.txt
+bundles/20260223-224834/diff.patch
+bundles/20260223-224834/intent.md
+bundles/20260223-224834/status.txt
+docs/KNOWN_LIMITATIONS.md
+docs/code-reviews/session-2026-02-23_162957.md
+docs/code-reviews/session-2026-02-23_224840.md
+plan/PROGRESS.md
+plan/end-of-session.md
+plan/eos-scorecard-rebuild/1. full dashboard view.png
+plan/eos-scorecard-rebuild/2. certificate pipeline tab.png
+plan/eos-scorecard-rebuild/3. weekly scorecard entry dialog.png
+plan/eos-scorecard-rebuild/4a. edit metric dialog - IDS.png
+plan/eos-scorecard-rebuild/4b. edit metric dialog non-IDS.png
+plan/eos-scorecard-rebuild/5. Add metric dialog.png
+plan/eos-scorecard-rebuild/6. eos day picker.png
+plan/eos-scorecard-rebuild/7. Login: Auth page.png
+plan/eos-scorecard-rebuild/REBUILD_BRIEF.md
+src/App.tsx
+src/components/GraphView.tsx
+src/components/InvestmentInsights.tsx
+src/components/ProgramDetail/FunnelView.tsx
+src/components/ProgramDetail/InsightsView.tsx
+src/components/ProgramDetail/ProgramDetailDrawer.tsx
+src/components/ProgramDetail/ROICalculator.tsx
+src/components/ProgramDetail/TrendsView.tsx
+src/components/ProgramTable.tsx
+src/components/Scorecard/AddMetricDialog.tsx
+src/components/Scorecard/EditMetricDialog.tsx
+src/components/Scorecard/ExecutiveSnapshot.tsx
+src/components/Scorecard/MetricTable.tsx
+src/components/Scorecard/ScorecardView.tsx
+src/components/Scorecard/TrendCharts.tsx
+src/components/ViewToggle.tsx
+src/hooks/useScorecardData.ts
+src/pages/ScorecardPage.tsx
+src/types/eos-scorecard.ts
